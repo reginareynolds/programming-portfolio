@@ -1,0 +1,48 @@
+name: REST API CI
+
+on:
+  push:
+    paths:
+      - "projects/rest-api-microservice/**"
+  pull_request:
+    paths:
+      - "projects/rest-api-microservice/**"
+
+defaults:
+  run:
+    working-directory: projects/rest-api-microservice
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements-dev.txt
+
+      - name: Run tests with coverage
+        run: pytest --cov=app --cov-report=term-missing -v
+
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements-dev.txt
+
+      - name: Check imports
+        run: python -c "from app import create_app; print('Imports OK')"

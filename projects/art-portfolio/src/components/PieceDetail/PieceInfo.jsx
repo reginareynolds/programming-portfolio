@@ -1,0 +1,34 @@
+import ToolBadge from "../Shared/ToolBadge";
+import "./PieceInfo.css";
+
+export default function PieceInfo({ piece }) {
+  return (
+    <div className="piece-info">
+      <div className="info-description">
+        <p>{piece.description}</p>
+      </div>
+      <div className="info-metadata">
+        <div className="meta-group">
+          <h3>Tools</h3>
+          <div className="meta-tools">
+            {piece.tools.map((tool) => (
+              <ToolBadge key={tool} name={tool} />
+            ))}
+          </div>
+        </div>
+        <div className="meta-group">
+          <h3>Role</h3>
+          <p>{piece.role}</p>
+        </div>
+        <div className="meta-group">
+          <h3>Date</h3>
+          <p>{piece.date}</p>
+        </div>
+        <div className="meta-group">
+          <h3>Category</h3>
+          <p>{piece.category}</p>
+        </div>
+      </div>
+    </div>
+  );
+}

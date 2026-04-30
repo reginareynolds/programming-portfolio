@@ -1,0 +1,31 @@
+.model-viewer {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.model-viewer canvas {
+  display: block;
+}
+
+.viewer-hint {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(30, 41, 59, 0.9);
+  color: var(--text-secondary);
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  pointer-events: none;
+  animation: fade-hint 3s forwards;
+}
+
+@keyframes fade-hint {
+  0%, 70% { opacity: 1; }
+  100% { opacity: 0; }
+}

@@ -22,6 +22,9 @@ build/
 *.swp
 *.swo
 
+# Claude Code
+.claude/
+
 # OS
 .DS_Store
 Thumbs.db
@@ -30,6 +33,10 @@ Thumbs.db
 .coverage
 htmlcov/
 .pytest_cache/
+
+# User data / uploads
+uploads/
+data/
 
 # Docker
 *.log
