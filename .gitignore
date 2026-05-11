@@ -37,7 +37,9 @@ htmlcov/
 
 # User data / uploads
 uploads/
-data/
+**/uploads/
+**/data/
+!/src/data/
 
 # Docker
 *.log
