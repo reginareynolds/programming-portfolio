@@ -217,6 +217,12 @@ export default function App() {
           onCancel={() => setPendingPoint(null)}
         />
       )}
+
+      <footer className="app-footer">
+        <p>
+          &copy; 2026 Regina Reynolds &middot; React &middot; Three.js &middot; Express
+        </p>
+      </footer>
     </div>
   );
 }
