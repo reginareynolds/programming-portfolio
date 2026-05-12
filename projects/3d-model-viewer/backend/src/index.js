@@ -1,12 +1,13 @@
 import express from "express";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import multer from "multer";
 import { v4 as uuidv4 } from "uuid";
 import { join, dirname, extname } from "path";
 import { fileURLToPath } from "url";
 import { existsSync, mkdirSync, unlinkSync } from "fs";
 import {
-  getAllModels,
+  getModelsBySession,
   getModelById,
   createModel,
   deleteModel,
@@ -48,14 +49,32 @@ const upload = multer({
 });
 
 const app = express();
-app.use(cors());
+app.use(cors({ origin: true, credentials: true }));
+app.use(cookieParser());
 app.use(express.json());
 app.use("/uploads", express.static(UPLOADS_DIR));
 
+function ensureSession(req, res, next) {
+  let sessionId = req.cookies.session_id;
+  if (!sessionId) {
+    sessionId = uuidv4();
+    res.cookie("session_id", sessionId, {
+      httpOnly: true,
+      sameSite: "none",
+      secure: true,
+      maxAge: 24 * 60 * 60 * 1000,
+    });
+  }
+  req.sessionId = sessionId;
+  next();
+}
+
+app.use(ensureSession);
+
 // --- Model routes ---
 
-app.get("/api/models", (_req, res) => {
-  res.json(getAllModels());
+app.get("/api/models", (req, res) => {
+  res.json(getModelsBySession(req.sessionId));
 });
 
 app.get("/api/models/:id", (req, res) => {
@@ -75,6 +94,7 @@ app.post("/api/models", upload.single("file"), (req, res) => {
     originalName: req.file.originalname,
     format: ext.replace(".", ""),
     size: req.file.size,
+    sessionId: req.sessionId,
     uploadedAt: new Date().toISOString(),
   });
 
@@ -84,6 +104,9 @@ app.post("/api/models", upload.single("file"), (req, res) => {
 app.delete("/api/models/:id", (req, res) => {
   const model = getModelById(req.params.id);
   if (!model) return res.status(404).json({ error: "Model not found" });
+  if (model.sessionId && model.sessionId !== req.sessionId) {
+    return res.status(403).json({ error: "Not your model" });
+  }
 
   const filePath = join(UPLOADS_DIR, model.filename);
   if (existsSync(filePath)) unlinkSync(filePath);

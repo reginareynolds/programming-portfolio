@@ -29,13 +29,14 @@ const DEMO_ANNOTATIONS = [
 export default function App() {
   const [models, setModels] = useState([]);
   const [activeModelId, setActiveModelId] = useState(null);
-  const [annotations, setAnnotations] = useState([]);
+  const [annotationCache, setAnnotationCache] = useState({});
   const [annotateMode, setAnnotateMode] = useState(false);
   const [pendingPoint, setPendingPoint] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(null);
 
   const activeModel = models.find((m) => m.id === activeModelId) || null;
+  const annotations = annotationCache[activeModelId] || [];
 
   useEffect(() => {
     fetchModels()
@@ -46,22 +47,23 @@ export default function App() {
         } else {
           setModels([DEMO_MODEL]);
           setActiveModelId("demo");
-          setAnnotations(DEMO_ANNOTATIONS);
+          setAnnotationCache({ demo: DEMO_ANNOTATIONS });
         }
       })
       .catch(() => {
         setModels([DEMO_MODEL]);
         setActiveModelId("demo");
-        setAnnotations(DEMO_ANNOTATIONS);
+        setAnnotationCache({ demo: DEMO_ANNOTATIONS });
       });
   }, []);
 
   useEffect(() => {
     if (!activeModelId || activeModelId === "demo") return;
+    if (annotationCache[activeModelId]) return;
     fetchAnnotations(activeModelId)
-      .then(setAnnotations)
-      .catch(() => setAnnotations([]));
-  }, [activeModelId]);
+      .then((data) => setAnnotationCache((prev) => ({ ...prev, [activeModelId]: data })))
+      .catch(() => setAnnotationCache((prev) => ({ ...prev, [activeModelId]: [] })));
+  }, [activeModelId, annotationCache]);
 
   const handleUpload = useCallback(async (file) => {
     setUploading(true);
@@ -82,9 +84,13 @@ export default function App() {
       try {
         await deleteModel(id);
         setModels((prev) => prev.filter((m) => m.id !== id));
+        setAnnotationCache((prev) => {
+          const next = { ...prev };
+          delete next[id];
+          return next;
+        });
         if (activeModelId === id) {
           setActiveModelId(null);
-          setAnnotations([]);
         }
       } catch {
         setError("Failed to delete model");
@@ -100,13 +106,30 @@ export default function App() {
   const handleAnnotationConfirm = useCallback(
     async (label) => {
       if (!pendingPoint || !activeModelId) return;
+      if (activeModelId === "demo") {
+        const ann = {
+          id: `demo-${Date.now()}`,
+          label,
+          position: pendingPoint.position,
+          normal: pendingPoint.normal,
+        };
+        setAnnotationCache((prev) => ({
+          ...prev,
+          demo: [...(prev.demo || []), ann],
+        }));
+        setPendingPoint(null);
+        return;
+      }
       try {
         const ann = await createAnnotation(activeModelId, {
           label,
           position: pendingPoint.position,
           normal: pendingPoint.normal,
         });
-        setAnnotations((prev) => [...prev, ann]);
+        setAnnotationCache((prev) => ({
+          ...prev,
+          [activeModelId]: [...(prev[activeModelId] || []), ann],
+        }));
       } catch {
         setError("Failed to save annotation");
       }
@@ -118,9 +141,19 @@ export default function App() {
   const handleAnnotationDelete = useCallback(
     async (id) => {
       if (!activeModelId) return;
+      if (activeModelId === "demo") {
+        setAnnotationCache((prev) => ({
+          ...prev,
+          demo: (prev.demo || []).filter((a) => a.id !== id),
+        }));
+        return;
+      }
       try {
         await deleteAnnotationApi(activeModelId, id);
-        setAnnotations((prev) => prev.filter((a) => a.id !== id));
+        setAnnotationCache((prev) => ({
+          ...prev,
+          [activeModelId]: (prev[activeModelId] || []).filter((a) => a.id !== id),
+        }));
       } catch {
         setError("Failed to delete annotation");
       }
