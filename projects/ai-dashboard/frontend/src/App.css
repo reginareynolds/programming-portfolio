@@ -52,6 +52,7 @@ body {
 
 .app-header {
   background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
   padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
