@@ -23,6 +23,9 @@ build/
 *.swp
 *.swo
 
+# Notes
+TODO.md
+
 # Claude Code
 .claude/
 

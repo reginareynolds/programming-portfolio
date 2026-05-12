@@ -12,7 +12,7 @@ export default function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <div className="header-left">
+        <div className="header-content">
           <h1>IoT Data Simulator</h1>
           <p>Real-time industrial sensor monitoring</p>
         </div>

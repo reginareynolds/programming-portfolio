@@ -13,13 +13,23 @@ function ProjectCard({ project }) {
 
   return (
     <div className="project-card">
-      <div
-        className="project-card-thumb"
-        style={{
-          background: `linear-gradient(${gradientAngles[idx] || 135}deg, rgba(99,102,241,0.3), rgba(34,211,238,0.15))`,
-        }}
-      >
-        <span className="project-card-initials">{initials}</span>
+      <div className="project-card-thumb">
+        {project.thumbnail ? (
+          <img
+            src={project.thumbnail}
+            alt={project.title}
+            className="project-card-img"
+          />
+        ) : (
+          <div
+            className="project-card-placeholder"
+            style={{
+              background: `linear-gradient(${gradientAngles[idx] || 135}deg, rgba(99,102,241,0.3), rgba(34,211,238,0.15))`,
+            }}
+          >
+            <span className="project-card-initials">{initials}</span>
+          </div>
+        )}
         <span className="project-card-type">{project.type}</span>
       </div>
       <div className="project-card-body">

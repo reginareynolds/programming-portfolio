@@ -8,7 +8,8 @@
   --accent: #6366f1;
   --accent-hover: #818cf8;
   --success: #10b981;
-  --error: #ef4444;
+  --warning: #f59e0b;
+  --danger: #ef4444;
   --radius: 8px;
 }
 
@@ -34,16 +35,18 @@ body {
 .app-header {
   background: var(--bg-secondary);
   border-bottom: 1px solid var(--border);
-  padding: 2rem;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .header-content {
   max-width: 1200px;
-  margin: 0 auto;
 }
 
 .header-content h1 {
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   font-weight: 700;
   background: linear-gradient(135deg, #6366f1, #22d3ee);
   -webkit-background-clip: text;
@@ -52,8 +55,8 @@ body {
 }
 
 .header-content p {
+  font-size: 0.8rem;
   color: var(--text-secondary);
-  margin-top: 0.25rem;
 }
 
 .app-main {
@@ -352,9 +355,9 @@ body {
   margin-top: 0.5rem;
   padding: 0.5rem 1rem;
   background: rgba(239, 68, 68, 0.1);
-  border: 1px solid var(--error);
+  border: 1px solid var(--danger);
   border-radius: var(--radius);
-  color: var(--error);
+  color: var(--danger);
   font-size: 0.85rem;
 }
 
@@ -390,9 +393,9 @@ body {
   margin-top: 0.75rem;
   padding: 0.75rem 1rem;
   background: rgba(239, 68, 68, 0.1);
-  border: 1px solid var(--error);
+  border: 1px solid var(--danger);
   border-radius: var(--radius);
-  color: var(--error);
+  color: var(--danger);
 }
 
 /* History */

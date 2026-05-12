@@ -85,7 +85,25 @@ function STLModel({ url, onLoad }) {
   return <group ref={ref} />;
 }
 
+function DemoModel({ onLoad }) {
+  const ref = useRef();
+
+  useEffect(() => {
+    if (ref.current && onLoad) onLoad(ref.current);
+  }, [onLoad]);
+
+  return (
+    <mesh ref={ref}>
+      <torusKnotGeometry args={[0.7, 0.25, 128, 32]} />
+      <meshStandardMaterial color="#6366f1" roughness={0.3} metalness={0.6} />
+    </mesh>
+  );
+}
+
 export default function ModelLoader({ url, format, onLoad }) {
+  if (format === "demo") {
+    return <DemoModel onLoad={onLoad} />;
+  }
   if (format === "glb" || format === "gltf") {
     return <GLTFModel url={url} onLoad={onLoad} />;
   }

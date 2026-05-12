@@ -13,6 +13,19 @@ import {
 } from "./api";
 import "./App.css";
 
+const DEMO_MODEL = {
+  id: "demo",
+  name: "Demo Torus Knot",
+  filename: "__demo__",
+  format: "demo",
+};
+
+const DEMO_ANNOTATIONS = [
+  { id: "demo-1", label: "Top curve", position: { x: 0, y: 0.85, z: 0.3 } },
+  { id: "demo-2", label: "Inner loop", position: { x: -0.5, y: -0.2, z: 0.6 } },
+  { id: "demo-3", label: "Base section", position: { x: 0.4, y: -0.7, z: -0.3 } },
+];
+
 export default function App() {
   const [models, setModels] = useState([]);
   const [activeModelId, setActiveModelId] = useState(null);
@@ -30,14 +43,15 @@ export default function App() {
         setModels(data);
         if (data.length > 0) setActiveModelId(data[0].id);
       })
-      .catch(() => setError("Failed to load models"));
+      .catch(() => {
+        setModels([DEMO_MODEL]);
+        setActiveModelId("demo");
+        setAnnotations(DEMO_ANNOTATIONS);
+      });
   }, []);
 
   useEffect(() => {
-    if (!activeModelId) {
-      setAnnotations([]);
-      return;
-    }
+    if (!activeModelId || activeModelId === "demo") return;
     fetchAnnotations(activeModelId)
       .then(setAnnotations)
       .catch(() => setAnnotations([]));
@@ -111,8 +125,10 @@ export default function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <h1>3D Model Viewer</h1>
-        <p>Upload, inspect, and annotate 3D models</p>
+        <div>
+          <h1>3D Model Viewer</h1>
+          <p>Upload, inspect, and annotate 3D models</p>
+        </div>
       </header>
 
       <div className="app-body">

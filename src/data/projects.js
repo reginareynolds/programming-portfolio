@@ -9,6 +9,7 @@ const projects = [
     githubUrl:
       "https://github.com/reginareynolds/programming-portfolio/tree/main/projects/ai-dashboard",
     liveUrl: null,
+    thumbnail: "/images/projects/ai-dashboard.png",
   },
   {
     id: "3d-model-viewer",
@@ -20,6 +21,7 @@ const projects = [
     githubUrl:
       "https://github.com/reginareynolds/programming-portfolio/tree/main/projects/3d-model-viewer",
     liveUrl: null,
+    thumbnail: "/images/projects/3d-model-viewer.png",
   },
   {
     id: "rest-api-microservice",
@@ -31,6 +33,7 @@ const projects = [
     githubUrl:
       "https://github.com/reginareynolds/programming-portfolio/tree/main/projects/rest-api-microservice",
     liveUrl: null,
+    thumbnail: null,
   },
   {
     id: "iot-data-simulator",
@@ -42,6 +45,7 @@ const projects = [
     githubUrl:
       "https://github.com/reginareynolds/programming-portfolio/tree/main/projects/iot-data-simulator",
     liveUrl: null,
+    thumbnail: "/images/projects/iot-data-simulator.png",
   },
   {
     id: "art-portfolio",
@@ -53,6 +57,7 @@ const projects = [
     githubUrl:
       "https://github.com/reginareynolds/programming-portfolio/tree/main/projects/art-portfolio",
     liveUrl: null,
+    thumbnail: null,
   },
 ];
 
