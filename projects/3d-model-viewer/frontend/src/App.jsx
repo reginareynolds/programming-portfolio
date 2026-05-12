@@ -163,8 +163,10 @@ export default function App() {
 
   return (
     <div className="app">
-      <header className="app-header">
+      <nav className="top-bar">
         <a href={import.meta.env.VITE_PORTFOLIO_URL || "https://reginareynolds.vercel.app"} className="back-link">&larr; Portfolio</a>
+      </nav>
+      <header className="app-header">
         <div>
           <h1>3D Model Viewer</h1>
           <p>Upload, inspect, and annotate 3D models</p>

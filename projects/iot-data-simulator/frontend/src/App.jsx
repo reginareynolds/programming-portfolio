@@ -11,6 +11,9 @@ export default function App() {
 
   return (
     <div className="app">
+      <nav className="top-bar">
+        <a href={import.meta.env.VITE_PORTFOLIO_URL || "https://reginareynolds.vercel.app"} className="back-link">&larr; Portfolio</a>
+      </nav>
       <header className="app-header">
         <div className="header-content">
           <h1>IoT Data Simulator</h1>
