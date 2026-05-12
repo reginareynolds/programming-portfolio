@@ -19,7 +19,7 @@ export default function AnnotationPin({ annotation, onDelete }) {
       </mesh>
 
       {hovered && (
-        <Html distanceFactor={5} style={{ pointerEvents: "auto" }}>
+        <Html distanceFactor={5} zIndexRange={[50, 0]} style={{ pointerEvents: "auto" }}>
           <div className="annotation-tooltip">
             <p>{label}</p>
             {onDelete && (
@@ -36,7 +36,7 @@ export default function AnnotationPin({ annotation, onDelete }) {
         </Html>
       )}
 
-      <Html distanceFactor={8} style={{ pointerEvents: "none" }}>
+      <Html distanceFactor={8} zIndexRange={[50, 0]} style={{ pointerEvents: "none" }}>
         <div className="annotation-marker" />
       </Html>
     </group>
