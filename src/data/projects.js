@@ -8,7 +8,7 @@ const projects = [
     stack: ["React", "Flask", "PostgreSQL", "LangChain", "Groq"],
     githubUrl:
       "https://github.com/reginareynolds/programming-portfolio/tree/main/projects/ai-dashboard",
-    liveUrl: "https://frontend-nine-woad-27.vercel.app",
+    liveUrl: "https://ai-dashboard-frontend-indol.vercel.app",
     thumbnail: "/images/projects/ai-dashboard.png",
   },
   {
@@ -20,7 +20,7 @@ const projects = [
     stack: ["React", "Three.js", "Express", "Node.js"],
     githubUrl:
       "https://github.com/reginareynolds/programming-portfolio/tree/main/projects/3d-model-viewer",
-    liveUrl: null,
+    liveUrl: "https://3d-model-viewer-frontend-seven.vercel.app",
     thumbnail: "/images/projects/3d-model-viewer.png",
   },
   {

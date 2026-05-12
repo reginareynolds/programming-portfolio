@@ -40,8 +40,14 @@ export default function App() {
   useEffect(() => {
     fetchModels()
       .then((data) => {
-        setModels(data);
-        if (data.length > 0) setActiveModelId(data[0].id);
+        if (data.length > 0) {
+          setModels(data);
+          setActiveModelId(data[0].id);
+        } else {
+          setModels([DEMO_MODEL]);
+          setActiveModelId("demo");
+          setAnnotations(DEMO_ANNOTATIONS);
+        }
       })
       .catch(() => {
         setModels([DEMO_MODEL]);
@@ -125,6 +131,7 @@ export default function App() {
   return (
     <div className="app">
       <header className="app-header">
+        <a href={import.meta.env.VITE_PORTFOLIO_URL || "https://reginareynolds.vercel.app"} className="back-link">&larr; Portfolio</a>
         <div>
           <h1>3D Model Viewer</h1>
           <p>Upload, inspect, and annotate 3D models</p>

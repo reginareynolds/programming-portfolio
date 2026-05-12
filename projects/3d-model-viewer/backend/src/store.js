@@ -3,7 +3,8 @@ import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const DB_PATH = join(__dirname, "..", "data", "db.json");
+const STORAGE_DIR = process.env.STORAGE_PATH || join(__dirname, "..", "uploads");
+const DB_PATH = join(STORAGE_DIR, "db.json");
 
 function ensureDir() {
   const dir = dirname(DB_PATH);
