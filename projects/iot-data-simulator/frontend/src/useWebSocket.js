@@ -75,6 +75,9 @@ export default function useWebSocket() {
   const demoFallbackTimer = useRef(null);
   const demoLoaded = useRef(false);
 
+  const demoIndex = useRef(60);
+  const demoInterval = useRef(null);
+
   const loadDemoData = useCallback(() => {
     if (demoLoaded.current) return;
     demoLoaded.current = true;
@@ -82,6 +85,11 @@ export default function useWebSocket() {
     setHistory(ticks);
     setLatestTick(ticks[ticks.length - 1]);
     setConnected(true);
+    demoInterval.current = setInterval(() => {
+      const tick = generateDemoTick(demoIndex.current++);
+      setLatestTick(tick);
+      setHistory((prev) => [...prev.slice(-(MAX_HISTORY - 1)), tick]);
+    }, 1000);
   }, []);
 
   const connect = useCallback(() => {
@@ -124,6 +132,7 @@ export default function useWebSocket() {
     return () => {
       clearTimeout(reconnectTimer.current);
       clearTimeout(demoFallbackTimer.current);
+      clearInterval(demoInterval.current);
       wsRef.current?.close();
     };
   }, [connect]);
