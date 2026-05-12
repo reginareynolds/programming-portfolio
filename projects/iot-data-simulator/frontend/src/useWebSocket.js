@@ -77,6 +77,16 @@ export default function useWebSocket() {
 
   const demoIndex = useRef(60);
   const demoInterval = useRef(null);
+  const wasConnected = useRef(false);
+
+  const startDemoInterval = useCallback(() => {
+    clearInterval(demoInterval.current);
+    demoInterval.current = setInterval(() => {
+      const tick = generateDemoTick(demoIndex.current++);
+      setLatestTick(tick);
+      setHistory((prev) => [...prev.slice(-(MAX_HISTORY - 1)), tick]);
+    }, 1000);
+  }, []);
 
   const loadDemoData = useCallback(() => {
     if (demoLoaded.current) return;
@@ -85,22 +95,21 @@ export default function useWebSocket() {
     setHistory(ticks);
     setLatestTick(ticks[ticks.length - 1]);
     setConnected(true);
-    demoInterval.current = setInterval(() => {
-      const tick = generateDemoTick(demoIndex.current++);
-      setLatestTick(tick);
-      setHistory((prev) => [...prev.slice(-(MAX_HISTORY - 1)), tick]);
-    }, 1000);
-  }, []);
+    startDemoInterval();
+  }, [startDemoInterval]);
 
   const connect = useCallback(() => {
     if (wsRef.current?.readyState === WebSocket.OPEN) return;
+    if (demoLoaded.current && !wasConnected.current) return;
 
     const ws = new WebSocket(WS_URL);
     wsRef.current = ws;
 
     ws.onopen = () => {
+      wasConnected.current = true;
       setConnected(true);
       clearTimeout(demoFallbackTimer.current);
+      clearInterval(demoInterval.current);
     };
 
     ws.onmessage = (event) => {
@@ -110,16 +119,16 @@ export default function useWebSocket() {
     };
 
     ws.onclose = () => {
-      setConnected(false);
-      if (!demoLoaded.current) {
+      if (!wasConnected.current) {
         loadDemoData();
-      } else {
-        reconnectTimer.current = setTimeout(connect, 3000);
+        return;
       }
+      setConnected(false);
+      reconnectTimer.current = setTimeout(connect, 3000);
     };
 
     ws.onerror = () => ws.close();
-  }, [loadDemoData]);
+  }, [loadDemoData, startDemoInterval]);
 
   useEffect(() => {
     demoFallbackTimer.current = setTimeout(() => {
