@@ -24,7 +24,7 @@ build/
 *.swo
 
 # Notes
-TODO.md
+notes/
 
 # Claude Code
 .claude/
