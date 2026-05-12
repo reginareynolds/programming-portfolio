@@ -25,7 +25,7 @@ export async function uploadCSV(file) {
   return data;
 }
 
-export async function queryData(question) {
-  const { data } = await api.post("/api/query", { question });
+export async function queryData(question, dataset = "demo") {
+  const { data } = await api.post("/api/query", { question, dataset });
   return data;
 }

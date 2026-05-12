@@ -70,7 +70,7 @@ export default function App() {
     setLoading(true);
     setError(null);
     try {
-      const result = await queryData(question);
+      const result = await queryData(question, activeTab === "custom" && uploadInfo ? "custom" : "demo");
       if (result.error) {
         setError(result.error);
       } else {
@@ -89,9 +89,12 @@ export default function App() {
     setActiveTab("custom");
   }
 
+  const portfolioUrl = import.meta.env.VITE_PORTFOLIO_URL || "https://reginareynolds.vercel.app";
+
   return (
     <div className="app">
       <header className="app-header">
+        <a href={portfolioUrl} className="back-link">&larr; Portfolio</a>
         <div className="header-content">
           <h1>AI Dashboard</h1>
           <p>Ask questions about your data in plain English</p>
@@ -117,16 +120,18 @@ export default function App() {
         {activeTab === "custom" && (
           <section className="section">
             <FileUpload onUploadComplete={handleUploadComplete} />
-            {uploadInfo && (
+            {uploadInfo && uploadInfo.message && (
               <div className="upload-summary">
                 <p>{uploadInfo.message}</p>
-                <div className="column-tags">
-                  {uploadInfo.columns.map((col) => (
-                    <span key={col} className="tag">
-                      {col} <small>({uploadInfo.types[col]})</small>
-                    </span>
-                  ))}
-                </div>
+                {Array.isArray(uploadInfo.columns) && uploadInfo.types && (
+                  <div className="column-tags">
+                    {uploadInfo.columns.map((col) => (
+                      <span key={col} className="tag">
+                        {col} <small>({uploadInfo.types[col] || "unknown"})</small>
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
             )}
           </section>

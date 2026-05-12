@@ -8,7 +8,7 @@ const projects = [
     stack: ["React", "Flask", "PostgreSQL", "LangChain", "Groq"],
     githubUrl:
       "https://github.com/reginareynolds/programming-portfolio/tree/main/projects/ai-dashboard",
-    liveUrl: null,
+    liveUrl: "https://frontend-nine-woad-27.vercel.app",
     thumbnail: "/images/projects/ai-dashboard.png",
   },
   {

@@ -24,7 +24,7 @@ Rules:
 - Use only SELECT statements. Never use INSERT, UPDATE, DELETE, DROP, ALTER, or any DDL/DML.
 - Alias columns with readable names using AS.
 - Limit results to 50 rows max.
-- Use the correct table based on context. Default to sales_records unless the user references their uploaded data."""
+- Use the table specified by the "active_table" context. Query ONLY that table."""
 
 SALES_SCHEMA = """  id: integer (primary key)
   order_date: date
@@ -47,12 +47,14 @@ def get_llm():
     )
 
 
-def generate_sql(question: str, custom_schema: str = "No custom data uploaded.") -> dict:
+def generate_sql(question: str, custom_schema: str = "No custom data uploaded.", use_custom: bool = False) -> dict:
     llm = get_llm()
+
+    active_table = "custom_data" if use_custom else "sales_records"
 
     prompt = ChatPromptTemplate.from_messages([
         ("system", SYSTEM_PROMPT),
-        ("human", "{question}"),
+        ("human", "Active table: {active_table}\n\nQuestion: {question}"),
     ])
 
     chain = prompt | llm | StrOutputParser()
@@ -61,6 +63,7 @@ def generate_sql(question: str, custom_schema: str = "No custom data uploaded.")
         "question": question,
         "schema": SALES_SCHEMA,
         "custom_schema": custom_schema,
+        "active_table": active_table,
     })
 
     match = re.search(r'\{[^}]+\}', response, re.DOTALL)

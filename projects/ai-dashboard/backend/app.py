@@ -23,7 +23,13 @@ def create_app():
 
 app = create_app()
 
-custom_schema_cache = {"schema_str": "No custom data uploaded."}
+
+def get_custom_schema():
+    from models import Dataset
+    dataset = Dataset.query.filter_by(name="User Upload", is_demo=False).first()
+    if not dataset or not dataset.columns_metadata:
+        return "No custom data uploaded."
+    return "\n".join(f"  {col}: {dtype}" for col, dtype in dataset.columns_metadata.items())
 
 
 @app.route("/api/health", methods=["GET"])
@@ -49,7 +55,6 @@ def upload_csv():
 
     try:
         result = process_csv_upload(file)
-        custom_schema_cache["schema_str"] = result["schema_str"]
         return jsonify({
             "message": f"Uploaded {result['rows']} rows with {len(result['columns'])} columns",
             "columns": result["columns"],
@@ -72,8 +77,11 @@ def query_data():
     if not question:
         return jsonify({"error": "Question cannot be empty"}), 400
 
+    dataset = data.get("dataset", "demo")
+
     try:
-        llm_result = generate_sql(question, custom_schema_cache["schema_str"])
+        custom_schema = get_custom_schema() if dataset == "custom" else "No custom data uploaded."
+        llm_result = generate_sql(question, custom_schema, use_custom=dataset == "custom")
         sql = llm_result["sql"]
         chart_type = llm_result.get("chart_type", "table")
 

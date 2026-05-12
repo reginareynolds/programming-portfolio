@@ -5,6 +5,7 @@ import { uploadCSV } from "../api";
 export default function FileUpload({ onUploadComplete }) {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
 
   const onDrop = useCallback(
     async (acceptedFiles) => {
@@ -13,12 +14,21 @@ export default function FileUpload({ onUploadComplete }) {
 
       setUploading(true);
       setError(null);
+      setSuccess(null);
 
       try {
         const result = await uploadCSV(file);
-        onUploadComplete(result);
+        if (result.error) {
+          setError(result.error);
+        } else {
+          setSuccess(result.message || `Uploaded ${file.name}`);
+          onUploadComplete(result);
+        }
       } catch (err) {
-        setError(err.response?.data?.error || "Upload failed");
+        const msg = err.response?.data?.error
+          || err.message
+          || "Upload failed — check your connection";
+        setError(msg);
       } finally {
         setUploading(false);
       }
@@ -41,6 +51,8 @@ export default function FileUpload({ onUploadComplete }) {
           <p>Processing...</p>
         ) : isDragActive ? (
           <p>Drop your CSV here</p>
+        ) : success ? (
+          <p style={{ color: "var(--success)" }}>{success} — drop another to replace</p>
         ) : (
           <p>Drag & drop a CSV file here, or click to browse</p>
         )}

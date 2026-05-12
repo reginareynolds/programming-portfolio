@@ -41,6 +41,18 @@ body {
   align-items: center;
 }
 
+.back-link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.back-link:hover {
+  color: var(--accent);
+}
+
 .header-content {
   max-width: 1200px;
 }
