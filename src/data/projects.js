@@ -44,7 +44,7 @@ const projects = [
     stack: ["React", "FastAPI", "WebSockets", "Recharts"],
     githubUrl:
       "https://github.com/reginareynolds/programming-portfolio/tree/main/projects/iot-data-simulator",
-    liveUrl: null,
+    liveUrl: "https://iot-data-simulator-frontend.vercel.app",
     thumbnail: "/images/projects/iot-data-simulator.png",
   },
   {

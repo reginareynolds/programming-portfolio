@@ -12,9 +12,12 @@ export default function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <div className="header-content">
-          <h1>IoT Data Simulator</h1>
-          <p>Real-time industrial sensor monitoring</p>
+        <div className="header-left">
+          <a href={import.meta.env.VITE_PORTFOLIO_URL || "https://reginareynolds.vercel.app"} className="back-link">&larr; Portfolio</a>
+          <div className="header-content">
+            <h1>IoT Data Simulator</h1>
+            <p>Real-time industrial sensor monitoring</p>
+          </div>
         </div>
         <div className={`connection-status ${connected ? "online" : "offline"}`}>
           <span className="status-dot" />
