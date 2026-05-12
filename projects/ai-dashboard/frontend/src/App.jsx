@@ -93,8 +93,10 @@ export default function App() {
 
   return (
     <div className="app">
-      <header className="app-header">
+      <nav className="top-bar">
         <a href={portfolioUrl} className="back-link">&larr; Portfolio</a>
+      </nav>
+      <header className="app-header">
         <div className="header-content">
           <h1>AI Dashboard</h1>
           <p>Ask questions about your data in plain English</p>

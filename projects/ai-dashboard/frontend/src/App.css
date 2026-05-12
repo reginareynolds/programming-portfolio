@@ -32,25 +32,30 @@ body {
   flex-direction: column;
 }
 
-.app-header {
+.top-bar {
   background: var(--bg-secondary);
   border-bottom: 1px solid var(--border);
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  padding: 0.4rem 2rem;
 }
 
 .back-link {
   color: var(--text-secondary);
   text-decoration: none;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 500;
   transition: color 0.2s;
 }
 
 .back-link:hover {
   color: var(--accent);
+}
+
+.app-header {
+  background: var(--bg-secondary);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .header-content {
