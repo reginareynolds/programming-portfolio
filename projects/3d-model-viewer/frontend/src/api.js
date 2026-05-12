@@ -2,7 +2,7 @@ import axios from "axios";
 
 const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3001";
 
-const api = axios.create({ baseURL: API_BASE });
+const api = axios.create({ baseURL: API_BASE, withCredentials: true });
 
 export async function fetchModels() {
   const { data } = await api.get("/api/models");

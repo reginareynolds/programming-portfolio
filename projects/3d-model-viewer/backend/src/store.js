@@ -29,6 +29,10 @@ export function getAllModels() {
   return read().models;
 }
 
+export function getModelsBySession(sessionId) {
+  return read().models.filter((m) => m.sessionId === sessionId);
+}
+
 export function getModelById(id) {
   return read().models.find((m) => m.id === id) || null;
 }

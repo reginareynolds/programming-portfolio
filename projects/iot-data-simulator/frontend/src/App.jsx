@@ -69,7 +69,7 @@ export default function App() {
 
       <footer className="app-footer">
         <p>
-          Built by Regina Reynolds &middot; FastAPI &middot; WebSockets &middot;
+          &copy; 2026 Regina Reynolds &middot; FastAPI &middot; WebSockets &middot;
           React &middot; Recharts
         </p>
       </footer>
