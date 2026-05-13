@@ -15,7 +15,7 @@ function updateLine(lineId, index) {
   const state = lineOeeState[lineId];
   let stopped = index < state.stoppedUntil;
 
-  if (!stopped && Math.random() < 0.02) {
+  if (!stopped && Math.random() < 0.05) {
     const duration = 5 + Math.floor(Math.random() * 10);
     state.stoppedUntil = index + duration;
     stopped = true;
