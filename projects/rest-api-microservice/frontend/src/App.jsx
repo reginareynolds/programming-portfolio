@@ -32,6 +32,7 @@ export default function App() {
   const [error, setError] = useState(null);
 
   const nextDemoId = useRef(11);
+  const deletingIds = useRef(new Set());
 
   // --- Auth handlers ---
   function handleAuth(userData, accessToken) {
@@ -116,21 +117,21 @@ export default function App() {
   }
 
   async function handleDeleteProject(id) {
-    const prevProjects = projects;
-    const prevTasks = tasks;
+    const key = `project-${id}`;
+    if (deletingIds.current.has(key)) return;
+    deletingIds.current.add(key);
     setProjects((prev) => prev.filter((p) => p.id !== id));
     setTasks((prev) => prev.filter((t) => t.project_id !== id));
     if (selectedProjectId === id) setSelectedProjectId(null);
-    if (demoMode) return;
+    if (demoMode) { deletingIds.current.delete(key); return; }
     try {
       await api.deleteProject(id);
-      await loadProjects();
-      await loadTasks();
     } catch {
-      setProjects(prevProjects);
-      setTasks(prevTasks);
-      setError("Failed to delete project");
+      // ignore — may have already been deleted
     }
+    await loadProjects();
+    await loadTasks();
+    deletingIds.current.delete(key);
   }
 
   // --- Task CRUD ---
@@ -184,8 +185,9 @@ export default function App() {
   }
 
   async function handleDeleteTask(id) {
-    const prevTasks = tasks;
-    const prevProjects = projects;
+    const key = `task-${id}`;
+    if (deletingIds.current.has(key)) return;
+    deletingIds.current.add(key);
     const task = tasks.find((t) => t.id === id);
     setTasks((prev) => prev.filter((t) => t.id !== id));
     if (task) {
@@ -197,16 +199,15 @@ export default function App() {
         )
       );
     }
-    if (demoMode) return;
+    if (demoMode) { deletingIds.current.delete(key); return; }
     try {
       await api.deleteTask(id);
-      await loadProjects();
-      await loadTasks();
     } catch {
-      setTasks(prevTasks);
-      setProjects(prevProjects);
-      setError("Failed to delete task");
+      // ignore — may have already been deleted
     }
+    await loadProjects();
+    await loadTasks();
+    deletingIds.current.delete(key);
   }
 
   async function handleStatusChange(id, newStatus) {
