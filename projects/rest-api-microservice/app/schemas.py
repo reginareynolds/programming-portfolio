@@ -38,3 +38,4 @@ class TaskUpdateSchema(Schema):
     status = fields.Str(validate=validate.OneOf(["todo", "in_progress", "done"]))
     priority = fields.Str(validate=validate.OneOf(["low", "medium", "high"]))
     due_date = fields.Date(allow_none=True)
+    project_id = fields.Int()
