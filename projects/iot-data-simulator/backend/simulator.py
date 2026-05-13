@@ -99,14 +99,14 @@ class SensorSimulator:
         }
 
     def maybe_trigger_event(self):
-        if random.random() < 0.02:
+        if random.random() < 0.05:
             line_id = random.choice(PRODUCTION_LINES)["id"]
             if line_id in self._anomaly_lines:
                 self._anomaly_lines.discard(line_id)
                 self._line_states[line_id]["status"] = "running"
             else:
                 self._anomaly_lines.add(line_id)
-                if random.random() < 0.3:
+                if random.random() < 0.5:
                     self._line_states[line_id]["status"] = "stopped"
 
     def generate_tick(self):
