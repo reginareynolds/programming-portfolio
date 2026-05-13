@@ -7,7 +7,7 @@ const projects = [
     type: "Full-Stack",
     stack: ["React", "Flask", "PostgreSQL", "LangChain", "Groq"],
     githubUrl:
-      "https://github.com/reginareynolds/programming-portfolio/tree/main/projects/ai-dashboard",
+      "https://github.com/reginareynolds/programming-portfolio/tree/master/projects/ai-dashboard",
     liveUrl: "https://ai-dashboard-frontend-indol.vercel.app",
     thumbnail: "/images/projects/ai-dashboard.png",
   },
@@ -19,7 +19,7 @@ const projects = [
     type: "Full-Stack",
     stack: ["React", "Three.js", "Express", "Node.js"],
     githubUrl:
-      "https://github.com/reginareynolds/programming-portfolio/tree/main/projects/3d-model-viewer",
+      "https://github.com/reginareynolds/programming-portfolio/tree/master/projects/3d-model-viewer",
     liveUrl: "https://3d-model-viewer-frontend-seven.vercel.app",
     thumbnail: "/images/projects/3d-model-viewer.png",
   },
@@ -31,7 +31,7 @@ const projects = [
     type: "Backend",
     stack: ["Flask", "PostgreSQL", "JWT", "Docker", "GitHub Actions"],
     githubUrl:
-      "https://github.com/reginareynolds/programming-portfolio/tree/main/projects/rest-api-microservice",
+      "https://github.com/reginareynolds/programming-portfolio/tree/master/projects/rest-api-microservice",
     liveUrl: null,
     thumbnail: null,
   },
@@ -43,7 +43,7 @@ const projects = [
     type: "Full-Stack",
     stack: ["React", "FastAPI", "WebSockets", "Recharts"],
     githubUrl:
-      "https://github.com/reginareynolds/programming-portfolio/tree/main/projects/iot-data-simulator",
+      "https://github.com/reginareynolds/programming-portfolio/tree/master/projects/iot-data-simulator",
     liveUrl: "https://iot-data-simulator-frontend.vercel.app",
     thumbnail: "/images/projects/iot-data-simulator.png",
   },
@@ -55,7 +55,7 @@ const projects = [
     type: "Static",
     stack: ["React", "Three.js", "Vite", "GitHub Pages"],
     githubUrl:
-      "https://github.com/reginareynolds/programming-portfolio/tree/main/projects/art-portfolio",
+      "https://github.com/reginareynolds/programming-portfolio/tree/master/projects/art-portfolio",
     liveUrl: null,
     thumbnail: null,
   },
