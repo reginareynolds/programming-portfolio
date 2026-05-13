@@ -30,4 +30,8 @@ def create_app(config_class=Config):
     app.register_blueprint(projects_bp, url_prefix="/api/projects")
     app.register_blueprint(tasks_bp, url_prefix="/api/tasks")
 
+    with app.app_context():
+        from app import models  # noqa: F401
+        db.create_all()
+
     return app
