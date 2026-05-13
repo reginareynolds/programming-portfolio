@@ -73,7 +73,13 @@ npm install
 npm run dev
 ```
 
-Runs on `http://localhost:5173`. Set `VITE_WS_URL` to override the default WebSocket URL.
+Runs on `http://localhost:5173`.
+
+Frontend environment variables (optional):
+
+| Variable       | Required | Default                      |
+|----------------|----------|------------------------------|
+| `VITE_WS_URL`  | No       | `ws://localhost:8000/ws`     |
 
 ## Docker Deployment
 

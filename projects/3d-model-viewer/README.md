@@ -49,6 +49,13 @@ npm run dev
 
 Runs on `http://localhost:3001`.
 
+Backend environment variables (optional):
+
+| Variable       | Required | Default                |
+|----------------|----------|------------------------|
+| `PORT`         | No       | `3001`                 |
+| `STORAGE_PATH` | No       | `./uploads`            |
+
 ### Frontend
 
 ```bash
@@ -57,7 +64,13 @@ npm install
 npm run dev
 ```
 
-Runs on `http://localhost:5173`. Set `VITE_API_URL` to override the default backend URL.
+Runs on `http://localhost:5173`.
+
+Frontend environment variables (optional):
+
+| Variable       | Required | Default                      |
+|----------------|----------|------------------------------|
+| `VITE_API_URL` | No       | `http://localhost:3001`      |
 
 ## Docker Deployment
 
