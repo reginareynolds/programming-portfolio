@@ -79,6 +79,10 @@ def create_task():
     if not verify_project_access(data["project_id"], user_id):
         return jsonify({"error": "Project not found"}), 404
 
+    task_count = Task.query.join(Project).filter(Project.owner_id == user_id).count()
+    if task_count >= 100:
+        return jsonify({"error": "Task limit reached (max 100)"}), 400
+
     task = Task(
         title=data["title"],
         description=data["description"],

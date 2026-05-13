@@ -49,6 +49,10 @@ def create_project():
         return jsonify({"errors": e.messages}), 400
 
     user_id = int(get_jwt_identity())
+
+    if Project.query.filter_by(owner_id=user_id).count() >= 20:
+        return jsonify({"error": "Project limit reached (max 20)"}), 400
+
     project = Project(name=data["name"], description=data["description"], owner_id=user_id)
 
     db.session.add(project)
