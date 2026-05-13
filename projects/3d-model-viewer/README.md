@@ -11,6 +11,7 @@ A web-based 3D model viewer for uploading, inspecting, and annotating 3D files d
 - **Model library** — manage multiple uploaded models in the sidebar
 - **Studio lighting** — HDRI environment for realistic material rendering
 - **Auto-scaling** — models are automatically normalized to fit the viewport
+- **Demo fallback** — frontend loads sample models when backend is unavailable
 
 ## Tech Stack
 
@@ -19,17 +20,22 @@ A web-based 3D model viewer for uploading, inspecting, and annotating 3D files d
 | Frontend | React, Three.js, React Three Fiber, Drei      |
 | Backend  | Node.js, Express, Multer                       |
 | Storage  | File system (models) + JSON store (metadata)   |
-| Deploy   | Docker Compose, Nginx                          |
+| Deploy   | Railway (backend), Vercel (frontend)             |
 
 ## Architecture
 
 ```
 ┌─────────────────┐         ┌─────────────────┐
-│   React + R3F   │────────▶│  Express API    │
-│   3D Viewport   │◀────────│  File uploads   │
-│   Annotations   │         │  JSON store     │
+│   React + R3F   │<------->│  Express API    │
+│   3D Viewport   │  REST   │  File uploads   │
+│   Annotations   │         │   JSON store    │
 └─────────────────┘         └─────────────────┘
 ```
+
+## Live Demo
+
+- **Frontend:** https://reginareynolds-3d-viewer.vercel.app
+- **Backend:** https://3d-model-viewer-api-production.up.railway.app
 
 ## Quick Start
 
@@ -51,7 +57,7 @@ npm install
 npm run dev
 ```
 
-Runs on `http://localhost:5173` with API proxy to the backend.
+Runs on `http://localhost:5173`. Set `VITE_API_URL` to override the default backend URL.
 
 ## Docker Deployment
 
