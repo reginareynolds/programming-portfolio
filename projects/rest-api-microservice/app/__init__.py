@@ -30,4 +30,11 @@ def create_app(config_class=Config):
     app.register_blueprint(projects_bp, url_prefix="/api/projects")
     app.register_blueprint(tasks_bp, url_prefix="/api/tasks")
 
+    @app.before_request
+    def ensure_tables():
+        if not getattr(app, '_tables_created', False):
+            from app import models  # noqa: F401
+            db.create_all()
+            app._tables_created = True
+
     return app

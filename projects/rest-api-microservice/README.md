@@ -16,16 +16,63 @@ A production-grade RESTful API for task and project management with JWT authenti
 
 ## Tech Stack
 
-| Component      | Technology                        |
-|----------------|-----------------------------------|
-| Framework      | Flask                             |
-| Database       | PostgreSQL (SQLite for tests)     |
-| Auth           | Flask-JWT-Extended (JWT tokens)   |
-| Validation     | Marshmallow                       |
-| Migrations     | Flask-Migrate (Alembic)           |
-| Tests          | pytest + pytest-cov               |
-| CI/CD          | GitHub Actions                    |
-| Deploy         | Docker Compose + Gunicorn         |
+| Layer      | Technology                        |
+|------------|-----------------------------------|
+| Framework  | Flask                             |
+| Database   | PostgreSQL (SQLite for tests)     |
+| Auth       | Flask-JWT-Extended (JWT tokens)   |
+| Validation | Marshmallow                       |
+| Tests      | pytest + pytest-cov               |
+| CI/CD      | GitHub Actions                    |
+| Deploy     | Railway (API + Postgres)          |
+
+## Architecture
+
+```
+┌──────────┐         ┌──────────┐
+│  Client  │<------->│  Flask   │
+│  (curl)  │  REST   │   API    │
+└──────────┘         └────┬─────┘
+                          │
+                     ┌────v─────┐
+                     │PostgreSQL│
+                     └──────────┘
+```
+
+## Live Demo
+
+- **API:** https://rest-api-microservice-api-production.up.railway.app
+
+## Quick Start
+
+```bash
+python -m venv .venv
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
+pip install -r requirements-dev.txt
+cp .env.example .env
+python wsgi.py
+```
+
+Runs on `http://localhost:5001`.
+
+Environment variables (see `.env.example`):
+
+| Variable         | Required | Default                                                  |
+|------------------|----------|----------------------------------------------------------|
+| `DATABASE_URL`   | No       | `postgresql://postgres:postgres@localhost:5432/taskmanager` |
+| `JWT_SECRET_KEY` | No       | `dev-secret-key`                                         |
+
+## Running Tests
+
+```bash
+pytest -v --cov=app --cov-report=term-missing
+```
+
+## Docker Deployment
+
+```bash
+docker compose up --build
+```
 
 ## API Endpoints
 
@@ -69,42 +116,18 @@ A production-grade RESTful API for task and project management with JWT authenti
 | `page`      | int    | Page number (default: 1)              |
 | `per_page`  | int    | Items per page (default: 20, max: 100)|
 
-## Quick Start
-
-```bash
-python -m venv .venv
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
-pip install -r requirements-dev.txt
-cp .env.example .env
-python wsgi.py
-```
-
-Runs on `http://localhost:5001`.
-
-## Running Tests
-
-```bash
-pytest -v --cov=app --cov-report=term-missing
-```
-
-## Docker Deployment
-
-```bash
-docker compose up --build
-```
-
 ## Example Usage
 
 ```bash
 # Register
 curl -X POST http://localhost:5001/api/auth/register \
   -H "Content-Type: application/json" \
-  -d '{"username":"regina","email":"r@example.com","password":"secret123"}'
+  -d '{"username":"demo","email":"demo@example.com","password":"secret123"}'
 
 # Login
 TOKEN=$(curl -s -X POST http://localhost:5001/api/auth/login \
   -H "Content-Type: application/json" \
-  -d '{"username":"regina","password":"secret123"}' | jq -r .access_token)
+  -d '{"username":"demo","password":"secret123"}' | jq -r .access_token)
 
 # Create project
 curl -X POST http://localhost:5001/api/projects \

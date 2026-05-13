@@ -7,6 +7,4 @@ RUN pip install --no-cache-dir -r requirements-prod.txt
 
 COPY . .
 
-EXPOSE 5001
-
-CMD ["gunicorn", "--bind", "0.0.0.0:5001", "--workers", "2", "wsgi:app"]
+CMD gunicorn --bind 0.0.0.0:${PORT:-5001} --workers 2 --preload wsgi:app
