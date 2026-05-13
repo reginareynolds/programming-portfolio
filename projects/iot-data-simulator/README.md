@@ -11,7 +11,9 @@ Inspired by OEE monitoring systems deployed on industrial IoT gateways in manufa
 - **Live charts** — 60-second rolling time series for temperature, pressure, and vibration
 - **Alert system** — warning and critical thresholds with visual indicators
 - **OEE dashboard** — availability, performance, and quality breakdowns per line
+- **Cumulative OEE** — shift-based tracking of availability, performance, and quality over time
 - **Anomaly simulation** — random events trigger sensor spikes and line stoppages
+- **Demo fallback** — frontend generates realistic demo data when backend is unavailable
 - **Auto-reconnect** — WebSocket reconnects automatically on disconnect
 
 ## Tech Stack
@@ -21,17 +23,17 @@ Inspired by OEE monitoring systems deployed on industrial IoT gateways in manufa
 | Frontend | React, Vite, Recharts             |
 | Backend  | FastAPI, WebSockets, uvicorn      |
 | Protocol | WebSocket (real-time streaming)   |
-| Deploy   | Docker Compose, Nginx             |
+| Deploy   | Railway (backend), Vercel (frontend) |
 
 ## Architecture
 
 ```
-┌──────────────┐   WebSocket    ┌──────────────┐
-│   React UI   │◀──────────────▶│   FastAPI     │
-│  Live Charts │    (1s ticks)  │  Simulator    │
-│  OEE Gauges  │                │  Engine       │
-│  Alert Feed  │                │              │
-└──────────────┘                └──────────────┘
+┌──────────────┐   WebSocket  ┌──────────────┐
+│   React UI   │<------------>│    FastAPI   │
+│  Live Charts │  (1s ticks)  │   Simulator  │
+│  OEE Gauges  │              │    Engine    │
+│  Alert Feed  │              │              │
+└──────────────┘              └──────────────┘
 ```
 
 ## Simulated Sensors
@@ -43,6 +45,11 @@ Inspired by OEE monitoring systems deployed on industrial IoT gateways in manufa
 | Vibration  | 0.5–2.5     | ≥2.2      | ≥3.0      | mm/s  |
 | Motor RPM  | 1400–1600   | ≥1550     | ≥1650     | RPM   |
 | Power Draw | 12–18       | ≥17       | ≥20       | kW    |
+
+## Live Demo
+
+- **Frontend:** https://reginareynolds-iot-simulator.vercel.app
+- **Backend:** https://iot-data-simulator-api-production.up.railway.app
 
 ## Quick Start
 
@@ -66,7 +73,7 @@ npm install
 npm run dev
 ```
 
-Runs on `http://localhost:5173` with proxy to backend.
+Runs on `http://localhost:5173`. Set `VITE_WS_URL` to override the default WebSocket URL.
 
 ## Docker Deployment
 
