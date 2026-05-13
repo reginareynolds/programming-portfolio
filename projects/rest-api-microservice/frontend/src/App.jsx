@@ -116,18 +116,19 @@ export default function App() {
   }
 
   async function handleDeleteProject(id) {
-    if (demoMode) {
-      setProjects((prev) => prev.filter((p) => p.id !== id));
-      setTasks((prev) => prev.filter((t) => t.project_id !== id));
-      if (selectedProjectId === id) setSelectedProjectId(null);
-      return;
-    }
+    const prevProjects = projects;
+    const prevTasks = tasks;
+    setProjects((prev) => prev.filter((p) => p.id !== id));
+    setTasks((prev) => prev.filter((t) => t.project_id !== id));
+    if (selectedProjectId === id) setSelectedProjectId(null);
+    if (demoMode) return;
     try {
       await api.deleteProject(id);
-      if (selectedProjectId === id) setSelectedProjectId(null);
       await loadProjects();
       await loadTasks();
     } catch {
+      setProjects(prevProjects);
+      setTasks(prevTasks);
       setError("Failed to delete project");
     }
   }
@@ -183,25 +184,27 @@ export default function App() {
   }
 
   async function handleDeleteTask(id) {
-    if (demoMode) {
-      const task = tasks.find((t) => t.id === id);
-      setTasks((prev) => prev.filter((t) => t.id !== id));
-      if (task) {
-        setProjects((prev) =>
-          prev.map((p) =>
-            p.id === task.project_id
-              ? { ...p, task_count: Math.max(0, (p.task_count || 1) - 1) }
-              : p
-          )
-        );
-      }
-      return;
+    const prevTasks = tasks;
+    const prevProjects = projects;
+    const task = tasks.find((t) => t.id === id);
+    setTasks((prev) => prev.filter((t) => t.id !== id));
+    if (task) {
+      setProjects((prev) =>
+        prev.map((p) =>
+          p.id === task.project_id
+            ? { ...p, task_count: Math.max(0, (p.task_count || 1) - 1) }
+            : p
+        )
+      );
     }
+    if (demoMode) return;
     try {
       await api.deleteTask(id);
       await loadProjects();
       await loadTasks();
     } catch {
+      setTasks(prevTasks);
+      setProjects(prevProjects);
       setError("Failed to delete task");
     }
   }
