@@ -21,12 +21,14 @@ export default function AuthForm({ onAuth, onDemoMode }) {
       api.setAuthToken(data.access_token);
       onAuth(data.user, data.access_token);
     } catch (err) {
-      const msg =
-        err.response?.data?.error ||
-        err.response?.data?.errors
-          ? Object.values(err.response.data.errors).flat().join(", ")
-          : "Connection failed. Is the backend running?";
-      setError(typeof msg === "string" ? msg : "Something went wrong");
+      const data = err.response?.data;
+      if (data?.error) {
+        setError(data.error);
+      } else if (data?.errors) {
+        setError(Object.values(data.errors).flat().join(", "));
+      } else {
+        setError("Connection failed. Is the backend running?");
+      }
     } finally {
       setLoading(false);
     }
