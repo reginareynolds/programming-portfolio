@@ -40,16 +40,11 @@ A full-stack analytics dashboard that lets users ask questions about data in pla
 - **Frontend:** https://reginareynolds-ai-dashboard.vercel.app
 - **Backend:** https://ai-dashboard-api-production.up.railway.app
 
-## Quick Start (Local Development)
-
-### Prerequisites
-
-- Python 3.10+
-- Node.js 18+
-- PostgreSQL running locally (or use Docker)
-- A free [Groq API key](https://console.groq.com)
+## Quick Start
 
 ### Backend
+
+Requires Python 3.10+, PostgreSQL, and a free [Groq API key](https://console.groq.com).
 
 ```bash
 cd backend
@@ -60,15 +55,15 @@ cp .env.example .env        # then edit .env with your keys
 python app.py
 ```
 
+Runs on `http://localhost:5000`.
+
 Backend environment variables (see `.env.example`):
 
-| Variable         | Required | Default                                          |
-|------------------|----------|--------------------------------------------------|
-| `GROQ_API_KEY`   | Yes      | —                                                |
-| `DATABASE_URL`   | No       | `postgresql://postgres:postgres@localhost:5432/ai_dashboard` |
-| `FLASK_SECRET_KEY` | No    | `dev-secret-key`                                 |
-
-Runs on `http://localhost:5000`.
+| Variable           | Required | Default                                                      |
+|--------------------|----------|--------------------------------------------------------------|
+| `GROQ_API_KEY`     | Yes      | —                                                            |
+| `DATABASE_URL`     | No       | `postgresql://postgres:postgres@localhost:5432/ai_dashboard`  |
+| `FLASK_SECRET_KEY` | No       | `dev-secret-key`                                             |
 
 ### Frontend
 
@@ -78,31 +73,21 @@ npm install
 npm run dev
 ```
 
-Runs on `http://localhost:5173`. Set `VITE_API_URL` to override the default backend URL (`http://localhost:5000`).
+Runs on `http://localhost:5173`.
+
+Frontend environment variables (optional):
+
+| Variable       | Required | Default                      |
+|----------------|----------|------------------------------|
+| `VITE_API_URL` | No       | `http://localhost:5000`      |
 
 ## Docker Deployment
 
-The entire stack runs with one command:
-
 ```bash
-# Set your Groq API key
-export GROQ_API_KEY=your_key_here
-
-# Build and start all services
 docker compose up --build
 ```
 
-This starts:
-- **PostgreSQL** on port 5432
-- **Flask API** on port 5000
-- **Nginx + React** on port 80
-
-Visit `http://localhost` to use the app.
-
-## Deployment
-
-- **Backend + Database:** Flask API and PostgreSQL on Railway
-- **Frontend:** React on Vercel
+Visit `http://localhost`. Requires `GROQ_API_KEY` set as an environment variable.
 
 ## Example Queries
 
