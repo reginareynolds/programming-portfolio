@@ -24,13 +24,20 @@ ALERT_THRESHOLDS = {
     "power_draw": {"warning": 17, "critical": 20},
 }
 
+IDEAL_CYCLE_TIME = 0.5
+
 
 class SensorSimulator:
     def __init__(self):
         self._start_time = time.time()
+        self._tick_count = 0
         self._anomaly_lines = set()
         self._line_states = {
             line["id"]: {"status": "running", "uptime_start": time.time()}
+            for line in PRODUCTION_LINES
+        }
+        self._oee_state = {
+            line["id"]: {"downtime_ticks": 0, "total_parts": 0, "good_parts": 0}
             for line in PRODUCTION_LINES
         }
 
@@ -62,11 +69,26 @@ class SensorSimulator:
 
     def _compute_oee(self, line_id):
         state = self._line_states[line_id]
+        oee_state = self._oee_state[line_id]
         is_running = state["status"] == "running"
 
-        availability = random.uniform(0.88, 0.98) if is_running else random.uniform(0.3, 0.5)
-        performance = random.uniform(0.85, 0.97) if is_running else random.uniform(0.4, 0.6)
-        quality = random.uniform(0.95, 0.995) if is_running else random.uniform(0.7, 0.85)
+        if not is_running:
+            oee_state["downtime_ticks"] += 1
+        else:
+            parts_this_tick = 2
+            oee_state["total_parts"] += parts_this_tick
+            defects = 1 if random.random() < 0.007 else 0
+            oee_state["good_parts"] += parts_this_tick - defects
+
+        elapsed = self._tick_count
+        if elapsed == 0:
+            return {"availability": 100.0, "performance": 100.0, "quality": 100.0, "oee": 100.0}
+
+        run_ticks = elapsed - oee_state["downtime_ticks"]
+        availability = run_ticks / elapsed
+        performance = (oee_state["total_parts"] * IDEAL_CYCLE_TIME) / run_ticks if run_ticks > 0 else 0
+        performance = min(performance, 1.0)
+        quality = oee_state["good_parts"] / oee_state["total_parts"] if oee_state["total_parts"] > 0 else 1.0
         oee = availability * performance * quality
 
         return {
@@ -88,6 +110,7 @@ class SensorSimulator:
                     self._line_states[line_id]["status"] = "stopped"
 
     def generate_tick(self):
+        self._tick_count += 1
         self.maybe_trigger_event()
         timestamp = time.time()
 
