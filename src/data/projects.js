@@ -8,7 +8,7 @@ const projects = [
     stack: ["React", "Flask", "PostgreSQL", "LangChain", "Groq"],
     githubUrl:
       "https://github.com/reginareynolds/programming-portfolio/tree/master/projects/ai-dashboard",
-    liveUrl: "https://ai-dashboard-frontend-indol.vercel.app",
+    liveUrl: "https://reginareynolds-ai-dashboard.vercel.app",
     thumbnail: "/images/projects/ai-dashboard.png",
   },
   {
@@ -20,7 +20,7 @@ const projects = [
     stack: ["React", "Three.js", "Express", "Node.js"],
     githubUrl:
       "https://github.com/reginareynolds/programming-portfolio/tree/master/projects/3d-model-viewer",
-    liveUrl: "https://3d-model-viewer-frontend-seven.vercel.app",
+    liveUrl: "https://reginareynolds-3d-viewer.vercel.app",
     thumbnail: "/images/projects/3d-model-viewer.png",
   },
   {
@@ -44,7 +44,7 @@ const projects = [
     stack: ["React", "FastAPI", "WebSockets", "Recharts"],
     githubUrl:
       "https://github.com/reginareynolds/programming-portfolio/tree/master/projects/iot-data-simulator",
-    liveUrl: "https://iot-data-simulator-frontend.vercel.app",
+    liveUrl: "https://reginareynolds-iot-simulator.vercel.app",
     thumbnail: "/images/projects/iot-data-simulator.png",
   },
   {
