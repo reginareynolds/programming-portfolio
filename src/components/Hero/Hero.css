@@ -80,6 +80,11 @@
   transform: translateY(-1px);
 }
 
+.btn--primary:active {
+  transform: translateY(0);
+  background: var(--accent);
+}
+
 .btn--outline {
   border: 1px solid var(--border);
   color: var(--text-primary);
@@ -89,6 +94,10 @@
   border-color: var(--accent);
   color: var(--accent);
   transform: translateY(-1px);
+}
+
+.btn--outline:active {
+  transform: translateY(0);
 }
 
 @media (max-width: 640px) {

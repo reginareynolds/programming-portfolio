@@ -112,3 +112,7 @@
   border-color: var(--accent);
   color: var(--accent);
 }
+
+.project-link:active {
+  transform: scale(0.97);
+}

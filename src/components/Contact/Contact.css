@@ -32,3 +32,7 @@
   color: var(--accent);
   transform: translateY(-2px);
 }
+
+.contact-btn:active {
+  transform: translateY(0);
+}
