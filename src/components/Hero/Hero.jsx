@@ -11,7 +11,6 @@ function Hero() {
         </Canvas>
       </div>
       <div className="hero-content">
-        <p className="hero-greeting">Hi, I'm</p>
         <h1 className="hero-name display-text">Regina Reynolds</h1>
         <h2 className="hero-title">Software Engineer</h2>
         <p className="hero-tagline">
