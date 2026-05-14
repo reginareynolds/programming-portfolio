@@ -16,7 +16,7 @@ function App() {
         <Contact />
       </main>
       <footer className="footer">
-        <p>&copy; 2026 Regina Reynolds. Built with React &amp; Three.js.</p>
+        <p>&copy; 2026 Regina Reynolds. Engineer by trade, artist by instinct.</p>
       </footer>
     </>
   );
