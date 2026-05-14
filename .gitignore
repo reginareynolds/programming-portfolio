@@ -29,6 +29,9 @@ notes/
 # Claude Code
 .claude/
 
+# Design docs (local only)
+DESIGN.md
+
 # OS
 .DS_Store
 Thumbs.db
