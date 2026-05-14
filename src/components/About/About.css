@@ -33,6 +33,11 @@
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: var(--space-4);
+  transition: border-color 0.2s;
+}
+
+.skill-card:hover {
+  border-color: var(--accent);
 }
 
 .skill-category {
@@ -63,6 +68,11 @@
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: var(--space-4);
+  transition: border-color 0.2s;
+}
+
+.edu-card:hover {
+  border-color: var(--accent);
 }
 
 .edu-degree {
