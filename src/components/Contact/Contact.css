@@ -23,7 +23,7 @@
   font-size: var(--text-sm);
   font-weight: 500;
   color: var(--text-secondary);
-  transition: all 0.2s;
+  transition: border-color 0.2s, color 0.2s, transform 0.2s;
 }
 
 .contact-btn:hover {

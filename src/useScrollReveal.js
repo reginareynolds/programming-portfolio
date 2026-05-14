@@ -10,10 +10,18 @@ export default function useScrollReveal(options = {}) {
     const targets = el.querySelectorAll(".reveal");
     if (!targets.length) return;
 
+    const cleanup = (e) => {
+      if (e.propertyName !== "opacity") return;
+      const t = e.target;
+      t.classList.remove("reveal", "revealed", "reveal-stagger");
+      t.removeEventListener("transitionend", cleanup);
+    };
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
+            entry.target.addEventListener("transitionend", cleanup);
             entry.target.classList.add("revealed");
             observer.unobserve(entry.target);
           }
