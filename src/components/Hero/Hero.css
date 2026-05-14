@@ -79,6 +79,7 @@
 
 .btn--outline {
   border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg-primary) 80%, transparent);
   color: var(--text-primary);
 }
 
