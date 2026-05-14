@@ -39,7 +39,7 @@ function Nav() {
   return (
     <nav className={`nav${scrolled ? " nav--scrolled" : ""}`}>
       <div className="nav-inner">
-        <a href="#" className="nav-logo gradient-text" onClick={handleClick}>
+        <a href="#" className="nav-logo display-text" onClick={handleClick}>
           Regina Reynolds
         </a>
         <button

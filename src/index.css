@@ -7,10 +7,30 @@
   --text-secondary: #94a3b8;
   --accent: #6366f1;
   --accent-hover: #818cf8;
-  --accent-cyan: #22d3ee;
-  --success: #10b981;
   --radius: 8px;
   --max-width: 1200px;
+
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 2rem;
+  --text-3xl: 2.5rem;
+  --text-4xl: 3.25rem;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
 }
 
 *,
@@ -26,9 +46,10 @@ html {
 }
 
 body {
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-body);
   background: var(--bg-primary);
   color: var(--text-primary);
+  font-size: var(--text-base);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
@@ -43,26 +64,27 @@ img {
   display: block;
 }
 
-.gradient-text {
-  background: linear-gradient(135deg, var(--accent), var(--accent-cyan));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
-  display: inline-block;
+.display-text {
+  color: var(--accent);
+  font-family: var(--font-display);
 }
 
 .section {
-  padding: 5rem 1.5rem;
+  padding: var(--space-20) var(--space-6);
   max-width: var(--max-width);
   margin: 0 auto;
 }
 
 .footer {
   text-align: center;
-  padding: 2rem 1.5rem;
+  padding: var(--space-8) var(--space-6);
   border-top: 1px solid var(--border);
   color: var(--text-secondary);
-  font-size: 0.85rem;
+  font-size: var(--text-sm);
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: var(--space-12) var(--space-4);
+  }
 }
