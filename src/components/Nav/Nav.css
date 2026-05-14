@@ -58,15 +58,19 @@
   border-radius: 1px;
 }
 
-.nav-resume {
-  padding: var(--space-1) var(--space-4) !important;
+.nav-links .nav-resume {
+  padding: var(--space-1) var(--space-4);
   border: 1px solid var(--accent);
   border-radius: var(--radius);
-  color: var(--accent) !important;
+  color: var(--accent);
 }
 
 .nav-resume:hover {
   background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+.nav-resume:active {
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
 }
 
 .nav-toggle {
