@@ -17,7 +17,7 @@
   position: relative;
   z-index: 1;
   text-align: center;
-  padding: 0 var(--space-6);
+  padding: var(--space-16) var(--space-6) 0;
   max-width: 700px;
 }
 
