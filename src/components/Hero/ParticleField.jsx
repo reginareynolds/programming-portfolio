@@ -99,10 +99,12 @@ function ParticleField() {
     }
 
     const lineGeo = linesRef.current.geometry;
-    lineGeo.setAttribute(
-      "position",
-      new THREE.BufferAttribute(linePositions.slice(0, lineIdx), 3)
-    );
+    if (!lineGeo.attributes.position) {
+      lineGeo.setAttribute(
+        "position",
+        new THREE.BufferAttribute(linePositions, 3)
+      );
+    }
     lineGeo.attributes.position.needsUpdate = true;
     lineGeo.setDrawRange(0, lineIdx / 3);
   });
