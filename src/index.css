@@ -64,6 +64,23 @@ img {
   display: block;
 }
 
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: var(--space-16);
+  z-index: 100;
+  padding: var(--space-2) var(--space-4);
+  background: var(--accent);
+  color: #fff;
+  border-radius: var(--radius);
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+.skip-link:focus {
+  left: var(--space-4);
+}
+
 .display-text {
   color: var(--accent);
   font-family: var(--font-display);

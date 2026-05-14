@@ -7,6 +7,7 @@ import Contact from "./components/Contact/Contact.jsx";
 function App() {
   return (
     <>
+      <a href="#projects" className="skip-link">Skip to content</a>
       <Nav />
       <main>
         <Hero />

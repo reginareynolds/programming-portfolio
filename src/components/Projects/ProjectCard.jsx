@@ -24,7 +24,7 @@ function ProjectCard({ project }) {
           <div
             className="project-card-placeholder"
             style={{
-              background: `linear-gradient(${gradientAngles[idx] || 135}deg, rgba(99,102,241,0.3), rgba(34,211,238,0.15))`,
+              background: `linear-gradient(${gradientAngles[idx] || 135}deg, rgba(99,102,241,0.3), rgba(129,140,248,0.1))`,
             }}
           >
             <span className="project-card-initials">{initials}</span>

@@ -130,7 +130,7 @@ function ParticleField() {
       </points>
       <lineSegments ref={linesRef}>
         <bufferGeometry />
-        <lineBasicMaterial color="#22d3ee" transparent opacity={0.12} />
+        <lineBasicMaterial color="#818cf8" transparent opacity={0.15} />
       </lineSegments>
     </>
   );

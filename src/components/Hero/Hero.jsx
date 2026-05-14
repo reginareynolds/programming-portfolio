@@ -5,7 +5,7 @@ import "./Hero.css";
 function Hero() {
   return (
     <section className="hero">
-      <div className="hero-canvas">
+      <div className="hero-canvas" aria-hidden="true">
         <Canvas camera={{ position: [0, 0, 5], fov: 60 }} dpr={[1, 2]}>
           <ParticleField />
         </Canvas>
