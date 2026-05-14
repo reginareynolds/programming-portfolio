@@ -12,7 +12,7 @@ function ProjectCard({ project }) {
     .slice(0, 3);
 
   return (
-    <div className="project-card">
+    <div className="project-card reveal reveal-stagger">
       <div className="project-card-thumb">
         {project.thumbnail ? (
           <img

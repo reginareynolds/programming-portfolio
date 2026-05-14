@@ -1,12 +1,15 @@
 import SectionHeading from "../Shared/SectionHeading.jsx";
 import skills from "../../data/skills.js";
+import useScrollReveal from "../../useScrollReveal.js";
 import "./About.css";
 
 function About() {
+  const ref = useScrollReveal();
+
   return (
-    <section id="about" className="section">
+    <section id="about" className="section" ref={ref}>
       <SectionHeading>About</SectionHeading>
-      <div className="about-bio">
+      <div className="about-bio reveal">
         <p>
           Results-driven Software Engineer with 8+ years of experience in
           full-stack development, AR/VR applications, and cloud-based solutions.
@@ -23,19 +26,19 @@ function About() {
         </p>
       </div>
 
-      <h3 className="about-subtitle">Technical Skills</h3>
+      <h3 className="about-subtitle reveal">Technical Skills</h3>
       <div className="skills-grid">
         {skills.map((group) => (
-          <div key={group.category} className="skill-card">
+          <div key={group.category} className="skill-card reveal reveal-stagger">
             <h4 className="skill-category">{group.category}</h4>
             <p className="skill-items">{group.items.join(" · ")}</p>
           </div>
         ))}
       </div>
 
-      <h3 className="about-subtitle">Education</h3>
+      <h3 className="about-subtitle reveal">Education</h3>
       <div className="education-grid">
-        <div className="edu-card">
+        <div className="edu-card reveal reveal-stagger">
           <p className="edu-degree">M.S. IT Management</p>
           <p className="edu-focus">Generative AI for Business</p>
           <p className="edu-school">UNC Greensboro &middot; 2026</p>
@@ -44,7 +47,7 @@ function About() {
             Analytics, IT Development
           </p>
         </div>
-        <div className="edu-card">
+        <div className="edu-card reveal reveal-stagger">
           <p className="edu-degree">Dual B.S.</p>
           <p className="edu-focus">ECE &amp; Interactive Media / Game Dev</p>
           <p className="edu-school">
