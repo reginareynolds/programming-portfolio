@@ -122,6 +122,7 @@ img {
 .reveal-stagger:nth-child(3) { transition-delay: 0.2s; }
 .reveal-stagger:nth-child(4) { transition-delay: 0.3s; }
 .reveal-stagger:nth-child(5) { transition-delay: 0.4s; }
+.reveal-stagger:nth-child(6) { transition-delay: 0.5s; }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal {

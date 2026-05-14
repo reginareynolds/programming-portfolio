@@ -12,6 +12,7 @@
 }
 
 .about-subtitle {
+  /* Uses display font directly — not .display-text — because these are sub-headings that inherit text-primary color rather than accent */
   font-family: var(--font-display);
   font-size: var(--text-lg);
   font-weight: 600;
