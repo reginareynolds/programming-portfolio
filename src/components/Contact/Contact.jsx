@@ -9,7 +9,7 @@ function Contact() {
     <section id="contact" className="section" ref={ref}>
       <SectionHeading>Let's Connect</SectionHeading>
       <p className="contact-subtitle reveal">
-        Currently open to software engineering opportunities.
+        Based in North Carolina. Currently open to remote and hybrid software engineering opportunities.
       </p>
       <div className="contact-links reveal">
         <a href="mailto:regina.reynolds.2014@gmail.com" className="contact-btn">
