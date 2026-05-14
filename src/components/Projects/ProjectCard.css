@@ -64,7 +64,6 @@
 }
 
 .project-card-title {
-  font-family: var(--font-display);
   font-size: var(--text-base);
   font-weight: 600;
   margin-bottom: var(--space-2);
