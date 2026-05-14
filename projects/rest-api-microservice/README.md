@@ -1,51 +1,61 @@
-# Task Manager REST API
+# Task Manager
 
-A production-grade RESTful API for task and project management with JWT authentication, input validation, pagination, filtering, and comprehensive test coverage.
+A full-stack task and project management app with a Kanban board UI, JWT authentication, filtering, and a REST API backend. Register or try demo mode to explore instantly.
 
 ## Features
 
+- **Kanban board** — drag-free columns for To Do, In Progress, and Done
 - **JWT Authentication** — register, login, and token-protected endpoints
-- **Projects** — CRUD operations with per-user isolation
+- **Projects** — CRUD with sidebar navigation and task counts
 - **Tasks** — full CRUD with status, priority, due dates, and project association
 - **Filtering & sorting** — filter tasks by status, priority, or project; sort by any field
 - **Pagination** — configurable page size with total counts
 - **Input validation** — Marshmallow schemas with clear error messages
-- **Cascade deletes** — deleting a project removes its tasks
+- **Cascade deletes** — deleting a project removes its tasks; deleting a user removes all data
 - **User isolation** — users can only access their own data
+- **Demo fallback** — frontend loads interactive demo data when backend is unavailable
+- **Auto-cleanup** — scheduled cron purges user accounts older than 24 hours
+- **Rate limits** — 20 projects and 100 tasks per user
 - **CI/CD** — GitHub Actions pipeline runs tests on every push
 
 ## Tech Stack
 
 | Layer      | Technology                        |
 |------------|-----------------------------------|
-| Framework  | Flask                             |
+| Frontend   | React, Vite                       |
+| Backend    | Flask                             |
 | Database   | PostgreSQL (SQLite for tests)     |
 | Auth       | Flask-JWT-Extended (JWT tokens)   |
 | Validation | Marshmallow                       |
 | Tests      | pytest + pytest-cov               |
 | CI/CD      | GitHub Actions                    |
-| Deploy     | Railway (API + Postgres)          |
+| Deploy     | Railway (API + DB), Vercel (frontend) |
 
 ## Architecture
 
 ```
-┌──────────┐         ┌──────────┐
-│  Client  │<------->│  Flask   │
-│  (curl)  │  REST   │   API    │
-└──────────┘         └────┬─────┘
-                          │
-                     ┌────v─────┐
-                     │PostgreSQL│
-                     └──────────┘
+┌──────────────┐         ┌──────────┐
+│   React UI   │<------->│  Flask   │
+│ Kanban Board │  REST   │   API    │
+│  Auth Forms  │         │          │
+└──────────────┘         └────┬─────┘
+                              │
+                         ┌────v─────┐
+                         │PostgreSQL│
+                         └──────────┘
 ```
 
 ## Live Demo
 
-- **API:** https://rest-api-microservice-api-production.up.railway.app
+- **Frontend:** https://reginareynolds-task-manager.vercel.app
+- **Backend:** https://rest-api-microservice-api-production.up.railway.app
 
 ## Quick Start
 
+### Backend
+
 ```bash
+cd backend
 python -m venv .venv
 source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements-dev.txt
@@ -55,12 +65,28 @@ python wsgi.py
 
 Runs on `http://localhost:5001`.
 
-Environment variables (see `.env.example`):
+Backend environment variables (see `.env.example`):
 
 | Variable         | Required | Default                                                  |
 |------------------|----------|----------------------------------------------------------|
 | `DATABASE_URL`   | No       | `postgresql://postgres:postgres@localhost:5432/taskmanager` |
 | `JWT_SECRET_KEY` | No       | `dev-secret-key`                                         |
+
+### Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Runs on `http://localhost:5173`.
+
+Frontend environment variables (optional):
+
+| Variable       | Required | Default                      |
+|----------------|----------|------------------------------|
+| `VITE_API_URL` | No       | `http://localhost:5001`      |
 
 ## Running Tests
 

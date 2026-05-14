@@ -10,7 +10,7 @@ on:
 
 defaults:
   run:
-    working-directory: projects/rest-api-microservice
+    working-directory: projects/rest-api-microservice/backend
 
 jobs:
   test:
