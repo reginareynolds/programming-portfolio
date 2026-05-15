@@ -101,7 +101,7 @@
   z-index: 1;
   color: var(--text-secondary);
   opacity: 0;
-  animation: hero-scroll-fade 1s 2s ease forwards, hero-scroll-bounce 2s 3s ease-in-out infinite;
+  animation: hero-scroll-fade 1s 2s ease forwards, hero-scroll-bounce 2s 3s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
 .hero-scroll:hover {
