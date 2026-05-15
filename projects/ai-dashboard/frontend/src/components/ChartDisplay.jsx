@@ -14,7 +14,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const COLORS = ["#6366f1", "#22d3ee", "#f59e0b", "#ef4444", "#10b981", "#8b5cf6", "#f97316", "#06b6d4"];
+const COLORS = ["#6366f1", "#818cf8", "#f59e0b", "#ef4444", "#10b981", "#8b5cf6", "#f97316", "#a5b4fc"];
 
 function DataTable({ columns, data }) {
   return (
