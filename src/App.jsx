@@ -16,7 +16,7 @@ function App() {
         <Contact />
       </main>
       <footer className="footer">
-        <p>&copy; 2026 Regina Reynolds. Engineer by trade, artist by instinct.</p>
+        <p>&copy; 2026 Regina Reynolds. Software Engineer & 3D Artist.</p>
       </footer>
     </>
   );

@@ -11,18 +11,25 @@ function About() {
       <SectionHeading>About</SectionHeading>
       <div className="about-bio reveal">
         <p>
-          Results-driven Software Engineer with 8+ years of experience in
+          I'm a results-driven Software Engineer with 8+ years of experience in
           full-stack development, AR/VR applications, and cloud-based solutions.
           I build scalable AI-driven applications, interactive 3D experiences,
           and production-grade APIs using Python, JavaScript, and C#.
         </p>
         <p>
-          I hold a Master of IT Management with a focus on Generative AI for
-          Business from UNCG, alongside certificates in Business Analytics,
-          Cloud Computing, and IT Development. Previously, I built enterprise
+          I graduated from UNCG with a Master's in IT & Management in 2026. My concentration was in 
+          Generative AI for Business. Alongside the Master's, I also received Post-Baccalaureate Certificates in 
+          Business Analytics, IT Development, and Cloud Computing. Prior to that, I did my undergrad at WPI, where
+          I graduated in 2018 with a Dual B.S. in Electrical & Computer Engineering and in Interactive Media & Game Development. 
+</p>
+<p>
+          In my prior professional experience, I built enterprise
           platforms and AR experiences at Harpak-ULMA Packaging and developed
           diagnostic tooling at Volvo Group, including a project that saved the
           company $600,000.
+</p>
+<p>
+          In my free time, I enjoy reading, playing video games, and running after my two adorable dogs.
         </p>
       </div>
 
@@ -41,7 +48,7 @@ function About() {
         <div className="edu-entry reveal reveal-stagger">
           <div className="edu-marker" />
           <div className="edu-content">
-            <p className="edu-degree">M.S. IT Management</p>
+            <p className="edu-degree">M.S. IT & Management</p>
             <p className="edu-focus">Generative AI for Business</p>
             <p className="edu-school">UNC Greensboro &middot; 2026</p>
             <p className="edu-detail">
@@ -54,7 +61,8 @@ function About() {
           <div className="edu-marker" />
           <div className="edu-content">
             <p className="edu-degree">Dual B.S.</p>
-            <p className="edu-focus">ECE &amp; Interactive Media / Game Dev</p>
+            <p className="edu-focus">Electrical & Computer Engineering</p>
+            <p className="edu-focus">Interactive Media & Game Development</p>
             <p className="edu-school">
               Worcester Polytechnic Institute &middot; May 2018
             </p>
