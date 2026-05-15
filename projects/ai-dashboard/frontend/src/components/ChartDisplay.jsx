@@ -16,6 +16,19 @@ import {
 
 const COLORS = ["#6366f1", "#818cf8", "#f59e0b", "#ef4444", "#10b981", "#8b5cf6", "#f97316", "#a5b4fc"];
 
+const TOKENS = {
+  border: "#334155",
+  textSecondary: "#94a3b8",
+  textPrimary: "#f1f5f9",
+  bgSecondary: "#1e293b",
+};
+
+const TOOLTIP_STYLE = {
+  backgroundColor: TOKENS.bgSecondary,
+  border: `1px solid ${TOKENS.border}`,
+  color: TOKENS.textPrimary,
+};
+
 function DataTable({ columns, data }) {
   return (
     <div className="data-table-wrapper">
@@ -79,10 +92,10 @@ export default function ChartDisplay({ result, loading }) {
         {chart_type === "bar" && (
           <ResponsiveContainer width="100%" height={350}>
             <BarChart data={data}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
-              <XAxis dataKey={labelKey} stroke="#9ca3af" />
-              <YAxis stroke="#9ca3af" />
-              <Tooltip contentStyle={{ backgroundColor: "#1f2937", border: "1px solid #374151", color: "#f3f4f6" }} />
+              <CartesianGrid strokeDasharray="3 3" stroke={TOKENS.border} />
+              <XAxis dataKey={labelKey} stroke={TOKENS.textSecondary} />
+              <YAxis stroke={TOKENS.textSecondary} />
+              <Tooltip contentStyle={TOOLTIP_STYLE} />
               <Legend />
               {valueKeys.map((key, i) => (
                 <Bar key={key} dataKey={key} fill={COLORS[i % COLORS.length]} />
@@ -94,10 +107,10 @@ export default function ChartDisplay({ result, loading }) {
         {chart_type === "line" && (
           <ResponsiveContainer width="100%" height={350}>
             <LineChart data={data}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
-              <XAxis dataKey={labelKey} stroke="#9ca3af" />
-              <YAxis stroke="#9ca3af" />
-              <Tooltip contentStyle={{ backgroundColor: "#1f2937", border: "1px solid #374151", color: "#f3f4f6" }} />
+              <CartesianGrid strokeDasharray="3 3" stroke={TOKENS.border} />
+              <XAxis dataKey={labelKey} stroke={TOKENS.textSecondary} />
+              <YAxis stroke={TOKENS.textSecondary} />
+              <Tooltip contentStyle={TOOLTIP_STYLE} />
               <Legend />
               {valueKeys.map((key, i) => (
                 <Line key={key} type="monotone" dataKey={key} stroke={COLORS[i % COLORS.length]} strokeWidth={2} />
@@ -114,7 +127,7 @@ export default function ChartDisplay({ result, loading }) {
                   <Cell key={i} fill={COLORS[i % COLORS.length]} />
                 ))}
               </Pie>
-              <Tooltip contentStyle={{ backgroundColor: "#1f2937", border: "1px solid #374151", color: "#f3f4f6" }} />
+              <Tooltip contentStyle={TOOLTIP_STYLE} />
               <Legend />
             </PieChart>
           </ResponsiveContainer>
