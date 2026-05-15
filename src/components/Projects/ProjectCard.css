@@ -77,6 +77,21 @@
   white-space: pre-line;
 }
 
+.project-card-toggle {
+  background: none;
+  border: none;
+  color: var(--accent-hover);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+.project-card-toggle:hover {
+  color: var(--text-primary);
+}
+
 .project-card-stack {
   display: flex;
   flex-wrap: wrap;

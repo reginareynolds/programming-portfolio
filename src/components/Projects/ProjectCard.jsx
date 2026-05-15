@@ -1,3 +1,4 @@
+import { useState } from "react";
 import TechBadge from "../Shared/TechBadge.jsx";
 import "./ProjectCard.css";
 
@@ -10,6 +11,10 @@ function ProjectCard({ project }) {
     .map((w) => w[0])
     .join("")
     .slice(0, 3);
+
+  const [expanded, setExpanded] = useState(false);
+  const maxChars = 150;
+  const isClamped = project.description.length > maxChars;
 
   return (
     <div className="project-card reveal reveal-stagger">
@@ -34,7 +39,19 @@ function ProjectCard({ project }) {
       </div>
       <div className="project-card-body">
         <h3 className="project-card-title">{project.title}</h3>
-        <p className="project-card-desc">{project.description}</p>
+        <p className="project-card-desc">
+          {expanded || !isClamped
+            ? project.description
+            : project.description.slice(0, maxChars).trimEnd() + "… "}
+          {isClamped && (
+            <button
+              className="project-card-toggle"
+              onClick={() => setExpanded(!expanded)}
+            >
+              {expanded ? "Read less" : "Read more"}
+            </button>
+          )}
+        </p>
         <div className="project-card-stack">
           {project.stack.map((tech) => (
             <TechBadge key={tech} label={tech} />
