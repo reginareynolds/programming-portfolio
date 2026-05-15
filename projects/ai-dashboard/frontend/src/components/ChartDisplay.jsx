@@ -45,7 +45,7 @@ function DataTable({ columns, data }) {
   );
 }
 
-export default function ChartDisplay({ result }) {
+export default function ChartDisplay({ result, loading }) {
   if (!result) return null;
 
   const { chart_type, columns, data, sql, question, row_count } = result;
@@ -58,7 +58,7 @@ export default function ChartDisplay({ result }) {
   const valueKeys = columns.slice(1);
 
   return (
-    <div className="chart-container">
+    <div className={`chart-container${loading ? " loading" : ""}`}>
       <div className="chart-header">
         <h3>{question}</h3>
         <span className="row-count">{row_count} row{row_count !== 1 ? "s" : ""}</span>

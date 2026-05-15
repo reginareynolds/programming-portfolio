@@ -451,6 +451,13 @@ body {
   border-color: var(--accent);
 }
 
+/* Loading */
+.chart-container.loading {
+  opacity: 0.6;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
 /* Footer */
 .app-footer {
   padding: 2rem 1.5rem;

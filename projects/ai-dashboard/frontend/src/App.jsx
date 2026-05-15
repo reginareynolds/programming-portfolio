@@ -148,7 +148,7 @@ export default function App() {
         <section className="section">
           <QueryBar onSubmit={handleQuery} loading={loading} />
           {error && <div className="error-message">{error}</div>}
-          <ChartDisplay result={queryResult} />
+          <ChartDisplay result={queryResult} loading={loading} />
         </section>
 
         {queryHistory.length > 1 && (
