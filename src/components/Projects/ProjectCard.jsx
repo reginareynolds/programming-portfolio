@@ -42,7 +42,7 @@ function ProjectCard({ project }) {
         <p className="project-card-desc">
           {expanded || !isClamped
             ? project.description
-            : project.description.slice(0, maxChars).trimEnd() + "… "}
+            : project.description.slice(0, maxChars).replace(/\s+\S*$/, "") + "… "}
           {isClamped && (
             <button
               className="project-card-toggle"
