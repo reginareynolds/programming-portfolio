@@ -47,6 +47,10 @@
   color: var(--text-primary);
 }
 
+.nav-links a:active {
+  color: var(--accent);
+}
+
 .nav-links a.active::after {
   content: "";
   position: absolute;

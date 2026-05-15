@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./Nav.css";
 
 const sections = ["projects", "about", "contact"];
@@ -7,39 +7,55 @@ function Nav() {
   const [active, setActive] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const scrollingRef = useRef(false);
+  const scrollTimerRef = useRef(null);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+
+      if (scrollingRef.current) {
+        clearTimeout(scrollTimerRef.current);
+        scrollTimerRef.current = setTimeout(() => {
+          scrollingRef.current = false;
+        }, 100);
+        return;
+      }
+
+      const threshold = window.innerHeight * 0.4;
+      const atBottom = window.innerHeight + window.scrollY >= document.body.scrollHeight - 2;
+
+      if (atBottom) {
+        setActive(sections[sections.length - 1]);
+        return;
+      }
+
+      let current = "";
+      for (const id of sections) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= threshold) {
+          current = id;
+        }
+      }
+      setActive(current);
+    };
+
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActive(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: "-40% 0px -55% 0px" }
-    );
-
-    sections.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
-  const handleClick = () => setMenuOpen(false);
+  const handleNavClick = (id) => {
+    setMenuOpen(false);
+    if (id) {
+      scrollingRef.current = true;
+      setActive(id);
+    }
+  };
 
   return (
     <nav className={`nav${scrolled ? " nav--scrolled" : ""}`}>
       <div className="nav-inner">
-        <a href="#" className="nav-logo display-text" onClick={handleClick}>
+        <a href="#" className="nav-logo display-text" onClick={() => handleNavClick(null)}>
           Regina Reynolds
         </a>
         <button
@@ -57,7 +73,7 @@ function Nav() {
               <a
                 href={`#${id}`}
                 className={active === id ? "active" : ""}
-                onClick={handleClick}
+                onClick={() => handleNavClick(id)}
               >
                 {id.charAt(0).toUpperCase() + id.slice(1)}
               </a>
@@ -69,7 +85,7 @@ function Nav() {
               target="_blank"
               rel="noopener noreferrer"
               className="nav-resume"
-              onClick={handleClick}
+              onClick={() => handleNavClick(null)}
             >
               Resume
             </a>
