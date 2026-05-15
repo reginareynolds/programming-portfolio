@@ -127,6 +127,10 @@ body {
   color: var(--text-primary);
 }
 
+.tab:active {
+  transform: scale(0.97);
+}
+
 .tab.active {
   background: var(--accent);
   border-color: var(--accent);
