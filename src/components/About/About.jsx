@@ -27,33 +27,39 @@ function About() {
       </div>
 
       <h3 className="about-subtitle reveal">Technical Skills</h3>
-      <div className="skills-grid">
+      <div className="skills-inline">
         {skills.map((group) => (
-          <div key={group.category} className="skill-card reveal reveal-stagger">
-            <h4 className="skill-category">{group.category}</h4>
-            <p className="skill-items">{group.items.join(" · ")}</p>
+          <div key={group.category} className="skill-row reveal reveal-stagger">
+            <span className="skill-label">{group.category}</span>
+            <span className="skill-items">{group.items.join(" · ")}</span>
           </div>
         ))}
       </div>
 
       <h3 className="about-subtitle reveal">Education</h3>
-      <div className="education-grid">
-        <div className="edu-card reveal reveal-stagger">
-          <p className="edu-degree">M.S. IT Management</p>
-          <p className="edu-focus">Generative AI for Business</p>
-          <p className="edu-school">UNC Greensboro &middot; 2026</p>
-          <p className="edu-detail">
-            Certificates in Business Analytics, Cloud Computing &amp; Security
-            Analytics, IT Development
-          </p>
+      <div className="edu-timeline">
+        <div className="edu-entry reveal reveal-stagger">
+          <div className="edu-marker" />
+          <div className="edu-content">
+            <p className="edu-degree">M.S. IT Management</p>
+            <p className="edu-focus">Generative AI for Business</p>
+            <p className="edu-school">UNC Greensboro &middot; 2026</p>
+            <p className="edu-detail">
+              Certificates in Business Analytics, Cloud Computing &amp; Security
+              Analytics, IT Development
+            </p>
+          </div>
         </div>
-        <div className="edu-card reveal reveal-stagger">
-          <p className="edu-degree">Dual B.S.</p>
-          <p className="edu-focus">ECE &amp; Interactive Media / Game Dev</p>
-          <p className="edu-school">
-            Worcester Polytechnic Institute &middot; May 2018
-          </p>
-          <p className="edu-detail">Minor in Spanish</p>
+        <div className="edu-entry reveal reveal-stagger">
+          <div className="edu-marker" />
+          <div className="edu-content">
+            <p className="edu-degree">Dual B.S.</p>
+            <p className="edu-focus">ECE &amp; Interactive Media / Game Dev</p>
+            <p className="edu-school">
+              Worcester Polytechnic Institute &middot; May 2018
+            </p>
+            <p className="edu-detail">Minor in Spanish</p>
+          </div>
         </div>
       </div>
     </section>
