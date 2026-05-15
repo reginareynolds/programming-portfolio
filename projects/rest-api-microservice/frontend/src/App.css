@@ -7,7 +7,7 @@
   --text-secondary: #94a3b8;
   --accent: #6366f1;
   --accent-hover: #818cf8;
-  --accent-cyan: #22d3ee;
+  --accent-cyan: #a5b4fc;
   --success: #10b981;
   --warning: #f59e0b;
   --danger: #ef4444;
@@ -65,7 +65,7 @@ body {
 .header-content h1 {
   font-size: 1.5rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #6366f1, #22d3ee);
+  background: linear-gradient(135deg, #6366f1, #818cf8);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -148,7 +148,7 @@ body {
 
 .auth-card-accent {
   height: 3px;
-  background: linear-gradient(90deg, #6366f1, #22d3ee);
+  background: linear-gradient(90deg, #6366f1, #818cf8);
 }
 
 .auth-card-body {
