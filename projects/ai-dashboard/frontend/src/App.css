@@ -467,6 +467,12 @@ body {
   font-size: 0.85rem;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
+
 @media (max-width: 768px) {
   .chart-grid {
     grid-template-columns: 1fr;
