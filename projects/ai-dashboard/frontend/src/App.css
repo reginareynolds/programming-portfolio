@@ -11,6 +11,12 @@
   --warning: #f59e0b;
   --danger: #ef4444;
   --radius: 8px;
+
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.563rem;
+  --text-3xl: 2.441rem;
 }
 
 * {
@@ -50,7 +56,7 @@ body {
 .back-link {
   color: var(--text-secondary);
   text-decoration: none;
-  font-size: 0.8rem;
+  font-size: var(--text-sm);
   font-weight: 500;
   transition: color 0.2s;
 }
@@ -73,13 +79,13 @@ body {
 }
 
 .header-content h1 {
-  font-size: 1.5rem;
+  font-size: var(--text-xl);
   font-weight: 700;
   color: var(--accent);
 }
 
 .header-content p {
-  font-size: 0.8rem;
+  font-size: var(--text-sm);
   color: var(--text-secondary);
 }
 
@@ -96,7 +102,7 @@ body {
 }
 
 .section h2 {
-  font-size: 1.25rem;
+  font-size: var(--text-lg);
   margin-bottom: 1rem;
   color: var(--text-secondary);
 }
@@ -118,7 +124,7 @@ body {
   border-radius: var(--radius);
   color: var(--text-secondary);
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: var(--text-sm);
   transition: all 0.2s;
 }
 
@@ -151,14 +157,14 @@ body {
 }
 
 .stat-title {
-  font-size: 0.8rem;
+  font-size: var(--text-sm);
   color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
 .stat-value {
-  font-size: 1.25rem;
+  font-size: var(--text-lg);
   font-weight: 600;
   margin-top: 0.25rem;
   color: var(--text-primary);
@@ -176,7 +182,7 @@ body {
 }
 
 .chart-card h3 {
-  font-size: 0.95rem;
+  font-size: var(--text-base);
   color: var(--text-secondary);
   margin-bottom: 1rem;
 }
@@ -202,7 +208,7 @@ body {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   color: var(--text-primary);
-  font-size: 1.1rem;
+  font-size: var(--text-base);
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
@@ -218,7 +224,7 @@ body {
   border: none;
   border-radius: var(--radius);
   color: white;
-  font-size: 1rem;
+  font-size: var(--text-base);
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s;
@@ -246,7 +252,7 @@ body {
 }
 
 .example-queries span {
-  font-size: 0.8rem;
+  font-size: var(--text-sm);
   color: var(--text-secondary);
 }
 
@@ -259,7 +265,7 @@ body {
   border: 1px solid var(--border);
   border-radius: 999px;
   color: var(--text-secondary);
-  font-size: 0.8rem;
+  font-size: var(--text-sm);
   cursor: pointer;
   transition: all 0.2s;
 }
@@ -302,11 +308,11 @@ body {
 }
 
 .chart-header h3 {
-  font-size: 1rem;
+  font-size: var(--text-base);
 }
 
 .row-count {
-  font-size: 0.8rem;
+  font-size: var(--text-sm);
   color: var(--text-secondary);
 }
 
@@ -316,13 +322,13 @@ body {
 }
 
 .big-number-label {
-  font-size: 1rem;
+  font-size: var(--text-base);
   color: var(--text-secondary);
   text-transform: uppercase;
 }
 
 .big-number-value {
-  font-size: 3rem;
+  font-size: var(--text-3xl);
   font-weight: 700;
   color: var(--accent);
 }
@@ -334,7 +340,7 @@ body {
 }
 
 .sql-details summary {
-  font-size: 0.8rem;
+  font-size: var(--text-sm);
   color: var(--text-secondary);
   cursor: pointer;
 }
@@ -344,7 +350,8 @@ body {
   padding: 1rem;
   background: var(--bg-primary);
   border-radius: var(--radius);
-  font-size: 0.85rem;
+  font-size: var(--text-sm);
+  line-height: 1.4;
   overflow-x: auto;
   color: #a5b4fc;
 }
@@ -367,7 +374,7 @@ body {
 }
 
 .data-table th {
-  font-size: 0.8rem;
+  font-size: var(--text-sm);
   color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -410,7 +417,7 @@ body {
   border: 1px solid var(--danger);
   border-radius: var(--radius);
   color: var(--danger);
-  font-size: 0.85rem;
+  font-size: var(--text-sm);
 }
 
 .upload-summary {
@@ -433,7 +440,7 @@ body {
   background: var(--bg-primary);
   border: 1px solid var(--border);
   border-radius: 999px;
-  font-size: 0.8rem;
+  font-size: var(--text-sm);
 }
 
 .tag small {
@@ -469,7 +476,7 @@ body {
   color: var(--text-primary);
   cursor: pointer;
   text-align: left;
-  font-size: 0.9rem;
+  font-size: var(--text-sm);
   transition: border-color 0.2s;
 }
 
@@ -494,7 +501,7 @@ body {
   text-align: center;
   border-top: 1px solid var(--border);
   color: var(--text-secondary);
-  font-size: 0.85rem;
+  font-size: var(--text-sm);
 }
 
 @media (prefers-reduced-motion: reduce) {
