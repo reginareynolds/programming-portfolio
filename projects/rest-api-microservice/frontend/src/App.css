@@ -7,7 +7,6 @@
   --text-secondary: #94a3b8;
   --accent: #6366f1;
   --accent-hover: #818cf8;
-  --accent-cyan: #a5b4fc;
   --success: #10b981;
   --warning: #f59e0b;
   --danger: #ef4444;
@@ -100,10 +99,10 @@ body {
 
 .demo-badge {
   padding: 0.25rem 0.75rem;
-  background: rgba(34, 211, 238, 0.1);
-  border: 1px solid var(--accent-cyan);
-  border-radius: 999px;
-  color: var(--accent-cyan);
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px dashed var(--accent);
+  border-radius: var(--radius);
+  color: var(--accent-hover);
   font-size: var(--text-xs);
   font-weight: 600;
 }
@@ -226,17 +225,17 @@ body {
   width: 100%;
   padding: 0.65rem 1rem;
   background: transparent;
-  border: 1px dashed var(--accent-cyan);
+  border: 1px dashed var(--accent);
   border-radius: var(--radius);
-  color: var(--accent-cyan);
-  font-size: 0.9rem;
+  color: var(--accent-hover);
+  font-size: var(--text-sm);
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .btn-demo:hover {
-  background: rgba(34, 211, 238, 0.1);
+  background: rgba(99, 102, 241, 0.1);
 }
 
 /* Forms */
@@ -433,12 +432,6 @@ body {
   display: flex;
   gap: 0.25rem;
   margin-left: 0.5rem;
-  opacity: 0;
-  transition: opacity 0.15s;
-}
-
-.project-item:hover .project-actions {
-  opacity: 1;
 }
 
 .btn-icon {
@@ -596,7 +589,7 @@ body {
 }
 
 .status-dot.in_progress {
-  background: var(--accent-cyan);
+  background: var(--accent);
 }
 
 .status-dot.done {
@@ -700,12 +693,6 @@ body {
   display: flex;
   gap: 0.25rem;
   margin-top: 0.5rem;
-  opacity: 0;
-  transition: opacity 0.15s;
-}
-
-.task-card:hover .task-actions {
-  opacity: 1;
 }
 
 /* Modal */
