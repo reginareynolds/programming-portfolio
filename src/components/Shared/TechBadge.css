@@ -3,8 +3,24 @@
   padding: var(--space-1) var(--space-2);
   background: color-mix(in srgb, var(--accent) 15%, transparent);
   color: var(--accent-hover);
-  border-radius: 999px;
+  border-radius: var(--radius);
   font-size: var(--text-xs);
   font-weight: 500;
   white-space: nowrap;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.tech-badge:hover {
+  background: color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+.tech-badge:active {
+  transform: scale(0.95);
+}
+
+.tech-badge--active {
+  background: var(--accent);
+  color: white;
 }
