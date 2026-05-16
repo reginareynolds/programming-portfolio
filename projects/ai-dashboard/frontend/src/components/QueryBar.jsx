@@ -31,6 +31,7 @@ export default function QueryBar({ onSubmit, loading }) {
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
           placeholder="Ask a question about your data..."
+          aria-label="Ask a question about your data"
           disabled={loading}
         />
         <button type="submit" disabled={loading || !question.trim()}>
