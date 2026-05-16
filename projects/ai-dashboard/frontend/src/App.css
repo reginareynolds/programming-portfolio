@@ -421,6 +421,10 @@ body {
   cursor: wait;
 }
 
+.upload-success {
+  color: var(--success);
+}
+
 .upload-error {
   margin-top: 0.5rem;
   padding: 0.5rem 1rem;
@@ -474,6 +478,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  animation: fade-up 0.3s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .history-item {
@@ -504,6 +509,18 @@ body {
   opacity: 0.6;
   pointer-events: none;
   transition: opacity 0.2s;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* Footer */

@@ -14,7 +14,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const COLORS = ["#6366f1", "#818cf8", "#f59e0b", "#ef4444", "#10b981", "#8b5cf6", "#f97316", "#a5b4fc"];
+const COLORS = ["#6366f1", "#818cf8", "#a5b4fc", "#c7d2fe", "#8b5cf6", "#a78bfa", "#c4b5fd", "#ddd6fe"];
 
 const TOKENS = {
   border: "#334155",

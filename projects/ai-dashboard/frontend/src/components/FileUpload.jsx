@@ -52,7 +52,7 @@ export default function FileUpload({ onUploadComplete }) {
         ) : isDragActive ? (
           <p>Drop your CSV here</p>
         ) : success ? (
-          <p style={{ color: "var(--success)" }}>{success} — drop another to replace</p>
+          <p className="upload-success">{success} — drop another to replace</p>
         ) : (
           <p>Drag & drop a CSV file here, or click to browse</p>
         )}

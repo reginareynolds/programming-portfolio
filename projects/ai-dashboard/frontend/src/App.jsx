@@ -140,6 +140,7 @@ export default function App() {
         )}
 
         <section className="section">
+          <h2 className="sr-only">Query</h2>
           <QueryBar onSubmit={handleQuery} loading={loading} />
           <div aria-live="polite">
             {error && <div className="error-message">{error}</div>}
