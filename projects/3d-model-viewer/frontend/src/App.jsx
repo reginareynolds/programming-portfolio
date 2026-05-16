@@ -206,8 +206,8 @@ export default function App() {
             />
           ) : (
             <div className="empty-state">
-              <h2>No model selected</h2>
-              <p>Upload a 3D model (.glb, .gltf, .obj, .stl) to get started</p>
+              <h2>Drop a model to begin</h2>
+              <p>.glb &middot; .gltf &middot; .obj &middot; .stl</p>
             </div>
           )}
         </main>

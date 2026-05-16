@@ -254,7 +254,7 @@ body {
   display: inline-flex;
   align-items: center;
   background: transparent;
-  border: 1px solid var(--border);
+  border: 2px dashed var(--border);
   border-radius: var(--radius);
   color: var(--text-secondary);
   cursor: pointer;
@@ -263,8 +263,8 @@ body {
 }
 
 .annotate-toggle:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+  border-color: var(--marker);
+  color: var(--marker);
 }
 
 .annotate-toggle:active {
@@ -272,8 +272,8 @@ body {
 }
 
 .annotate-toggle.active {
-  background: var(--accent);
-  border-color: var(--accent);
+  background: var(--marker);
+  border: 2px solid var(--marker);
   color: white;
 }
 
