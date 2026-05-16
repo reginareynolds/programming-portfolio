@@ -62,6 +62,10 @@ body {
   color: var(--accent);
 }
 
+.back-link:active {
+  opacity: 0.7;
+}
+
 /* Header */
 .app-header {
   background: var(--bg-secondary);

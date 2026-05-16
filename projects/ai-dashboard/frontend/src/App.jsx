@@ -103,7 +103,7 @@ export default function App() {
         </div>
       </header>
 
-      <main className="app-main">
+      <main className="app-main" aria-label="AI data analysis dashboard">
         <div className="tabs">
           <button
             className={`tab ${activeTab === "demo" ? "active" : ""}`}
