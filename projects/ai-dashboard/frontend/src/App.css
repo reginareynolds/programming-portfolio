@@ -155,9 +155,10 @@ body {
 }
 
 .stat-value {
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-size: 1.25rem;
+  font-weight: 600;
   margin-top: 0.25rem;
+  color: var(--text-primary);
 }
 
 /* Charts */
@@ -179,7 +180,11 @@ body {
 
 /* Query Bar */
 .query-section {
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
 }
 
 .query-bar {
@@ -189,18 +194,19 @@ body {
 
 .query-bar input {
   flex: 1;
-  padding: 0.75rem 1rem;
-  background: var(--bg-secondary);
+  padding: 1rem 1.25rem;
+  background: var(--bg-primary);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   color: var(--text-primary);
-  font-size: 1rem;
+  font-size: 1.1rem;
   outline: none;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .query-bar input:focus {
   border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
 }
 
 .query-bar button {
