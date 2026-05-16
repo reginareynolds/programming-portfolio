@@ -10,6 +10,7 @@
   --success: #10b981;
   --warning: #f59e0b;
   --danger: #ef4444;
+  --marker: #f59e0b;
   --radius: 8px;
 }
 
@@ -372,7 +373,7 @@ body {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--danger);
+  background: var(--marker);
   border: 2px solid white;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
 }
