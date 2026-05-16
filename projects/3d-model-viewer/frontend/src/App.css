@@ -460,6 +460,13 @@ body {
   flex-shrink: 0;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation: none !important;
+  }
+}
+
 @media (max-width: 768px) {
   .app-body {
     flex-direction: column;
