@@ -10,6 +10,7 @@
   --success: #10b981;
   --warning: #f59e0b;
   --danger: #ef4444;
+  --marker: #f59e0b;
   --radius: 8px;
 }
 
@@ -24,6 +25,15 @@ body {
   color: var(--text-primary);
   font-family: "Inter", system-ui, -apple-system, sans-serif;
   line-height: 1.6;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .app {
@@ -66,7 +76,8 @@ body {
 .app-header h1 {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--accent);
+  line-height: 1.2;
+  color: var(--accent-hover);
 }
 
 .app-header p {
@@ -127,6 +138,11 @@ body {
 .upload-zone.active,
 .upload-zone:hover {
   border-color: var(--accent);
+}
+
+.upload-zone.uploading {
+  opacity: 0.6;
+  pointer-events: none;
 }
 
 .upload-label {
@@ -190,6 +206,10 @@ body {
   background: rgba(255, 255, 255, 0.05);
 }
 
+.model-select:active {
+  transform: scale(0.98);
+}
+
 .model-name {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -207,6 +227,11 @@ body {
 
 .model-delete {
   padding: 0.5rem;
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: none;
   border: none;
   color: var(--text-secondary);
@@ -218,11 +243,18 @@ body {
   color: var(--danger);
 }
 
+.model-delete:active {
+  transform: scale(0.9);
+}
+
 /* Annotate Toggle */
 .annotate-toggle {
-  padding: 0.25rem 0.6rem;
+  padding: 0.5rem 0.75rem;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
   background: transparent;
-  border: 1px solid var(--border);
+  border: 2px dashed var(--border);
   border-radius: var(--radius);
   color: var(--text-secondary);
   cursor: pointer;
@@ -231,13 +263,17 @@ body {
 }
 
 .annotate-toggle:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+  border-color: var(--marker);
+  color: var(--marker);
+}
+
+.annotate-toggle:active {
+  transform: scale(0.95);
 }
 
 .annotate-toggle.active {
-  background: var(--accent);
-  border-color: var(--accent);
+  background: var(--marker);
+  border: 2px solid var(--marker);
   color: white;
 }
 
@@ -268,6 +304,11 @@ body {
   color: var(--text-secondary);
   cursor: pointer;
   font-size: 0.8rem;
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .annotation-item button:hover {
@@ -372,7 +413,7 @@ body {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--danger);
+  background: var(--marker);
   border: 2px solid white;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
 }
@@ -386,6 +427,12 @@ body {
   align-items: center;
   justify-content: center;
   z-index: 10000;
+  animation: fade-in 0.2s ease-out;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .dialog {
@@ -394,6 +441,18 @@ body {
   border-radius: var(--radius);
   padding: 1.5rem;
   width: 320px;
+  animation: scale-up 0.2s cubic-bezier(0, 0, 0.2, 1);
+}
+
+@keyframes scale-up {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .dialog h3 {
@@ -443,6 +502,11 @@ body {
   color: white;
 }
 
+.btn-cancel:active,
+.btn-confirm:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
 .btn-confirm:disabled {
   opacity: 0.5;
   cursor: not-allowed;
@@ -458,6 +522,13 @@ body {
   flex-shrink: 0;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation: none !important;
+  }
+}
+
 @media (max-width: 768px) {
   .app-body {
     flex-direction: column;
@@ -465,7 +536,7 @@ body {
 
   .sidebar {
     width: 100%;
-    max-height: 200px;
+    max-height: 150px;
     border-right: none;
     border-bottom: 1px solid var(--border);
   }

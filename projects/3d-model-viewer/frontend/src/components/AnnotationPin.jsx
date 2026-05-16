@@ -15,7 +15,7 @@ export default function AnnotationPin({ annotation, onDelete }) {
         onPointerOut={() => setHovered(false)}
       >
         <sphereGeometry args={[0.04, 16, 16]} />
-        <meshStandardMaterial color={hovered ? "#f59e0b" : "#ef4444"} />
+        <meshStandardMaterial color={hovered ? "#fbbf24" : "#f59e0b"} />
       </mesh>
 
       {hovered && (
