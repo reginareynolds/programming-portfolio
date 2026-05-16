@@ -72,8 +72,10 @@ def generate_sql(question: str, custom_schema: str = "No custom data uploaded.",
 
     result = json.loads(match.group())
 
-    sql = result.get("sql", "").strip().upper()
-    if any(keyword in sql for keyword in ["INSERT", "UPDATE", "DELETE", "DROP", "ALTER", "TRUNCATE", "CREATE"]):
+    sql = result.get("sql", "").strip()
+    sql_upper = sql.upper()
+    if any(keyword in sql_upper for keyword in ["INSERT", "UPDATE", "DELETE", "DROP", "ALTER", "TRUNCATE", "CREATE"]):
         raise ValueError("Only SELECT queries are permitted")
 
+    result["sql"] = sql
     return result

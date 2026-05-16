@@ -7,6 +7,7 @@ from database import db, init_db
 from demo_data import seed_demo_data
 from csv_handler import process_csv_upload
 from llm_service import generate_sql
+from safe_query import execute_readonly
 
 
 def create_app():
@@ -85,9 +86,7 @@ def query_data():
         sql = llm_result["sql"]
         chart_type = llm_result.get("chart_type", "table")
 
-        result = db.session.execute(text(sql))
-        columns = list(result.keys())
-        rows = [dict(zip(columns, row)) for row in result.fetchall()]
+        columns, rows = execute_readonly(sql)
 
         return jsonify({
             "question": question,
