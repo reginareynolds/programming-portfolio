@@ -25,7 +25,7 @@ export default function App() {
         </div>
       </header>
 
-      <main className="app-main">
+      <main className="app-main" aria-label="Sensor monitoring dashboard">
         {!latestTick ? (
           <div className="loading">Waiting for data stream...</div>
         ) : (

@@ -6,7 +6,7 @@ export default function LineCard({ line }) {
   const sensorEntries = Object.entries(line.sensors);
 
   return (
-    <div className={`line-card ${line.status}`}>
+    <article className={`line-card ${line.status}`}>
       <div className="line-header">
         <div>
           <h2>{line.line_name}</h2>
@@ -28,6 +28,6 @@ export default function LineCard({ line }) {
       </div>
 
       <OEEDisplay oee={line.oee} />
-    </div>
+    </article>
   );
 }
