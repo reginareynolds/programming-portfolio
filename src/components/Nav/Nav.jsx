@@ -57,6 +57,12 @@ function Nav() {
       <div className="nav-inner">
         <a href="#" className="nav-logo display-text" onClick={() => handleNavClick(null)}>
           Regina Reynolds
+          <svg className="nav-logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round">
+            <path d="M12 2 L22 7 L22 17 L12 22 L2 17 L2 7 Z" />
+            <path d="M12 2 L12 12 L22 7" />
+            <path d="M12 12 L2 7" />
+            <path d="M12 12 L12 22" />
+          </svg>
         </a>
         <button
           className={`nav-toggle${menuOpen ? " nav-toggle--open" : ""}`}

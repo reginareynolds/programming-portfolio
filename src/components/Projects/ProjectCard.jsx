@@ -4,7 +4,7 @@ import "./ProjectCard.css";
 
 const gradientAngles = [135, 160, 200, 180, 145];
 
-function ProjectCard({ project }) {
+function ProjectCard({ project, dimmed, activeSkill, onBadgeClick, skipReveal }) {
   const idx = ["ai-dashboard", "3d-model-viewer", "rest-api-microservice", "iot-data-simulator", "art-portfolio"].indexOf(project.id);
   const initials = project.title
     .split(" ")
@@ -17,7 +17,7 @@ function ProjectCard({ project }) {
   const isClamped = project.description.length > maxChars;
 
   return (
-    <div className="project-card reveal reveal-stagger">
+    <div className={`project-card${skipReveal ? "" : " reveal reveal-stagger"}${dimmed ? " project-card--dimmed" : ""}`}>
       <div className="project-card-thumb">
         {project.thumbnail ? (
           <img
@@ -54,7 +54,12 @@ function ProjectCard({ project }) {
         </p>
         <div className="project-card-stack">
           {project.stack.map((tech) => (
-            <TechBadge key={tech} label={tech} />
+            <TechBadge
+              key={tech}
+              label={tech}
+              active={activeSkill === tech}
+              onClick={() => onBadgeClick(tech)}
+            />
           ))}
         </div>
         <div className="project-card-links">

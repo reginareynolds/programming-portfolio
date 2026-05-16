@@ -29,11 +29,11 @@ const projects = [
     description:
       "This project is my take on a full-stack task management application with a Kanban board UI. I created it to show that I can build a clean, well-structured, production-level API capable of CRUD operations, but more importantly, I wanted to demonstrate my ability to proactively identify and address potential failure points throughout the tech stack. This is because I believe that being a good engineer requires thinking beyond just features and taking into consideration potential problems BEFORE they happen. Simply being reactive to problems that arise creates compounding technical debt from the moment that a project begins. A good engineer has to be proactive about problems so that they never come up in the first place.\n\nThe backend is built using the Flask REST API, which is linked to a PostgreSQL database. It features JWT authentication with secure token handling and input validation through Marshmallow schemas to ensure the validity of submitted data and avoid database injection attacks. Rate limits on task, project, and user creation prevent users from abusing the database, and user isolation ensures data privacy. Additionally, a scheduled cron job runs automatically to regularly purge stale demo accounts and their associated data from the system. The full API surface includes auth endpoints, project CRUD, and task CRUD with filtering by status, priority, and project, plus sorting and pagination.\n\nThe React frontend includes an authentication flow and a demo mode for exploring the full UI without creating an account. The demo mode operates entirely on local state when the backend isn't available, which is an affordance for situations that require graceful degradation. When a user signs in, the frontend sends the credentials to the backend, where the credentials are verified by the server and a signed JWT is issued. This lets the user see the Kanban board. Users can only access their own data, but they can create projects, organize tasks into To Do, In Progress, and Done columns, assign priorities, and set due dates.\n\nThe whole thing is deployed with CI/CD in mind. GitHub Actions runs the test suite on every push, the API lives on Railway with a managed PostgreSQL instance, and the frontend is on Vercel. Docker Compose handles local development. ",
     type: "Full-Stack",
-    stack: ["Flask", "PostgreSQL", "JWT", "Docker", "GitHub Actions"],
+    stack: ["React", "Flask", "PostgreSQL", "JWT", "Docker", "GitHub Actions"],
     githubUrl:
       "https://github.com/reginareynolds/programming-portfolio/tree/master/projects/rest-api-microservice",
-    liveUrl: null,
-    thumbnail: null,
+    liveUrl: "https://reginareynolds-task-manager.vercel.app",
+    thumbnail: "/images/projects/rest-api-microservice.png",
   },
   {
     id: "iot-data-simulator",
