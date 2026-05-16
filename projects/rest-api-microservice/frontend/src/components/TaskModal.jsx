@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function TaskModal({ task, projects, onSave, onClose }) {
   const isEdit = !!task;
@@ -9,6 +9,7 @@ export default function TaskModal({ task, projects, onSave, onClose }) {
   const [dueDate, setDueDate] = useState("");
   const [projectId, setProjectId] = useState("");
   const [saving, setSaving] = useState(false);
+  const modalRef = useRef(null);
 
   useEffect(() => {
     if (task) {
@@ -22,6 +23,31 @@ export default function TaskModal({ task, projects, onSave, onClose }) {
       setProjectId(projects[0].id);
     }
   }, [task, projects]);
+
+  useEffect(() => {
+    function handleKeyDown(e) {
+      if (e.key === "Escape") {
+        onClose();
+        return;
+      }
+      if (e.key === "Tab" && modalRef.current) {
+        const focusable = modalRef.current.querySelectorAll(
+          'input, select, textarea, button:not([disabled])'
+        );
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    }
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [onClose]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -39,8 +65,8 @@ export default function TaskModal({ task, projects, onSave, onClose }) {
   }
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-card" onClick={(e) => e.stopPropagation()}>
+    <div className="modal-overlay" role="dialog" aria-label={isEdit ? "Edit task" : "New task"} onClick={onClose}>
+      <div className="modal-card" ref={modalRef} onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <h2>{isEdit ? "Edit Task" : "New Task"}</h2>
           <button className="modal-close" onClick={onClose}>

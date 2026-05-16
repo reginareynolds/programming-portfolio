@@ -20,7 +20,7 @@ export default function ProjectList({
   const totalTasks = projects.reduce((sum, p) => sum + (p.task_count || 0), 0);
 
   return (
-    <div className="sidebar">
+    <aside className="sidebar" aria-label="Project navigation">
       <div className="sidebar-header">Projects</div>
       <div className="project-list">
         <div
@@ -71,6 +71,6 @@ export default function ProjectList({
           <button type="submit">Add</button>
         </form>
       </div>
-    </div>
+    </aside>
   );
 }
