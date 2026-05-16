@@ -14,7 +14,20 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const COLORS = ["#6366f1", "#22d3ee", "#f59e0b", "#ef4444", "#10b981", "#8b5cf6", "#f97316", "#06b6d4"];
+const COLORS = ["#6366f1", "#818cf8", "#a5b4fc", "#c7d2fe", "#8b5cf6", "#a78bfa", "#c4b5fd", "#ddd6fe"];
+
+const TOKENS = {
+  border: "#334155",
+  textSecondary: "#94a3b8",
+  textPrimary: "#f1f5f9",
+  bgSecondary: "#1e293b",
+};
+
+const TOOLTIP_STYLE = {
+  backgroundColor: TOKENS.bgSecondary,
+  border: `1px solid ${TOKENS.border}`,
+  color: TOKENS.textPrimary,
+};
 
 function DataTable({ columns, data }) {
   return (
@@ -45,7 +58,7 @@ function DataTable({ columns, data }) {
   );
 }
 
-export default function ChartDisplay({ result }) {
+export default function ChartDisplay({ result, loading }) {
   if (!result) return null;
 
   const { chart_type, columns, data, sql, question, row_count } = result;
@@ -58,7 +71,7 @@ export default function ChartDisplay({ result }) {
   const valueKeys = columns.slice(1);
 
   return (
-    <div className="chart-container">
+    <div className={`chart-container${loading ? " loading" : ""}`}>
       <div className="chart-header">
         <h3>{question}</h3>
         <span className="row-count">{row_count} row{row_count !== 1 ? "s" : ""}</span>
@@ -79,10 +92,10 @@ export default function ChartDisplay({ result }) {
         {chart_type === "bar" && (
           <ResponsiveContainer width="100%" height={350}>
             <BarChart data={data}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
-              <XAxis dataKey={labelKey} stroke="#9ca3af" />
-              <YAxis stroke="#9ca3af" />
-              <Tooltip contentStyle={{ backgroundColor: "#1f2937", border: "1px solid #374151", color: "#f3f4f6" }} />
+              <CartesianGrid strokeDasharray="3 3" stroke={TOKENS.border} />
+              <XAxis dataKey={labelKey} stroke={TOKENS.textSecondary} />
+              <YAxis stroke={TOKENS.textSecondary} />
+              <Tooltip contentStyle={TOOLTIP_STYLE} />
               <Legend />
               {valueKeys.map((key, i) => (
                 <Bar key={key} dataKey={key} fill={COLORS[i % COLORS.length]} />
@@ -94,10 +107,10 @@ export default function ChartDisplay({ result }) {
         {chart_type === "line" && (
           <ResponsiveContainer width="100%" height={350}>
             <LineChart data={data}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
-              <XAxis dataKey={labelKey} stroke="#9ca3af" />
-              <YAxis stroke="#9ca3af" />
-              <Tooltip contentStyle={{ backgroundColor: "#1f2937", border: "1px solid #374151", color: "#f3f4f6" }} />
+              <CartesianGrid strokeDasharray="3 3" stroke={TOKENS.border} />
+              <XAxis dataKey={labelKey} stroke={TOKENS.textSecondary} />
+              <YAxis stroke={TOKENS.textSecondary} />
+              <Tooltip contentStyle={TOOLTIP_STYLE} />
               <Legend />
               {valueKeys.map((key, i) => (
                 <Line key={key} type="monotone" dataKey={key} stroke={COLORS[i % COLORS.length]} strokeWidth={2} />
@@ -114,7 +127,7 @@ export default function ChartDisplay({ result }) {
                   <Cell key={i} fill={COLORS[i % COLORS.length]} />
                 ))}
               </Pie>
-              <Tooltip contentStyle={{ backgroundColor: "#1f2937", border: "1px solid #374151", color: "#f3f4f6" }} />
+              <Tooltip contentStyle={TOOLTIP_STYLE} />
               <Legend />
             </PieChart>
           </ResponsiveContainer>

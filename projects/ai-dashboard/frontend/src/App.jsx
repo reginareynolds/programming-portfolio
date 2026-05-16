@@ -139,17 +139,22 @@ export default function App() {
           </section>
         )}
 
+        <section className="section">
+          <h2 className="sr-only">Query</h2>
+          <QueryBar onSubmit={handleQuery} loading={loading} />
+          <div aria-live="polite">
+            {error && <div className="error-message">{error}</div>}
+          </div>
+          <div aria-live="polite">
+            <ChartDisplay result={queryResult} loading={loading} />
+          </div>
+        </section>
+
         {activeTab === "demo" && (
           <section className="section">
             <DashboardSummary stats={stats} />
           </section>
         )}
-
-        <section className="section">
-          <QueryBar onSubmit={handleQuery} loading={loading} />
-          {error && <div className="error-message">{error}</div>}
-          <ChartDisplay result={queryResult} />
-        </section>
 
         {queryHistory.length > 1 && (
           <section className="section">
