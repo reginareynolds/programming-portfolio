@@ -189,7 +189,7 @@ export default function App() {
 
         <main className="main-content" aria-label="3D model viewer">
           {error && (
-            <div className="error-banner">
+            <div className="error-banner" aria-live="polite">
               {error}
               <button onClick={() => setError(null)}>Dismiss</button>
             </div>

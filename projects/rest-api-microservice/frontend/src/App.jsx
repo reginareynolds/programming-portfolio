@@ -275,7 +275,7 @@ export default function App() {
       </header>
 
       {error && (
-        <div className="error-message">
+        <div className="error-message" aria-live="polite">
           {error}
           <button
             className="btn-icon"
