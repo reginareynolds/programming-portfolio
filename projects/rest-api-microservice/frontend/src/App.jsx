@@ -250,11 +250,11 @@ export default function App() {
   // --- Render ---
   return (
     <div className="app">
-      <div className="top-bar">
+      <nav className="top-bar">
         <a href={PORTFOLIO_URL} className="back-link">
-          ← Portfolio
+          &larr; Portfolio
         </a>
-      </div>
+      </nav>
 
       <header className="app-header">
         <div className="header-content">
@@ -287,7 +287,7 @@ export default function App() {
         </div>
       )}
 
-      <main className="app-main">
+      <main className="app-main" aria-label="Task management workspace">
         {!user ? (
           <AuthForm onAuth={handleAuth} onDemoMode={handleDemoMode} />
         ) : (
