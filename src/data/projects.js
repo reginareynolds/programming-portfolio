@@ -33,7 +33,7 @@ const projects = [
     githubUrl:
       "https://github.com/reginareynolds/programming-portfolio/tree/master/projects/rest-api-microservice",
     liveUrl: "https://reginareynolds-task-manager.vercel.app",
-    thumbnail: null,
+    thumbnail: "/images/projects/rest-api-microservice.png",
   },
   {
     id: "iot-data-simulator",
