@@ -280,6 +280,18 @@ body {
   border-radius: var(--radius);
   padding: 1.5rem;
   margin-top: 1rem;
+  animation: fade-up 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .chart-header {
@@ -436,6 +448,7 @@ body {
   border: 1px solid var(--danger);
   border-radius: var(--radius);
   color: var(--danger);
+  animation: fade-up 0.2s cubic-bezier(0, 0, 0.2, 1);
 }
 
 /* History */
