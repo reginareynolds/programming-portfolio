@@ -11,6 +11,12 @@
   --warning: #f59e0b;
   --danger: #ef4444;
   --radius: 8px;
+  --text-xs: 0.64rem;
+  --text-sm: 0.8rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: clamp(1.25rem, 1.1rem + 0.5vw, 1.563rem);
+  --text-3xl: clamp(1.75rem, 1.5rem + 1.2vw, 2.441rem);
 }
 
 * {
@@ -42,7 +48,7 @@ body {
 .back-link {
   color: var(--text-secondary);
   text-decoration: none;
-  font-size: 0.8rem;
+  font-size: var(--text-sm);
   font-weight: 500;
   transition: color 0.2s;
 }
@@ -62,13 +68,13 @@ body {
 }
 
 .app-header h1 {
-  font-size: 1.5rem;
+  font-size: var(--text-xl);
   font-weight: 700;
   color: var(--accent);
 }
 
 .app-header p {
-  font-size: 0.8rem;
+  font-size: var(--text-sm);
   color: var(--text-secondary);
 }
 
@@ -76,7 +82,7 @@ body {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.85rem;
+  font-size: var(--text-sm);
   font-weight: 500;
 }
 
@@ -104,7 +110,7 @@ body {
   text-align: center;
   padding: 4rem;
   color: var(--text-secondary);
-  font-size: 1.1rem;
+  font-size: var(--text-lg);
 }
 
 /* Lines Section */
@@ -135,19 +141,19 @@ body {
 }
 
 .line-header h2 {
-  font-size: 1rem;
+  font-size: var(--text-base);
   font-weight: 600;
 }
 
 .line-product {
-  font-size: 0.75rem;
+  font-size: var(--text-xs);
   color: var(--text-secondary);
 }
 
 .status-badge {
   padding: 0.2rem 0.6rem;
   border-radius: 999px;
-  font-size: 0.7rem;
+  font-size: var(--text-xs);
   font-weight: 600;
   text-transform: uppercase;
 }
@@ -195,20 +201,21 @@ body {
 }
 
 .sensor-label {
-  font-size: 0.6rem;
+  font-size: var(--text-xs);
   color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
 
 .sensor-value {
-  font-size: 1.1rem;
+  font-size: var(--text-lg);
   font-weight: 700;
+  font-variant-numeric: tabular-nums;
   margin-top: 0.15rem;
 }
 
 .sensor-unit {
-  font-size: 0.65rem;
+  font-size: var(--text-xs);
   color: var(--text-secondary);
   margin-left: 0.15rem;
   font-weight: 400;
@@ -224,15 +231,16 @@ body {
 }
 
 .oee-score {
-  font-size: 1.75rem;
+  font-size: var(--text-3xl);
   font-weight: 700;
+  font-variant-numeric: tabular-nums;
   min-width: 70px;
   text-align: center;
 }
 
 .oee-label {
   display: block;
-  font-size: 0.6rem;
+  font-size: var(--text-xs);
   color: var(--text-secondary);
   font-weight: 400;
   letter-spacing: 0.1em;
@@ -248,8 +256,9 @@ body {
 .oee-bar-header {
   display: flex;
   justify-content: space-between;
-  font-size: 0.7rem;
+  font-size: var(--text-xs);
   color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
 }
 
 .oee-bar-track {
@@ -271,7 +280,7 @@ body {
 }
 
 .charts-section h2 {
-  font-size: 1rem;
+  font-size: var(--text-base);
   color: var(--text-secondary);
   margin-bottom: 1rem;
 }
@@ -290,7 +299,7 @@ body {
 }
 
 .live-chart h3 {
-  font-size: 0.85rem;
+  font-size: var(--text-sm);
   color: var(--text-secondary);
   margin-bottom: 0.5rem;
 }
@@ -299,7 +308,7 @@ body {
   display: flex;
   gap: 1.5rem;
   margin-top: 0.75rem;
-  font-size: 0.8rem;
+  font-size: var(--text-sm);
   color: var(--text-secondary);
 }
 
@@ -321,14 +330,14 @@ body {
 }
 
 .alert-feed h3 {
-  font-size: 1rem;
+  font-size: var(--text-base);
   color: var(--text-secondary);
   margin-bottom: 0.75rem;
 }
 
 .no-alerts {
   color: var(--success);
-  font-size: 0.9rem;
+  font-size: var(--text-sm);
 }
 
 .alert-list {
@@ -345,7 +354,7 @@ body {
   padding: 0.5rem 0.75rem;
   background: var(--bg-card);
   border-radius: 6px;
-  font-size: 0.85rem;
+  font-size: var(--text-sm);
   border-left: 3px solid transparent;
 }
 
@@ -359,7 +368,7 @@ body {
 }
 
 .alert-level {
-  font-size: 0.65rem;
+  font-size: var(--text-xs);
   font-weight: 600;
   text-transform: uppercase;
   min-width: 55px;
@@ -378,7 +387,7 @@ body {
   text-align: center;
   border-top: 1px solid var(--border);
   color: var(--text-secondary);
-  font-size: 0.85rem;
+  font-size: var(--text-sm);
 }
 
 @media (max-width: 768px) {
