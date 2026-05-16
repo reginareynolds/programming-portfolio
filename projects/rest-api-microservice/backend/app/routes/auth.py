@@ -14,6 +14,10 @@ login_schema = LoginSchema()
 
 @auth_bp.route("/register", methods=["POST"])
 def register():
+    MAX_USERS = 50
+    if User.query.count() >= MAX_USERS:
+        return jsonify({"error": "Registration is currently closed (user limit reached)"}), 403
+
     try:
         data = register_schema.load(request.get_json())
     except ValidationError as e:

@@ -1,6 +1,6 @@
 .section-heading {
-  font-size: 2rem;
+  font-size: var(--text-2xl);
   font-weight: 700;
-  margin-bottom: 3rem;
+  margin-bottom: var(--space-12);
   text-align: center;
 }

@@ -7,6 +7,7 @@ import Contact from "./components/Contact/Contact.jsx";
 function App() {
   return (
     <>
+      <a href="#projects" className="skip-link">Skip to content</a>
       <Nav />
       <main>
         <Hero />
@@ -15,7 +16,7 @@ function App() {
         <Contact />
       </main>
       <footer className="footer">
-        <p>&copy; 2026 Regina Reynolds. Built with React &amp; Three.js.</p>
+        <p>&copy; 2026 Regina Reynolds. Software Engineer & 3D Artist.</p>
       </footer>
     </>
   );

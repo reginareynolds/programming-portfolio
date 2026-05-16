@@ -120,6 +120,7 @@ function ParticleField() {
             itemSize={3}
           />
         </bufferGeometry>
+        {/* Colors mirror --accent (#6366f1) and --accent-hover (#818cf8) — update if tokens change */}
         <pointsMaterial
           size={0.04}
           color="#6366f1"
@@ -130,7 +131,7 @@ function ParticleField() {
       </points>
       <lineSegments ref={linesRef}>
         <bufferGeometry />
-        <lineBasicMaterial color="#22d3ee" transparent opacity={0.12} />
+        <lineBasicMaterial color="#818cf8" transparent opacity={0.15} />
       </lineSegments>
     </>
   );

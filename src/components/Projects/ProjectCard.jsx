@@ -1,3 +1,4 @@
+import { useState } from "react";
 import TechBadge from "../Shared/TechBadge.jsx";
 import "./ProjectCard.css";
 
@@ -11,8 +12,12 @@ function ProjectCard({ project }) {
     .join("")
     .slice(0, 3);
 
+  const [expanded, setExpanded] = useState(false);
+  const maxChars = 150;
+  const isClamped = project.description.length > maxChars;
+
   return (
-    <div className="project-card">
+    <div className="project-card reveal reveal-stagger">
       <div className="project-card-thumb">
         {project.thumbnail ? (
           <img
@@ -24,7 +29,7 @@ function ProjectCard({ project }) {
           <div
             className="project-card-placeholder"
             style={{
-              background: `linear-gradient(${gradientAngles[idx] || 135}deg, rgba(99,102,241,0.3), rgba(34,211,238,0.15))`,
+              background: `linear-gradient(${gradientAngles[idx] || 135}deg, rgba(99,102,241,0.3), rgba(129,140,248,0.1))`,
             }}
           >
             <span className="project-card-initials">{initials}</span>
@@ -34,7 +39,19 @@ function ProjectCard({ project }) {
       </div>
       <div className="project-card-body">
         <h3 className="project-card-title">{project.title}</h3>
-        <p className="project-card-desc">{project.description}</p>
+        <p className="project-card-desc">
+          {expanded || !isClamped
+            ? project.description
+            : project.description.slice(0, maxChars).replace(/\s+\S*$/, "") + "… "}
+          {isClamped && (
+            <button
+              className="project-card-toggle"
+              onClick={() => setExpanded(!expanded)}
+            >
+              {expanded ? "Read less" : "Read more"}
+            </button>
+          )}
+        </p>
         <div className="project-card-stack">
           {project.stack.map((tech) => (
             <TechBadge key={tech} label={tech} />
