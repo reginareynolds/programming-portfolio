@@ -75,9 +75,9 @@ export default function Sidebar({
               <button
                 className="model-delete"
                 onClick={() => onDeleteModel(model.id)}
-                title="Delete model"
+                aria-label="Delete model"
               >
-                x
+                &times;
               </button>
             </li>
           ))}
@@ -103,7 +103,7 @@ export default function Sidebar({
             {annotations.map((ann) => (
               <li key={ann.id} className="annotation-item">
                 <span>{ann.label}</span>
-                <button onClick={() => onDeleteAnnotation(ann.id)}>x</button>
+                <button onClick={() => onDeleteAnnotation(ann.id)} aria-label="Delete annotation">&times;</button>
               </li>
             ))}
             {annotations.length === 0 && (
