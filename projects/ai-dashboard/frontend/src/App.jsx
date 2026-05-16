@@ -104,16 +104,6 @@ export default function App() {
       </header>
 
       <main className="app-main">
-        <section className="section">
-          <QueryBar onSubmit={handleQuery} loading={loading} />
-          <div aria-live="polite">
-            {error && <div className="error-message">{error}</div>}
-          </div>
-          <div aria-live="polite">
-            <ChartDisplay result={queryResult} loading={loading} />
-          </div>
-        </section>
-
         <div className="tabs">
           <button
             className={`tab ${activeTab === "demo" ? "active" : ""}`}
@@ -148,6 +138,16 @@ export default function App() {
             )}
           </section>
         )}
+
+        <section className="section">
+          <QueryBar onSubmit={handleQuery} loading={loading} />
+          <div aria-live="polite">
+            {error && <div className="error-message">{error}</div>}
+          </div>
+          <div aria-live="polite">
+            <ChartDisplay result={queryResult} loading={loading} />
+          </div>
+        </section>
 
         {activeTab === "demo" && (
           <section className="section">
