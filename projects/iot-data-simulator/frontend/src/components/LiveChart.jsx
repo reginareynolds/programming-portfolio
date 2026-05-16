@@ -10,8 +10,8 @@ import {
 
 const LINE_COLORS = {
   "line-1": "#6366f1",
-  "line-2": "#22d3ee",
-  "line-3": "#f59e0b",
+  "line-2": "#8b5cf6",
+  "line-3": "#14b8a6",
 };
 
 export default function LiveChart({ history, sensor }) {

@@ -53,11 +53,11 @@ export default function App() {
                   Packaging Line A
                 </span>
                 <span className="legend-item">
-                  <span className="legend-color" style={{ background: "#22d3ee" }} />
+                  <span className="legend-color" style={{ background: "#8b5cf6" }} />
                   Packaging Line B
                 </span>
                 <span className="legend-item">
-                  <span className="legend-color" style={{ background: "#f59e0b" }} />
+                  <span className="legend-color" style={{ background: "#14b8a6" }} />
                   Assembly Line C
                 </span>
               </div>
