@@ -110,6 +110,9 @@ body {
 
 .tab {
   padding: 0.5rem 1.25rem;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
   background: var(--bg-secondary);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -225,6 +228,10 @@ body {
   background: var(--accent-hover);
 }
 
+.query-bar button:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
 .query-bar button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
@@ -260,6 +267,10 @@ body {
 .example-queries button:hover:not(:disabled) {
   border-color: var(--accent);
   color: var(--accent);
+}
+
+.example-queries button:active:not(:disabled) {
+  transform: scale(0.97);
 }
 
 /* Chart Display */
@@ -448,6 +459,10 @@ body {
 
 .history-item:hover {
   border-color: var(--accent);
+}
+
+.history-item:active {
+  transform: scale(0.99);
 }
 
 /* Loading */
