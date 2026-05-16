@@ -34,7 +34,7 @@ export default function Sidebar({
   );
 
   return (
-    <aside className="sidebar">
+    <aside className="sidebar" aria-label="Model and annotation controls">
       <div className="sidebar-section">
         <h2>Models</h2>
         <div
