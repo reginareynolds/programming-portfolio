@@ -11,7 +11,7 @@ export default function AnnotationDialog({ onConfirm, onCancel }) {
   }
 
   return (
-    <div className="dialog-overlay">
+    <div className="dialog-overlay" role="dialog" aria-label="Add annotation">
       <form className="dialog" onSubmit={handleSubmit}>
         <h3>Add Annotation</h3>
         <input
@@ -19,6 +19,7 @@ export default function AnnotationDialog({ onConfirm, onCancel }) {
           value={label}
           onChange={(e) => setLabel(e.target.value)}
           placeholder="Enter label..."
+          aria-label="Annotation label"
           autoFocus
           maxLength={100}
         />
