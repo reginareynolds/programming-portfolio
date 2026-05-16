@@ -75,10 +75,7 @@ body {
 .header-content h1 {
   font-size: 1.5rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #6366f1, #818cf8);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--text-primary);
 }
 
 .header-content p {
@@ -146,10 +143,8 @@ body {
 }
 
 .stat-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1.25rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border);
 }
 
 .stat-title {
@@ -173,10 +168,7 @@ body {
 }
 
 .chart-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1.25rem;
+  padding: 1.25rem 0;
 }
 
 .chart-card h3 {
@@ -303,10 +295,7 @@ body {
 .big-number-value {
   font-size: 3rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #6366f1, #818cf8);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--accent);
 }
 
 .sql-details {
