@@ -32,7 +32,7 @@ const projects = [
     stack: ["Flask", "PostgreSQL", "JWT", "Docker", "GitHub Actions"],
     githubUrl:
       "https://github.com/reginareynolds/programming-portfolio/tree/master/projects/rest-api-microservice",
-    liveUrl: null,
+    liveUrl: "https://reginareynolds-task-manager.vercel.app",
     thumbnail: null,
   },
   {
