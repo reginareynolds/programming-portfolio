@@ -104,6 +104,12 @@ export default function App() {
       </header>
 
       <main className="app-main">
+        <section className="section">
+          <QueryBar onSubmit={handleQuery} loading={loading} />
+          {error && <div className="error-message">{error}</div>}
+          <ChartDisplay result={queryResult} loading={loading} />
+        </section>
+
         <div className="tabs">
           <button
             className={`tab ${activeTab === "demo" ? "active" : ""}`}
@@ -144,12 +150,6 @@ export default function App() {
             <DashboardSummary stats={stats} />
           </section>
         )}
-
-        <section className="section">
-          <QueryBar onSubmit={handleQuery} loading={loading} />
-          {error && <div className="error-message">{error}</div>}
-          <ChartDisplay result={queryResult} loading={loading} />
-        </section>
 
         {queryHistory.length > 1 && (
           <section className="section">
