@@ -201,6 +201,10 @@ body {
   background: rgba(255, 255, 255, 0.05);
 }
 
+.model-select:active {
+  transform: scale(0.98);
+}
+
 .model-name {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -234,6 +238,10 @@ body {
   color: var(--danger);
 }
 
+.model-delete:active {
+  transform: scale(0.9);
+}
+
 /* Annotate Toggle */
 .annotate-toggle {
   padding: 0.5rem 0.75rem;
@@ -252,6 +260,10 @@ body {
 .annotate-toggle:hover {
   border-color: var(--accent);
   color: var(--accent);
+}
+
+.annotate-toggle:active {
+  transform: scale(0.95);
 }
 
 .annotate-toggle.active {
@@ -483,6 +495,11 @@ body {
 .btn-confirm {
   background: var(--accent);
   color: white;
+}
+
+.btn-cancel:active,
+.btn-confirm:active:not(:disabled) {
+  transform: scale(0.95);
 }
 
 .btn-confirm:disabled {
