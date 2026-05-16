@@ -218,6 +218,11 @@ body {
 
 .model-delete {
   padding: 0.5rem;
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: none;
   border: none;
   color: var(--text-secondary);
@@ -231,7 +236,10 @@ body {
 
 /* Annotate Toggle */
 .annotate-toggle {
-  padding: 0.25rem 0.6rem;
+  padding: 0.5rem 0.75rem;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
   background: transparent;
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -279,6 +287,11 @@ body {
   color: var(--text-secondary);
   cursor: pointer;
   font-size: 0.8rem;
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .annotation-item button:hover {
