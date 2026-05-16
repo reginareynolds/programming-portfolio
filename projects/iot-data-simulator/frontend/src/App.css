@@ -66,6 +66,10 @@ body {
   color: var(--accent);
 }
 
+.back-link:active {
+  opacity: 0.7;
+}
+
 /* Header */
 .app-header {
   background: var(--bg-secondary);
@@ -102,10 +106,18 @@ body {
   border-radius: 50%;
 }
 
-.connection-status.online .status-dot { background: var(--success); }
+.connection-status.online .status-dot {
+  background: var(--success);
+  animation: live-pulse 2s ease-in-out infinite;
+}
 .connection-status.offline .status-dot { background: var(--danger); }
 .connection-status.online { color: var(--success); }
 .connection-status.offline { color: var(--danger); }
+
+@keyframes live-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
 
 /* Main */
 .app-main {
