@@ -19,7 +19,7 @@ export default function App() {
           <h1>IoT Data Simulator</h1>
           <p>Real-time industrial sensor monitoring</p>
         </div>
-        <div className={`connection-status ${connected ? "online" : "offline"}`}>
+        <div className={`connection-status ${connected ? "online" : "offline"}`} aria-live="polite">
           <span className="status-dot" />
           {connected ? "Live" : "Reconnecting..."}
         </div>

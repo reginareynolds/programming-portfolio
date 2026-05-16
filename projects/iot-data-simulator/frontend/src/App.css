@@ -200,7 +200,7 @@ body {
 
 .sensor-gauge {
   background: var(--bg-primary);
-  border-radius: 6px;
+  border-radius: var(--radius);
   padding: 0.5rem;
   text-align: center;
   border: 1px solid transparent;
@@ -377,7 +377,7 @@ body {
   gap: 0.75rem;
   padding: 0.5rem 0.75rem;
   background: var(--bg-card);
-  border-radius: 6px;
+  border-radius: var(--radius);
   font-size: var(--text-sm);
   border-left: 3px solid transparent;
 }
