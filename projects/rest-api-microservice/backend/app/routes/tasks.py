@@ -42,9 +42,10 @@ def list_tasks():
     if project_id:
         query = query.filter(Task.project_id == project_id)
 
+    ALLOWED_SORT = {"created_at", "updated_at", "title", "status", "priority", "due_date"}
     sort = request.args.get("sort", "created_at")
     order = request.args.get("order", "desc")
-    sort_column = getattr(Task, sort, Task.created_at)
+    sort_column = getattr(Task, sort) if sort in ALLOWED_SORT else Task.created_at
     query = query.order_by(sort_column.desc() if order == "desc" else sort_column.asc())
 
     pagination = query.paginate(page=page, per_page=per_page, error_out=False)
