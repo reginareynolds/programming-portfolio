@@ -34,8 +34,8 @@ export default function QueryBar({ onSubmit, loading }) {
           aria-label="Ask a question about your data"
           disabled={loading}
         />
-        <button type="submit" disabled={loading || !question.trim()}>
-          {loading ? "Thinking..." : "Ask"}
+        <button type="submit" disabled={loading || !question.trim()} className={loading ? "loading" : ""}>
+          {loading ? "Thinking…" : "Ask"}
         </button>
       </form>
       <div className="example-queries">
