@@ -106,8 +106,12 @@ export default function App() {
       <main className="app-main">
         <section className="section">
           <QueryBar onSubmit={handleQuery} loading={loading} />
-          {error && <div className="error-message">{error}</div>}
-          <ChartDisplay result={queryResult} loading={loading} />
+          <div aria-live="polite">
+            {error && <div className="error-message">{error}</div>}
+          </div>
+          <div aria-live="polite">
+            <ChartDisplay result={queryResult} loading={loading} />
+          </div>
         </section>
 
         <div className="tabs">

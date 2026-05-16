@@ -513,3 +513,23 @@ body {
     flex-direction: column;
   }
 }
+
+@media (max-width: 480px) {
+  .app-main {
+    padding: 1rem;
+  }
+
+  .query-section {
+    padding: 1rem;
+  }
+
+  .stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .top-bar,
+  .app-header {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
