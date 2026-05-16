@@ -140,6 +140,11 @@ body {
   border-color: var(--accent);
 }
 
+.upload-zone.uploading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
 .upload-label {
   display: flex;
   flex-direction: column;

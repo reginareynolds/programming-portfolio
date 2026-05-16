@@ -38,7 +38,7 @@ export default function Sidebar({
       <div className="sidebar-section">
         <h2>Models</h2>
         <div
-          className={`upload-zone ${dragActive ? "active" : ""}`}
+          className={`upload-zone ${dragActive ? "active" : ""} ${uploading ? "uploading" : ""}`}
           onDragOver={(e) => {
             e.preventDefault();
             setDragActive(true);
