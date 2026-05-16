@@ -1,6 +1,6 @@
 import useWebSocket from "./useWebSocket";
 import LineCard from "./components/LineCard";
-import LiveChart from "./components/LiveChart";
+import LiveChart, { LINE_COLORS } from "./components/LiveChart";
 import AlertFeed from "./components/AlertFeed";
 import "./App.css";
 
@@ -19,13 +19,13 @@ export default function App() {
           <h1>IoT Data Simulator</h1>
           <p>Real-time industrial sensor monitoring</p>
         </div>
-        <div className={`connection-status ${connected ? "online" : "offline"}`}>
+        <div className={`connection-status ${connected ? "online" : "offline"}`} aria-live="polite">
           <span className="status-dot" />
           {connected ? "Live" : "Reconnecting..."}
         </div>
       </header>
 
-      <main className="app-main">
+      <main className="app-main" aria-label="Sensor monitoring dashboard">
         {!latestTick ? (
           <div className="loading">Waiting for data stream...</div>
         ) : (
@@ -49,15 +49,15 @@ export default function App() {
               </div>
               <div className="chart-legend">
                 <span className="legend-item">
-                  <span className="legend-color" style={{ background: "#6366f1" }} />
+                  <span className="legend-color" style={{ background: LINE_COLORS["line-1"] }} />
                   Packaging Line A
                 </span>
                 <span className="legend-item">
-                  <span className="legend-color" style={{ background: "#22d3ee" }} />
+                  <span className="legend-color" style={{ background: LINE_COLORS["line-2"] }} />
                   Packaging Line B
                 </span>
                 <span className="legend-item">
-                  <span className="legend-color" style={{ background: "#f59e0b" }} />
+                  <span className="legend-color" style={{ background: LINE_COLORS["line-3"] }} />
                   Assembly Line C
                 </span>
               </div>

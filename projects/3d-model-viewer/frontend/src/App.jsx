@@ -187,7 +187,7 @@ export default function App() {
           uploading={uploading}
         />
 
-        <main className="main-content">
+        <main className="main-content" aria-label="3D model viewer">
           {error && (
             <div className="error-banner">
               {error}
