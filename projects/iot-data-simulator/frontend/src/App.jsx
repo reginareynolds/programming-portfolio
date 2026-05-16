@@ -1,6 +1,6 @@
 import useWebSocket from "./useWebSocket";
 import LineCard from "./components/LineCard";
-import LiveChart from "./components/LiveChart";
+import LiveChart, { LINE_COLORS } from "./components/LiveChart";
 import AlertFeed from "./components/AlertFeed";
 import "./App.css";
 
@@ -49,15 +49,15 @@ export default function App() {
               </div>
               <div className="chart-legend">
                 <span className="legend-item">
-                  <span className="legend-color" style={{ background: "#6366f1" }} />
+                  <span className="legend-color" style={{ background: LINE_COLORS["line-1"] }} />
                   Packaging Line A
                 </span>
                 <span className="legend-item">
-                  <span className="legend-color" style={{ background: "#8b5cf6" }} />
+                  <span className="legend-color" style={{ background: LINE_COLORS["line-2"] }} />
                   Packaging Line B
                 </span>
                 <span className="legend-item">
-                  <span className="legend-color" style={{ background: "#14b8a6" }} />
+                  <span className="legend-color" style={{ background: LINE_COLORS["line-3"] }} />
                   Assembly Line C
                 </span>
               </div>
