@@ -10,6 +10,8 @@ class Dataset(db.Model):
     is_demo = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     columns_metadata = db.Column(db.JSON)
+    session_id = db.Column(db.String(36), index=True)
+    table_name = db.Column(db.String(100))
 
     def to_dict(self):
         return {

@@ -1,4 +1,7 @@
-from flask import Flask, request, jsonify
+import uuid
+from datetime import datetime, timedelta, timezone
+
+from flask import Flask, request, jsonify, session
 from flask_cors import CORS
 from sqlalchemy import text
 
@@ -13,7 +16,7 @@ from safe_query import execute_readonly
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
-    CORS(app)
+    CORS(app, supports_credentials=True)
     init_db(app)
 
     with app.app_context():
@@ -24,13 +27,22 @@ def create_app():
 
 app = create_app()
 
+SESSION_TTL = timedelta(hours=2)
 
-def get_custom_schema():
+
+def get_session_id():
+    if "sid" not in session:
+        session["sid"] = uuid.uuid4().hex
+    return session["sid"]
+
+
+def get_custom_table_for_session(session_id: str):
     from models import Dataset
-    dataset = Dataset.query.filter_by(name="User Upload", is_demo=False).first()
+    dataset = Dataset.query.filter_by(session_id=session_id, is_demo=False).first()
     if not dataset or not dataset.columns_metadata:
-        return "No custom data uploaded."
-    return "\n".join(f"  {col}: {dtype}" for col, dtype in dataset.columns_metadata.items())
+        return None, "No custom data uploaded."
+    schema = "\n".join(f"  {col}: {dtype}" for col, dtype in dataset.columns_metadata.items())
+    return dataset.table_name, schema
 
 
 @app.route("/api/health", methods=["GET"])
@@ -41,7 +53,10 @@ def health():
 @app.route("/api/datasets", methods=["GET"])
 def list_datasets():
     from models import Dataset
-    datasets = Dataset.query.all()
+    session_id = get_session_id()
+    datasets = Dataset.query.filter(
+        (Dataset.is_demo == True) | (Dataset.session_id == session_id)
+    ).all()
     return jsonify([d.to_dict() for d in datasets])
 
 
@@ -54,8 +69,10 @@ def upload_csv():
     if not file.filename.endswith(".csv"):
         return jsonify({"error": "Only CSV files are supported"}), 400
 
+    session_id = get_session_id()
+
     try:
-        result = process_csv_upload(file)
+        result = process_csv_upload(file, session_id)
         return jsonify({
             "message": f"Uploaded {result['rows']} rows with {len(result['columns'])} columns",
             "columns": result["columns"],
@@ -79,14 +96,26 @@ def query_data():
         return jsonify({"error": "Question cannot be empty"}), 400
 
     dataset = data.get("dataset", "demo")
+    session_id = get_session_id()
 
     try:
-        custom_schema = get_custom_schema() if dataset == "custom" else "No custom data uploaded."
-        llm_result = generate_sql(question, custom_schema, use_custom=dataset == "custom")
+        custom_table = None
+        custom_schema = "No custom data uploaded."
+
+        if dataset == "custom":
+            custom_table, custom_schema = get_custom_table_for_session(session_id)
+            if not custom_table:
+                return jsonify({"error": "No custom data uploaded for this session"}), 400
+
+        llm_result = generate_sql(
+            question, custom_schema,
+            use_custom=(dataset == "custom"),
+            custom_table_name=custom_table,
+        )
         sql = llm_result["sql"]
         chart_type = llm_result.get("chart_type", "table")
 
-        columns, rows = execute_readonly(sql)
+        columns, rows = execute_readonly(sql, custom_table=custom_table)
 
         return jsonify({
             "question": question,
@@ -140,6 +169,27 @@ def demo_summary():
         return jsonify(stats)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+
+@app.route("/api/cleanup", methods=["POST"])
+def cleanup_stale_sessions():
+    """Drop custom data tables for sessions older than SESSION_TTL."""
+    from models import Dataset
+    cutoff = datetime.now(timezone.utc) - SESSION_TTL
+    stale = Dataset.query.filter(
+        Dataset.is_demo == False,
+        Dataset.created_at < cutoff,
+    ).all()
+
+    dropped = 0
+    for ds in stale:
+        if ds.table_name:
+            db.session.execute(text(f'DROP TABLE IF EXISTS "{ds.table_name}"'))
+            dropped += 1
+        db.session.delete(ds)
+
+    db.session.commit()
+    return jsonify({"dropped": dropped})
 
 
 if __name__ == "__main__":

@@ -2,13 +2,14 @@ import re
 from sqlalchemy import text
 from database import db
 
-ALLOWED_TABLES = {"sales_records", "custom_data"}
+BASE_ALLOWED_TABLES = {"sales_records"}
 STATEMENT_TIMEOUT_MS = 5000
 
 
-def execute_readonly(sql: str):
+def execute_readonly(sql: str, custom_table: str = None):
     """Execute LLM-generated SQL in a read-only context with restrictions."""
-    _validate_sql(sql)
+    allowed = BASE_ALLOWED_TABLES | ({custom_table} if custom_table else set())
+    _validate_sql(sql, allowed)
 
     conn = db.engine.connect()
     try:
@@ -27,7 +28,7 @@ def execute_readonly(sql: str):
         conn.close()
 
 
-def _validate_sql(sql: str):
+def _validate_sql(sql: str, allowed_tables: set):
     """Reject anything that isn't a single SELECT on allowed tables."""
     normalized = sql.strip().rstrip(";")
 
@@ -49,7 +50,7 @@ def _validate_sql(sql: str):
         + re.findall(r"\bJOIN\s+([a-z_][a-z0-9_]*)", normalized, re.IGNORECASE)
     )
 
-    disallowed = tables_referenced - ALLOWED_TABLES
+    disallowed = tables_referenced - allowed_tables
     if disallowed:
         raise ValueError(f"Access denied to table(s): {', '.join(disallowed)}")
 
