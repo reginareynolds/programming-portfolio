@@ -20,7 +20,7 @@ const LEAN_SPEED = 3;
 const LEAN_MAX = 0.15;
 const LOOK_AROUND_INTERVAL = 12;
 
-function Mascot({ position = [3, -1.5, 0], scale = 2.5, ctaHover = null }) {
+function Mascot({ position = [3, -1.5, 2], scale = 2, ctaHover = null }) {
   const leanRef = useRef();
   const groupRef = useRef();
   const targetAnim = useRef(null);
@@ -28,18 +28,30 @@ function Mascot({ position = [3, -1.5, 0], scale = 2.5, ctaHover = null }) {
   const introPlayed = useRef(false);
   const introFinished = useRef(false);
   const [hovered, setHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const mouseRef = useRef({ x: 0, y: 0 });
 
   const { scene, animations } = useGLTF("/models/MiniMe.glb");
   const { actions, mixer } = useAnimations(animations, groupRef);
-  const { viewport, size } = useThree();
+  const { viewport } = useThree();
 
   const actionsRef = useRef(actions);
   const mixerRef = useRef(mixer);
   actionsRef.current = actions;
   mixerRef.current = mixer;
 
-  const isMobile = viewport.width < 6;
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 1005px)");
+    setIsMobile(mq.matches);
+    const handler = (e) => setIsMobile(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+  const distFromCam = 3;
+  const visibleWidth = viewport.width * (distFromCam / viewport.distance);
+  const visibleHeight = viewport.height * (distFromCam / viewport.distance);
+  const responsiveX = isMobile ? 0 : visibleWidth * 0.35;
+  const responsiveY = isMobile ? -visibleHeight * 0.55 : -visibleHeight * 0.2;
 
   useEffect(() => {
     if (leanRef.current) {
@@ -97,12 +109,12 @@ function Mascot({ position = [3, -1.5, 0], scale = 2.5, ctaHover = null }) {
   useEffect(() => {
     if (isMobile) return;
     const handleMove = (e) => {
-      mouseRef.current.x = (e.clientX / size.width) * 2 - 1;
-      mouseRef.current.y = -(e.clientY / size.height) * 2 + 1;
+      mouseRef.current.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mouseRef.current.y = -(e.clientY / window.innerHeight) * 2 + 1;
     };
     window.addEventListener("pointermove", handleMove, { passive: true });
     return () => window.removeEventListener("pointermove", handleMove);
-  }, [size, isMobile]);
+  }, [isMobile]);
 
   useFrame(({ clock }, delta) => {
     if (!groupRef.current) return;
@@ -163,7 +175,7 @@ function Mascot({ position = [3, -1.5, 0], scale = 2.5, ctaHover = null }) {
   return (
     <group
       ref={leanRef}
-      position={position}
+      position={[responsiveX, responsiveY, 2]}
       scale={isMobile ? scale * 0.7 : scale}
     >
       <group
