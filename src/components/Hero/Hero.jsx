@@ -1,13 +1,44 @@
+import { Suspense, useState, useCallback, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import ParticleField from "./ParticleField.jsx";
+import Mascot from "./Mascot.jsx";
 import "./Hero.css";
 
+const HOVER_DEBOUNCE = 150;
+
 function Hero() {
+  const [ctaHover, setCtaHover] = useState(null);
+  const debounceRef = useRef(null);
+
+  const setCtaDebounced = useCallback((value) => {
+    clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => setCtaHover(value), HOVER_DEBOUNCE);
+  }, []);
+
+  const onPrimaryEnter = useCallback(() => {
+    clearTimeout(debounceRef.current);
+    setCtaHover("primary");
+  }, []);
+
+  const onSecondaryEnter = useCallback(() => {
+    clearTimeout(debounceRef.current);
+    setCtaHover("secondary");
+  }, []);
+
+  const onCtaLeave = useCallback(() => {
+    setCtaDebounced(null);
+  }, [setCtaDebounced]);
+
   return (
     <section className="hero">
       <div className="hero-canvas" aria-hidden="true">
         <Canvas camera={{ position: [0, 0, 5], fov: 60 }} dpr={[1, 2]}>
+          <ambientLight intensity={0.6} />
+          <directionalLight position={[3, 4, 5]} intensity={0.8} />
           <ParticleField />
+          <Suspense fallback={null}>
+            <Mascot ctaHover={ctaHover} />
+          </Suspense>
         </Canvas>
       </div>
       <div className="hero-content">
@@ -18,10 +49,20 @@ function Hero() {
           experiences.
         </p>
         <div className="hero-cta">
-          <a href="#projects" className="btn btn--primary">
+          <a
+            href="#projects"
+            className="btn btn--primary"
+            onMouseEnter={onPrimaryEnter}
+            onMouseLeave={onCtaLeave}
+          >
             View Projects
           </a>
-          <a href="#contact" className="btn btn--outline">
+          <a
+            href="#contact"
+            className="btn btn--outline"
+            onMouseEnter={onSecondaryEnter}
+            onMouseLeave={onCtaLeave}
+          >
             Get in Touch
           </a>
         </div>
