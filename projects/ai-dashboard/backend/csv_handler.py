@@ -1,3 +1,4 @@
+import re
 import pandas as pd
 from sqlalchemy import text
 
@@ -5,7 +6,13 @@ from database import db
 from models import Dataset
 
 
-def process_csv_upload(file) -> dict:
+def _sanitize_table_name(session_id: str) -> str:
+    """Ensure session_id produces a safe table name."""
+    cleaned = re.sub(r"[^a-z0-9]", "", session_id.lower())
+    return f"custom_data_{cleaned[:32]}"
+
+
+def process_csv_upload(file, session_id: str) -> dict:
     df = pd.read_csv(file)
 
     if len(df) > 10000:
@@ -13,9 +20,11 @@ def process_csv_upload(file) -> dict:
     if len(df.columns) > 30:
         raise ValueError("CSV must have 30 columns or fewer")
 
-    df.columns = [c.strip().lower().replace(" ", "_") for c in df.columns]
+    df.columns = [re.sub(r"[^a-z0-9_]", "", c.strip().lower().replace(" ", "_")) for c in df.columns]
 
-    db.session.execute(text("DROP TABLE IF EXISTS custom_data"))
+    table_name = _sanitize_table_name(session_id)
+
+    db.session.execute(text(f'DROP TABLE IF EXISTS "{table_name}"'))
     db.session.commit()
 
     type_map = {}
@@ -34,28 +43,31 @@ def process_csv_upload(file) -> dict:
             except (ValueError, TypeError):
                 type_map[col] = "categorical" if df[col].nunique() < 50 else "text"
 
-    df.to_sql("custom_data", db.engine, if_exists="replace", index=False)
+    df.to_sql(table_name, db.engine, if_exists="replace", index=False)
 
-    existing = Dataset.query.filter_by(name="User Upload", is_demo=False).first()
+    existing = Dataset.query.filter_by(session_id=session_id, is_demo=False).first()
     if existing:
         existing.columns_metadata = type_map
+        existing.table_name = table_name
         existing.description = f"User-uploaded CSV with {len(df)} rows and {len(df.columns)} columns."
+        existing.created_at = db.func.now()
     else:
         dataset = Dataset(
             name="User Upload",
             description=f"User-uploaded CSV with {len(df)} rows and {len(df.columns)} columns.",
             is_demo=False,
             columns_metadata=type_map,
+            session_id=session_id,
+            table_name=table_name,
         )
         db.session.add(dataset)
 
     db.session.commit()
 
-    schema_str = "\n".join(f"  {col}: {dtype}" for col, dtype in type_map.items())
     return {
         "rows": len(df),
         "columns": list(df.columns),
         "types": type_map,
-        "schema_str": schema_str,
+        "table_name": table_name,
         "preview": df.head(5).to_dict(orient="records"),
     }

@@ -11,7 +11,7 @@ SYSTEM_PROMPT = """You are a SQL analyst. Given a user's natural language questi
 The database has a table called `sales_records` with these columns:
 {schema}
 
-If the user uploaded a custom CSV, the table is called `custom_data` with these columns:
+If the user uploaded a custom CSV, the table name is specified in the "Active table" field below. Its columns are:
 {custom_schema}
 
 Rules:
@@ -47,10 +47,10 @@ def get_llm():
     )
 
 
-def generate_sql(question: str, custom_schema: str = "No custom data uploaded.", use_custom: bool = False) -> dict:
+def generate_sql(question: str, custom_schema: str = "No custom data uploaded.", use_custom: bool = False, custom_table_name: str = None) -> dict:
     llm = get_llm()
 
-    active_table = "custom_data" if use_custom else "sales_records"
+    active_table = custom_table_name if use_custom and custom_table_name else "sales_records"
 
     prompt = ChatPromptTemplate.from_messages([
         ("system", SYSTEM_PROMPT),
@@ -72,8 +72,10 @@ def generate_sql(question: str, custom_schema: str = "No custom data uploaded.",
 
     result = json.loads(match.group())
 
-    sql = result.get("sql", "").strip().upper()
-    if any(keyword in sql for keyword in ["INSERT", "UPDATE", "DELETE", "DROP", "ALTER", "TRUNCATE", "CREATE"]):
+    sql = result.get("sql", "").strip()
+    sql_upper = sql.upper()
+    if any(keyword in sql_upper for keyword in ["INSERT", "UPDATE", "DELETE", "DROP", "ALTER", "TRUNCATE", "CREATE"]):
         raise ValueError("Only SELECT queries are permitted")
 
+    result["sql"] = sql
     return result
