@@ -36,6 +36,7 @@ function Mascot({ ctaHover = null, availableHeight = 0 }) {
     () => window.matchMedia("(prefers-reduced-motion: reduce)").matches
   );
   const mouseRef = useRef({ x: 0, y: 0 });
+  const fadeProgress = useRef(0);
 
   const { scene, animations } = useGLTF("/models/MiniMe.glb");
   const { actions, mixer } = useAnimations(animations, groupRef);
@@ -82,6 +83,15 @@ function Mascot({ ctaHover = null, availableHeight = 0 }) {
   }, []);
 
   useEffect(() => {
+    scene.traverse((child) => {
+      if (child.isMesh) {
+        child.material.transparent = true;
+        child.material.opacity = 0;
+      }
+    });
+  }, [scene]);
+
+  useEffect(() => {
     const looping = [ANIM.IDLE, ANIM.POINT_LEFT, ANIM.POINT_RIGHT, ANIM.HAPPY_IDLE, ANIM.SAD_IDLE];
     looping.forEach((name) => {
       const action = actions[name];
@@ -106,22 +116,26 @@ function Mascot({ ctaHover = null, availableHeight = 0 }) {
     }
     introPlayed.current = true;
 
-    const wave = actions[ANIM.WAVE];
-    wave.reset();
-    wave.setLoop(THREE.LoopOnce, 1);
-    wave.clampWhenFinished = true;
-    wave.setEffectiveWeight(1);
-    wave.play();
-    setReady(true);
+    const timer = setTimeout(() => {
+      setReady(true);
+      const wave = actions[ANIM.WAVE];
+      wave.reset();
+      wave.setLoop(THREE.LoopOnce, 1);
+      wave.clampWhenFinished = true;
+      wave.setEffectiveWeight(1);
+      wave.play();
 
-    const handler = (e) => {
-      if (e.action === wave) {
-        mixerRef.current.removeEventListener("finished", handler);
-        introFinished.current = true;
-        targetAnim.current = ANIM.IDLE;
-      }
-    };
-    mixerRef.current.addEventListener("finished", handler);
+      const handler = (e) => {
+        if (e.action === wave) {
+          mixerRef.current.removeEventListener("finished", handler);
+          introFinished.current = true;
+          targetAnim.current = ANIM.IDLE;
+        }
+      };
+      mixerRef.current.addEventListener("finished", handler);
+    }, 500);
+
+    return () => clearTimeout(timer);
   }, [actions]);
 
   useEffect(() => {
@@ -156,7 +170,20 @@ function Mascot({ ctaHover = null, availableHeight = 0 }) {
   }, [isMobile, reducedMotion]);
 
   useFrame(({ clock }, delta) => {
-    if (!groupRef.current || reducedMotion) return;
+    if (!groupRef.current) return;
+
+    if (ready && fadeProgress.current < 1) {
+      fadeProgress.current = Math.min(fadeProgress.current + delta / 0.6, 1);
+      const t = fadeProgress.current;
+      const opacity = 1 - Math.pow(1 - t, 3);
+      scene.traverse((child) => {
+        if (child.isMesh) {
+          child.material.opacity = opacity;
+        }
+      });
+    }
+
+    if (reducedMotion) return;
     const t = clock.getElapsedTime();
 
     if (lastLookAround.current === -1) {
