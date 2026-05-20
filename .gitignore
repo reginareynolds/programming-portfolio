@@ -50,4 +50,6 @@ uploads/
 # Docker
 *.log
 
+# Vercel
 .vercel
+.env*.local

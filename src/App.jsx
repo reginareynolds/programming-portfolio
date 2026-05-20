@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import Nav from "./components/Nav/Nav.jsx";
 import Hero from "./components/Hero/Hero.jsx";
 import Projects from "./components/Projects/Projects.jsx";
@@ -18,6 +19,7 @@ function App() {
       <footer className="footer">
         <p>&copy; 2026 Regina Reynolds. Software Engineer & 3D Artist.</p>
       </footer>
+      <Analytics />
     </>
   );
 }
