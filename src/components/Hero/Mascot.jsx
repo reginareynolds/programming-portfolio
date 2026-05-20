@@ -5,7 +5,7 @@ import * as THREE from "three";
 
 const ANIM = {
   IDLE: "Idle",
-  WAVE: "Waving",
+  WAVE: "Wave",
   POINT_LEFT: "Pointing up and left",
   POINT_RIGHT: "Pointing up and right",
   NOD: "Nodding",
@@ -108,8 +108,7 @@ function Mascot({ ctaHover = null, availableHeight = 0 }) {
 
     const wave = actions[ANIM.WAVE];
     wave.reset();
-    wave.setLoop(THREE.LoopRepeat, 2);
-    wave.repetitions = 2;
+    wave.setLoop(THREE.LoopOnce, 1);
     wave.clampWhenFinished = true;
     wave.setEffectiveWeight(1);
     wave.play();
