@@ -94,6 +94,7 @@ function ParticleField() {
           itemSize={3}
         />
       </bufferGeometry>
+      {/* Mirrors --accent (#6366f1) — update if token changes */}
       <pointsMaterial
         size={0.04}
         color="#6366f1"
