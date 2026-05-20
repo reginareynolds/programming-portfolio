@@ -31,8 +31,8 @@ function ParticleField() {
   }, [count]);
 
   const linePositions = useMemo(
-    () => new Float32Array(count * count * 3),
-    [count]
+    () => new Float32Array(PARTICLE_COUNT * PARTICLE_COUNT * 3),
+    []
   );
 
   useEffect(() => {

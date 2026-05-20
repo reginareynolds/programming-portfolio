@@ -2,7 +2,7 @@
   position: relative;
   min-height: 100vh;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   overflow: clip;
 }
@@ -17,7 +17,7 @@
   position: relative;
   z-index: 1;
   text-align: center;
-  padding: var(--space-16) var(--space-6) 0;
+  padding: 15vh var(--space-6) 0;
   max-width: 700px;
 }
 
