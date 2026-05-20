@@ -140,16 +140,17 @@ function Mascot({ ctaHover = null, availableHeight = 0 }) {
       t - lastLookAround.current > LOOK_AROUND_INTERVAL
     ) {
       lastLookAround.current = t;
-      const lookAround = actionsRef.current[ANIM.LOOK_AROUND];
-      if (lookAround) {
-        lookAround.reset();
-        lookAround.setLoop(THREE.LoopOnce, 1);
-        lookAround.clampWhenFinished = true;
-        lookAround.play();
-        targetAnim.current = ANIM.LOOK_AROUND;
+      const pick = Math.random() < 0.5 ? ANIM.LOOK_AROUND : ANIM.SAD_IDLE;
+      const action = actionsRef.current[pick];
+      if (action) {
+        action.reset();
+        action.setLoop(THREE.LoopOnce, 1);
+        action.clampWhenFinished = true;
+        action.play();
+        targetAnim.current = pick;
 
         const handler = (e) => {
-          if (e.action === lookAround) {
+          if (e.action === action) {
             mixerRef.current.removeEventListener("finished", handler);
             targetAnim.current = ANIM.IDLE;
           }
