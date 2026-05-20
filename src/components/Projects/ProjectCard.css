@@ -6,7 +6,6 @@
   border-radius: var(--radius);
   overflow: hidden;
   transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s, opacity 0.3s;
-  will-change: transform;
 }
 
 .project-card:hover {
@@ -90,6 +89,10 @@
 
 .project-card-toggle:hover {
   color: var(--text-primary);
+}
+
+.project-card-toggle:active {
+  color: var(--accent);
 }
 
 .project-card-stack {
