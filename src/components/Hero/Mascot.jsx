@@ -105,17 +105,23 @@ function Mascot({ ctaHover = null, availableHeight = 0 }) {
   useEffect(() => {
     if (!introFinished.current) return;
 
+    let next;
     if (hovered) {
-      targetAnim.current = ANIM.HAPPY_IDLE;
+      next = ANIM.HAPPY_IDLE;
     } else if (ctaHover === "primary") {
-      targetAnim.current = ANIM.POINT_LEFT;
+      next = ANIM.POINT_LEFT;
     } else if (ctaHover === "secondary") {
-      targetAnim.current = ANIM.POINT_RIGHT;
+      next = ANIM.POINT_RIGHT;
     } else {
-      targetAnim.current = ANIM.IDLE;
+      next = ANIM.IDLE;
       lastLookAround.current = -1;
     }
-  }, [hovered, ctaHover]);
+
+    if (next !== targetAnim.current && actions[next]) {
+      actions[next].reset();
+    }
+    targetAnim.current = next;
+  }, [hovered, ctaHover, actions]);
 
   useEffect(() => {
     if (isMobile) return;
