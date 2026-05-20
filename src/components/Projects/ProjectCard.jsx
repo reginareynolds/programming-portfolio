@@ -47,6 +47,7 @@ function ProjectCard({ project, dimmed, activeSkill, onBadgeClick, skipReveal })
             <button
               className="project-card-toggle"
               onClick={() => setExpanded(!expanded)}
+              aria-expanded={expanded}
             >
               {expanded ? "Read less" : "Read more"}
             </button>
