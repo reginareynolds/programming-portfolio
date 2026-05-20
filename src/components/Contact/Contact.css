@@ -1,3 +1,4 @@
+/* Intentionally tighter than standard section padding due to size of section */
 #contact {
   padding-top: var(--space-12);
   padding-bottom: var(--space-12);
