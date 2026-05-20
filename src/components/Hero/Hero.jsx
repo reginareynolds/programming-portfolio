@@ -69,7 +69,7 @@ function Hero() {
             onMouseEnter={onPrimaryEnter}
             onMouseLeave={onCtaLeave}
           >
-            View Projects
+            See My Work
           </a>
           <a
             href="#contact"
@@ -77,7 +77,7 @@ function Hero() {
             onMouseEnter={onSecondaryEnter}
             onMouseLeave={onCtaLeave}
           >
-            Get in Touch
+            Say Hi!
           </a>
         </div>
       </div>
