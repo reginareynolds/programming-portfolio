@@ -1,14 +1,28 @@
-import { Suspense, useState, useCallback, useRef } from "react";
+import { Suspense, useState, useCallback, useRef, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import ParticleField from "./ParticleField.jsx";
 import Mascot from "./Mascot.jsx";
 import "./Hero.css";
 
 const HOVER_DEBOUNCE = 150;
+const CHEVRON_RESERVE = 56;
 
 function Hero() {
   const [ctaHover, setCtaHover] = useState(null);
+  const [availableHeight, setAvailableHeight] = useState(0);
+  const ctaRef = useRef(null);
   const debounceRef = useRef(null);
+
+  useEffect(() => {
+    const measure = () => {
+      if (!ctaRef.current) return;
+      const ctaBottom = ctaRef.current.getBoundingClientRect().bottom;
+      setAvailableHeight(window.innerHeight - ctaBottom - CHEVRON_RESERVE);
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
 
   const setCtaDebounced = useCallback((value) => {
     clearTimeout(debounceRef.current);
@@ -37,7 +51,7 @@ function Hero() {
           <directionalLight position={[3, 4, 5]} intensity={0.8} />
           <ParticleField />
           <Suspense fallback={null}>
-            <Mascot ctaHover={ctaHover} />
+            <Mascot ctaHover={ctaHover} availableHeight={availableHeight} />
           </Suspense>
         </Canvas>
       </div>
@@ -48,7 +62,7 @@ function Hero() {
           Building full-stack applications, AI-driven tools, and interactive 3D
           experiences.
         </p>
-        <div className="hero-cta">
+        <div className="hero-cta" ref={ctaRef}>
           <a
             href="#projects"
             className="btn btn--primary"

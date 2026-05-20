@@ -6,8 +6,8 @@ import * as THREE from "three";
 const ANIM = {
   IDLE: "Idle",
   WAVE: "Waving",
-  POINT_LEFT: "Pointing left",
-  POINT_RIGHT: "Pointing right",
+  POINT_LEFT: "Pointing up and left",
+  POINT_RIGHT: "Pointing up and right",
   NOD: "Nodding",
   SHRUG: "Shrugging",
   LOOK_AROUND: "Looking around",
@@ -17,10 +17,12 @@ const ANIM = {
 
 const FADE_SPEED = 5;
 const LEAN_SPEED = 3;
-const LEAN_MAX = 0.15;
+const LEAN_MAX = 0.4;
 const LOOK_AROUND_INTERVAL = 12;
 
-function Mascot({ position = [3, -1.5, 2], scale = 2, ctaHover = null }) {
+const MODEL_HEIGHT = 0.677;
+
+function Mascot({ ctaHover = null, availableHeight = 0 }) {
   const leanRef = useRef();
   const groupRef = useRef();
   const targetAnim = useRef(null);
@@ -47,15 +49,23 @@ function Mascot({ position = [3, -1.5, 2], scale = 2, ctaHover = null }) {
     mq.addEventListener("change", handler);
     return () => mq.removeEventListener("change", handler);
   }, []);
+
   const distFromCam = 3;
-  const visibleWidth = viewport.width * (distFromCam / viewport.distance);
   const visibleHeight = viewport.height * (distFromCam / viewport.distance);
-  const responsiveX = isMobile ? 0 : visibleWidth * 0.35;
-  const responsiveY = isMobile ? -visibleHeight * 0.55 : -visibleHeight * 0.2;
+  const worldPerPx = visibleHeight / window.innerHeight;
+  const availableWorld = availableHeight * worldPerPx;
+  const fitScale = availableWorld > 0 ? (availableWorld * 0.75) / MODEL_HEIGHT : 1.5;
+  const scale = Math.max(Math.min(fitScale, 2.5), 0.5);
+  const mascotWorldHeight = MODEL_HEIGHT * scale;
+  const ctaBottomPx = window.innerHeight - availableHeight - 56;
+  const ctaBottomWorld = (visibleHeight / 2) - (ctaBottomPx * worldPerPx);
+  const responsiveX = 0;
+  const centerY = ctaBottomWorld - availableWorld / 2;
+  const responsiveY = centerY - mascotWorldHeight / 2;
 
   useEffect(() => {
     if (leanRef.current) {
-      leanRef.current.rotation.y = -Math.PI / 6;
+      leanRef.current.rotation.y = 0;
     }
   }, []);
 
@@ -103,6 +113,7 @@ function Mascot({ position = [3, -1.5, 2], scale = 2, ctaHover = null }) {
       targetAnim.current = ANIM.POINT_RIGHT;
     } else {
       targetAnim.current = ANIM.IDLE;
+      lastLookAround.current = -1;
     }
   }, [hovered, ctaHover]);
 
@@ -119,6 +130,10 @@ function Mascot({ position = [3, -1.5, 2], scale = 2, ctaHover = null }) {
   useFrame(({ clock }, delta) => {
     if (!groupRef.current) return;
     const t = clock.getElapsedTime();
+
+    if (lastLookAround.current === -1) {
+      lastLookAround.current = t;
+    }
 
     if (
       targetAnim.current === ANIM.IDLE &&
@@ -163,7 +178,7 @@ function Mascot({ position = [3, -1.5, 2], scale = 2, ctaHover = null }) {
     }
 
     if (!isMobile && leanRef.current) {
-      const targetLean = -Math.PI / 6 + mouseRef.current.x * LEAN_MAX;
+      const targetLean = mouseRef.current.x * LEAN_MAX;
       leanRef.current.rotation.y = THREE.MathUtils.lerp(
         leanRef.current.rotation.y,
         targetLean,
@@ -176,7 +191,7 @@ function Mascot({ position = [3, -1.5, 2], scale = 2, ctaHover = null }) {
     <group
       ref={leanRef}
       position={[responsiveX, responsiveY, 2]}
-      scale={isMobile ? scale * 0.7 : scale}
+      scale={scale}
     >
       <group
         ref={groupRef}
