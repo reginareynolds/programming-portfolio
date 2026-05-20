@@ -11,7 +11,7 @@
   white-space: nowrap;
   border: none;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
 }
 
 .tech-badge:hover {
@@ -19,7 +19,7 @@
 }
 
 .tech-badge:active {
-  transform: scale(0.95);
+  transform: scale(0.97);
 }
 
 .tech-badge--active {
