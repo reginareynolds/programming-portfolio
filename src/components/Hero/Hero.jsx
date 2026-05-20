@@ -16,7 +16,7 @@ function Hero() {
   useEffect(() => {
     const measure = () => {
       if (!ctaRef.current) return;
-      const ctaBottom = ctaRef.current.getBoundingClientRect().bottom;
+      const ctaBottom = ctaRef.current.offsetTop + ctaRef.current.offsetHeight;
       setAvailableHeight(window.innerHeight - ctaBottom - CHEVRON_RESERVE);
     };
     measure();
