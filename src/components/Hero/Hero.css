@@ -68,7 +68,10 @@
 }
 
 .btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
   padding: var(--space-3) var(--space-6);
   border-radius: var(--radius);
   font-size: var(--text-sm);
