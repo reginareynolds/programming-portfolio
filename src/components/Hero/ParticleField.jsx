@@ -1,4 +1,4 @@
-import { useRef, useMemo, useEffect } from "react";
+import { useRef, useMemo, useEffect, useState } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 
@@ -12,6 +12,17 @@ function ParticleField() {
   const linesRef = useRef();
   const mouseRef = useRef(new THREE.Vector2(0, 0));
   const { size, viewport } = useThree();
+  const [reducedMotion, setReducedMotion] = useState(
+    () => window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReducedMotion(mq.matches);
+    const handler = (e) => setReducedMotion(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
 
   const isMobile = size.width < 640;
   const count = isMobile ? 80 : PARTICLE_COUNT;
@@ -36,18 +47,18 @@ function ParticleField() {
   );
 
   useEffect(() => {
-    if (isMobile) return;
+    if (isMobile || reducedMotion) return;
     const handleMove = (e) => {
       mouseRef.current.x = (e.clientX / size.width) * 2 - 1;
       mouseRef.current.y = -(e.clientY / size.height) * 2 + 1;
     };
     window.addEventListener("pointermove", handleMove, { passive: true });
     return () => window.removeEventListener("pointermove", handleMove);
-  }, [size, isMobile]);
+  }, [size, isMobile, reducedMotion]);
 
   useFrame(() => {
     const pts = pointsRef.current;
-    if (!pts) return;
+    if (!pts || reducedMotion) return;
 
     const posArr = pts.geometry.attributes.position.array;
     const mx = mouseRef.current.x * viewport.width * 0.5;

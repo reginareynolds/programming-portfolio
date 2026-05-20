@@ -29,8 +29,12 @@ function Mascot({ ctaHover = null, availableHeight = 0 }) {
   const lastLookAround = useRef(0);
   const introPlayed = useRef(false);
   const introFinished = useRef(false);
+  const [ready, setReady] = useState(false);
   const [hovered, setHovered] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(
+    () => window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
   const mouseRef = useRef({ x: 0, y: 0 });
 
   const { scene, animations } = useGLTF("/models/MiniMe.glb");
@@ -46,6 +50,14 @@ function Mascot({ ctaHover = null, availableHeight = 0 }) {
     const mq = window.matchMedia("(max-width: 1005px)");
     setIsMobile(mq.matches);
     const handler = (e) => setIsMobile(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReducedMotion(mq.matches);
+    const handler = (e) => setReducedMotion(e.matches);
     mq.addEventListener("change", handler);
     return () => mq.removeEventListener("change", handler);
   }, []);
@@ -81,7 +93,17 @@ function Mascot({ ctaHover = null, availableHeight = 0 }) {
   }, [actions]);
 
   useEffect(() => {
-    if (!actions[ANIM.WAVE] || introPlayed.current) return;
+    if (!actions[ANIM.WAVE] || introPlayed.current || reducedMotion) {
+      if (reducedMotion && actions[ANIM.IDLE]) {
+        introPlayed.current = true;
+        introFinished.current = true;
+        actions[ANIM.IDLE].play();
+        actions[ANIM.IDLE].setEffectiveWeight(1);
+        targetAnim.current = ANIM.IDLE;
+        setReady(true);
+      }
+      return;
+    }
     introPlayed.current = true;
 
     const wave = actions[ANIM.WAVE];
@@ -91,6 +113,7 @@ function Mascot({ ctaHover = null, availableHeight = 0 }) {
     wave.clampWhenFinished = true;
     wave.setEffectiveWeight(1);
     wave.play();
+    setReady(true);
 
     const handler = (e) => {
       if (e.action === wave) {
@@ -117,24 +140,24 @@ function Mascot({ ctaHover = null, availableHeight = 0 }) {
       lastLookAround.current = -1;
     }
 
-    if (next !== targetAnim.current && actions[next]) {
+    if (!reducedMotion && next !== targetAnim.current && actions[next]) {
       actions[next].reset();
     }
     targetAnim.current = next;
   }, [hovered, ctaHover, actions]);
 
   useEffect(() => {
-    if (isMobile) return;
+    if (isMobile || reducedMotion) return;
     const handleMove = (e) => {
       mouseRef.current.x = (e.clientX / window.innerWidth) * 2 - 1;
       mouseRef.current.y = -(e.clientY / window.innerHeight) * 2 + 1;
     };
     window.addEventListener("pointermove", handleMove, { passive: true });
     return () => window.removeEventListener("pointermove", handleMove);
-  }, [isMobile]);
+  }, [isMobile, reducedMotion]);
 
   useFrame(({ clock }, delta) => {
-    if (!groupRef.current) return;
+    if (!groupRef.current || reducedMotion) return;
     const t = clock.getElapsedTime();
 
     if (lastLookAround.current === -1) {
@@ -199,6 +222,7 @@ function Mascot({ ctaHover = null, availableHeight = 0 }) {
       ref={leanRef}
       position={[responsiveX, responsiveY, 2]}
       scale={scale}
+      visible={ready}
     >
       <group
         ref={groupRef}

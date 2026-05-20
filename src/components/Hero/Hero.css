@@ -117,9 +117,4 @@
   50% { transform: translateX(-50%) translateY(6px); }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .hero-scroll {
-    animation: hero-scroll-fade 0.01s ease forwards;
-  }
-}
 
