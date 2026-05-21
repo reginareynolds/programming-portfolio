@@ -4,7 +4,7 @@ A full-stack task and project management app with a Kanban board UI, JWT authent
 
 ## Features
 
-- **Kanban board** — drag-free columns for To Do, In Progress, and Done
+- **Kanban board** — columns for To Do, In Progress, and Done
 - **JWT Authentication** — register, login, and token-protected endpoints
 - **Projects** — CRUD with sidebar navigation and task counts
 - **Tasks** — full CRUD with status, priority, due dates, and project association
@@ -15,7 +15,7 @@ A full-stack task and project management app with a Kanban board UI, JWT authent
 - **User isolation** — users can only access their own data
 - **Demo fallback** — frontend loads interactive demo data when backend is unavailable
 - **Auto-cleanup** — scheduled cron purges user accounts older than 24 hours
-- **Rate limits** — 20 projects and 100 tasks per user
+- **Rate limits** — 50 registered users, 20 projects and 100 tasks per user
 - **CI/CD** — GitHub Actions pipeline runs tests on every push
 
 ## Tech Stack
