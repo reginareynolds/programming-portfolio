@@ -31,7 +31,9 @@ function Mascot({ ctaHover = null, availableHeight = 0 }) {
   const introFinished = useRef(false);
   const [ready, setReady] = useState(false);
   const [hovered, setHovered] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [hasHover, setHasHover] = useState(
+    () => window.matchMedia("(hover: hover)").matches
+  );
   const [reducedMotion, setReducedMotion] = useState(
     () => window.matchMedia("(prefers-reduced-motion: reduce)").matches
   );
@@ -48,9 +50,9 @@ function Mascot({ ctaHover = null, availableHeight = 0 }) {
   mixerRef.current = mixer;
 
   useEffect(() => {
-    const mq = window.matchMedia("(max-width: 1005px)");
-    setIsMobile(mq.matches);
-    const handler = (e) => setIsMobile(e.matches);
+    const mq = window.matchMedia("(hover: hover)");
+    setHasHover(mq.matches);
+    const handler = (e) => setHasHover(e.matches);
     mq.addEventListener("change", handler);
     return () => mq.removeEventListener("change", handler);
   }, []);
@@ -160,14 +162,14 @@ function Mascot({ ctaHover = null, availableHeight = 0 }) {
   }, [hovered, ctaHover, actions]);
 
   useEffect(() => {
-    if (isMobile || reducedMotion) return;
+    if (!hasHover || reducedMotion) return;
     const handleMove = (e) => {
       mouseRef.current.x = (e.clientX / window.innerWidth) * 2 - 1;
       mouseRef.current.y = -(e.clientY / window.innerHeight) * 2 + 1;
     };
     window.addEventListener("pointermove", handleMove, { passive: true });
     return () => window.removeEventListener("pointermove", handleMove);
-  }, [isMobile, reducedMotion]);
+  }, [hasHover, reducedMotion]);
 
   useFrame(({ clock }, delta) => {
     if (!groupRef.current) return;
@@ -233,7 +235,7 @@ function Mascot({ ctaHover = null, availableHeight = 0 }) {
       });
     }
 
-    if (!isMobile && leanRef.current) {
+    if (hasHover && leanRef.current) {
       const targetLean = mouseRef.current.x * LEAN_MAX;
       leanRef.current.rotation.y = THREE.MathUtils.lerp(
         leanRef.current.rotation.y,
@@ -252,8 +254,8 @@ function Mascot({ ctaHover = null, availableHeight = 0 }) {
     >
       <group
         ref={groupRef}
-        onPointerOver={() => setHovered(true)}
-        onPointerOut={() => setHovered(false)}
+        onPointerOver={hasHover ? () => setHovered(true) : undefined}
+        onPointerOut={hasHover ? () => setHovered(false) : undefined}
       >
         <primitive object={scene} />
       </group>

@@ -10,8 +10,19 @@ const CHEVRON_RESERVE = 56;
 function Hero() {
   const [ctaHover, setCtaHover] = useState(null);
   const [availableHeight, setAvailableHeight] = useState(0);
+  const [hasHover, setHasHover] = useState(
+    () => window.matchMedia("(hover: hover)").matches
+  );
   const ctaRef = useRef(null);
   const debounceRef = useRef(null);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(hover: hover)");
+    setHasHover(mq.matches);
+    const handler = (e) => setHasHover(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
 
   useEffect(() => {
     let lastWidth = window.innerWidth;
@@ -73,16 +84,16 @@ function Hero() {
           <a
             href="#projects"
             className="btn btn--primary"
-            onMouseEnter={onPrimaryEnter}
-            onMouseLeave={onCtaLeave}
+            onMouseEnter={hasHover ? onPrimaryEnter : undefined}
+            onMouseLeave={hasHover ? onCtaLeave : undefined}
           >
             See My Work
           </a>
           <a
             href="#contact"
             className="btn btn--outline"
-            onMouseEnter={onSecondaryEnter}
-            onMouseLeave={onCtaLeave}
+            onMouseEnter={hasHover ? onSecondaryEnter : undefined}
+            onMouseLeave={hasHover ? onCtaLeave : undefined}
           >
             Say Hi!
           </a>
