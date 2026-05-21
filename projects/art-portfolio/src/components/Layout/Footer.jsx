@@ -9,7 +9,7 @@ export default function Footer() {
           <a href="https://github.com/reginareynolds" target="_blank" rel="noopener noreferrer">GitHub</a>
           <a href="https://linkedin.com/in/regina-c-reynolds" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         </div>
-        <p>&copy; 2026 Regina Reynolds &middot; React &middot; Three.js</p>
+        <p>&copy; 2026 Regina Reynolds &middot; React &middot; Three.js &middot; React Three Fiber &middot; Vite &middot; GitHub Pages</p>
       </div>
     </footer>
   );

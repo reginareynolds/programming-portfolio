@@ -7,22 +7,27 @@ A collection of full-stack, AI, and real-time applications demonstrating experti
 ### 1. [AI-Powered Dashboard](./projects/ai-dashboard)
 Full-stack analytics dashboard with natural language querying powered by LLMs. Ask questions about your data in plain English and get instant visualizations.
 
-**Stack:** React · Flask · PostgreSQL · LangChain · OpenAI API
+**Stack:** React · Flask · PostgreSQL · LangChain · Groq
 
 ### 2. [3D Model Viewer](./projects/3d-model-viewer)
 Web-based 3D model viewer for uploading, inspecting, and annotating 3D files directly in the browser.
 
-**Stack:** React · Three.js / React Three Fiber · Node.js · Express
+**Stack:** React · Three.js · React Three Fiber · Express · Node.js
 
 ### 3. [REST API Microservice](./projects/rest-api-microservice)
 Production-grade RESTful API with authentication, comprehensive tests, CI/CD pipeline, and containerized deployment.
 
-**Stack:** Flask · PostgreSQL · Docker · GitHub Actions · JWT Auth
+**Stack:** React · Flask · PostgreSQL · JWT · Docker · GitHub Actions
 
 ### 4. [IoT Data Simulator](./projects/iot-data-simulator)
 Real-time industrial sensor data simulator with live streaming and visualization — inspired by OEE monitoring systems in manufacturing.
 
-**Stack:** Python · WebSockets · React · D3.js
+**Stack:** React · FastAPI · WebSockets · Recharts
+
+### 5. [3D Art Portfolio](./projects/art-portfolio)
+Interactive portfolio showcasing 3D modeling and visualization work, with an embedded WebGL model viewer and process breakdowns.
+
+**Stack:** React · Three.js · React Three Fiber · Vite · GitHub Pages
 
 ## About
 
