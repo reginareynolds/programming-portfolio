@@ -36,6 +36,7 @@ function ProjectCard({ project, dimmed, activeSkill, onBadgeClick, skipReveal })
           </div>
         )}
         <span className="project-card-type">{project.type}</span>
+        {project.wip && <span className="project-card-wip">In Progress</span>}
       </div>
       <div className="project-card-body">
         <h3 className="project-card-title">{project.title}</h3>
