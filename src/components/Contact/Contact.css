@@ -33,10 +33,12 @@
   transition: border-color 0.2s, color 0.2s, transform 0.2s;
 }
 
-.contact-btn:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  transform: translateY(-2px);
+@media (hover: hover) {
+  .contact-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
 }
 
 .contact-btn:active {

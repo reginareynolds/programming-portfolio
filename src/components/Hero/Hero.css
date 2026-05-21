@@ -85,9 +85,11 @@
   color: #fff;
 }
 
-.btn--primary:hover {
-  background: var(--accent-hover);
-  transform: translateY(-1px);
+@media (hover: hover) {
+  .btn--primary:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+  }
 }
 
 .btn--primary:active {
@@ -101,10 +103,12 @@
   color: var(--text-primary);
 }
 
-.btn--outline:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  transform: translateY(-1px);
+@media (hover: hover) {
+  .btn--outline:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-1px);
+  }
 }
 
 .btn--outline:active {
@@ -122,8 +126,10 @@
   animation: hero-scroll-fade 1s 2s ease forwards, hero-scroll-bounce 2s 3s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
-.hero-scroll:hover {
-  color: var(--accent);
+@media (hover: hover) {
+  .hero-scroll:hover {
+    color: var(--accent);
+  }
 }
 
 @keyframes hero-scroll-fade {

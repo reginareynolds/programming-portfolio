@@ -8,9 +8,11 @@
   transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s, opacity 0.3s;
 }
 
-.project-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--accent);
+@media (hover: hover) {
+  .project-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+  }
 }
 
 .project-card-thumb {
@@ -86,8 +88,10 @@
   transition: color 0.2s;
 }
 
-.project-card-toggle:hover {
-  color: var(--text-primary);
+@media (hover: hover) {
+  .project-card-toggle:hover {
+    color: var(--text-primary);
+  }
 }
 
 .project-card-toggle:active {
@@ -121,9 +125,11 @@
   transition: border-color 0.2s, color 0.2s, transform 0.2s;
 }
 
-.project-link:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+@media (hover: hover) {
+  .project-link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
 }
 
 .project-link:active {

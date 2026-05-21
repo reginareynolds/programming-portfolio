@@ -14,8 +14,10 @@
   transition: background 0.2s, color 0.2s, transform 0.2s;
 }
 
-.tech-badge:hover {
-  background: color-mix(in srgb, var(--accent) 30%, transparent);
+@media (hover: hover) {
+  .tech-badge:hover {
+    background: color-mix(in srgb, var(--accent) 30%, transparent);
+  }
 }
 
 .tech-badge:active {

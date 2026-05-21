@@ -26,8 +26,10 @@
   padding: 0 var(--space-1);
 }
 
-.filter-pill button:hover {
-  color: var(--text-primary);
+@media (hover: hover) {
+  .filter-pill button:hover {
+    color: var(--text-primary);
+  }
 }
 
 .project-card--dimmed {
