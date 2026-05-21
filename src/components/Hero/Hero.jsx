@@ -14,14 +14,21 @@ function Hero() {
   const debounceRef = useRef(null);
 
   useEffect(() => {
+    let lastWidth = window.innerWidth;
     const measure = () => {
       if (!ctaRef.current) return;
       const ctaBottom = ctaRef.current.offsetTop + ctaRef.current.offsetHeight;
       setAvailableHeight(window.innerHeight - ctaBottom - CHEVRON_RESERVE);
     };
+    const onResize = () => {
+      if (window.innerWidth !== lastWidth) {
+        lastWidth = window.innerWidth;
+        measure();
+      }
+    };
     measure();
-    window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
   }, []);
 
   const setCtaDebounced = useCallback((value) => {
