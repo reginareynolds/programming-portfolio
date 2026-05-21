@@ -20,6 +20,7 @@ A web-based 3D model viewer for uploading, inspecting, and annotating 3D files d
 | Frontend | React, Three.js, React Three Fiber, Drei      |
 | Backend  | Node.js, Express, Multer                       |
 | Storage  | File system (models) + JSON store (metadata)   |
+| Infra    | Docker, Docker Compose                          |
 | Deploy   | Railway (backend), Vercel (frontend)             |
 
 ## Architecture

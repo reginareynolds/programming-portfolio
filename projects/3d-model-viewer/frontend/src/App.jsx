@@ -222,7 +222,7 @@ export default function App() {
 
       <footer className="app-footer">
         <p>
-          &copy; 2026 Regina Reynolds &middot; React &middot; Three.js &middot; React Three Fiber &middot; Express &middot; Node.js
+          &copy; 2026 Regina Reynolds &middot; React &middot; Three.js &middot; React Three Fiber &middot; Express &middot; Node.js &middot; Docker
         </p>
       </footer>
     </div>

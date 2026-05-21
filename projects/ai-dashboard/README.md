@@ -20,6 +20,7 @@ A full-stack analytics dashboard that lets users ask questions about data in pla
 | Backend   | Flask, SQLAlchemy, LangChain        |
 | Database  | PostgreSQL                           |
 | LLM       | Groq API (Llama 3.3 70B, free tier) |
+| Infra     | Docker, Docker Compose               |
 | Deploy    | Railway (backend + DB), Vercel (frontend) |
 
 ## Architecture
