@@ -23,6 +23,7 @@ Inspired by OEE monitoring systems deployed on industrial IoT gateways in manufa
 | Frontend | React, Vite, Recharts             |
 | Backend  | FastAPI, WebSockets, uvicorn      |
 | Protocol | WebSocket (real-time streaming)   |
+| Infra    | Docker, Docker Compose             |
 | Deploy   | Railway (backend), Vercel (frontend) |
 
 ## Architecture

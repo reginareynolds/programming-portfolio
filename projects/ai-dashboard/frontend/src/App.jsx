@@ -172,7 +172,7 @@ export default function App() {
 
       <footer className="app-footer">
         <p>
-          &copy; 2026 Regina Reynolds &middot; React &middot; Flask &middot; PostgreSQL &middot; LangChain &middot; Llama
+          &copy; 2026 Regina Reynolds &middot; React &middot; Flask &middot; PostgreSQL &middot; LangChain &middot; Groq &middot; Recharts &middot; Docker
         </p>
       </footer>
     </div>

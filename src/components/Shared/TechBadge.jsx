@@ -9,6 +9,8 @@ function TechBadge({ label, active, onClick }) {
         onClick();
       }}
       type="button"
+      aria-label={`Filter projects by ${label}`}
+      aria-pressed={active}
     >
       {label}
     </button>

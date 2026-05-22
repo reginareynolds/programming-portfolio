@@ -18,11 +18,18 @@
   cursor: pointer;
   font-size: 1.2em;
   line-height: 1;
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 0 var(--space-1);
 }
 
-.filter-pill button:hover {
-  color: var(--text-primary);
+@media (hover: hover) {
+  .filter-pill button:hover {
+    color: var(--text-primary);
+  }
 }
 
 .project-card--dimmed {

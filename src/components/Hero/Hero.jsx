@@ -10,18 +10,36 @@ const CHEVRON_RESERVE = 56;
 function Hero() {
   const [ctaHover, setCtaHover] = useState(null);
   const [availableHeight, setAvailableHeight] = useState(0);
+  const [hasHover, setHasHover] = useState(
+    () => window.matchMedia("(hover: hover)").matches
+  );
   const ctaRef = useRef(null);
   const debounceRef = useRef(null);
 
   useEffect(() => {
+    const mq = window.matchMedia("(hover: hover)");
+    setHasHover(mq.matches);
+    const handler = (e) => setHasHover(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
+  useEffect(() => {
+    let lastWidth = window.innerWidth;
     const measure = () => {
       if (!ctaRef.current) return;
-      const ctaBottom = ctaRef.current.getBoundingClientRect().bottom;
+      const ctaBottom = ctaRef.current.offsetTop + ctaRef.current.offsetHeight;
       setAvailableHeight(window.innerHeight - ctaBottom - CHEVRON_RESERVE);
     };
+    const onResize = () => {
+      if (window.innerWidth !== lastWidth) {
+        lastWidth = window.innerWidth;
+        measure();
+      }
+    };
     measure();
-    window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
   }, []);
 
   const setCtaDebounced = useCallback((value) => {
@@ -66,18 +84,18 @@ function Hero() {
           <a
             href="#projects"
             className="btn btn--primary"
-            onMouseEnter={onPrimaryEnter}
-            onMouseLeave={onCtaLeave}
+            onMouseEnter={hasHover ? onPrimaryEnter : undefined}
+            onMouseLeave={hasHover ? onCtaLeave : undefined}
           >
-            View Projects
+            See My Work
           </a>
           <a
             href="#contact"
             className="btn btn--outline"
-            onMouseEnter={onSecondaryEnter}
-            onMouseLeave={onCtaLeave}
+            onMouseEnter={hasHover ? onSecondaryEnter : undefined}
+            onMouseLeave={hasHover ? onCtaLeave : undefined}
           >
-            Get in Touch
+            Say Hi!
           </a>
         </div>
       </div>

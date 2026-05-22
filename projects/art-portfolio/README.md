@@ -41,6 +41,6 @@ Quick version:
 
 ## Deployment
 
-Pushes to `main` that modify `projects/art-portfolio/` trigger a GitHub Actions workflow that builds the site and deploys to GitHub Pages.
+Pushes to `master` that modify `projects/art-portfolio/` trigger a GitHub Actions workflow that builds the site and deploys to GitHub Pages.
 
 To deploy manually: Settings > Pages > enable GitHub Pages, or run `npm run build` and host the `dist/` folder anywhere.

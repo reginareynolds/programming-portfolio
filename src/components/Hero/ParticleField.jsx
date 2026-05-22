@@ -1,17 +1,26 @@
-import { useRef, useMemo, useEffect } from "react";
+import { useRef, useMemo, useEffect, useState } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 
 const PARTICLE_COUNT = 150;
-const CONNECTION_DISTANCE = 1.5;
 const MOUSE_INFLUENCE = 2;
 const BOUNDS = 6;
 
 function ParticleField() {
   const pointsRef = useRef();
-  const linesRef = useRef();
   const mouseRef = useRef(new THREE.Vector2(0, 0));
   const { size, viewport } = useThree();
+  const [reducedMotion, setReducedMotion] = useState(
+    () => window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReducedMotion(mq.matches);
+    const handler = (e) => setReducedMotion(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
 
   const isMobile = size.width < 640;
   const count = isMobile ? 80 : PARTICLE_COUNT;
@@ -30,24 +39,19 @@ function ParticleField() {
     return { positions: pos, velocities: vel };
   }, [count]);
 
-  const linePositions = useMemo(
-    () => new Float32Array(PARTICLE_COUNT * PARTICLE_COUNT * 3),
-    []
-  );
-
   useEffect(() => {
-    if (isMobile) return;
+    if (isMobile || reducedMotion) return;
     const handleMove = (e) => {
       mouseRef.current.x = (e.clientX / size.width) * 2 - 1;
       mouseRef.current.y = -(e.clientY / size.height) * 2 + 1;
     };
     window.addEventListener("pointermove", handleMove, { passive: true });
     return () => window.removeEventListener("pointermove", handleMove);
-  }, [size, isMobile]);
+  }, [size, isMobile, reducedMotion]);
 
   useFrame(() => {
     const pts = pointsRef.current;
-    if (!pts) return;
+    if (!pts || reducedMotion) return;
 
     const posArr = pts.geometry.attributes.position.array;
     const mx = mouseRef.current.x * viewport.width * 0.5;
@@ -78,62 +82,27 @@ function ParticleField() {
       }
     }
     pts.geometry.attributes.position.needsUpdate = true;
-
-    let lineIdx = 0;
-    for (let i = 0; i < count; i++) {
-      for (let j = i + 1; j < count; j++) {
-        const dx = posArr[i * 3] - posArr[j * 3];
-        const dy = posArr[i * 3 + 1] - posArr[j * 3 + 1];
-        const dz = posArr[i * 3 + 2] - posArr[j * 3 + 2];
-        const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
-
-        if (dist < CONNECTION_DISTANCE) {
-          linePositions[lineIdx++] = posArr[i * 3];
-          linePositions[lineIdx++] = posArr[i * 3 + 1];
-          linePositions[lineIdx++] = posArr[i * 3 + 2];
-          linePositions[lineIdx++] = posArr[j * 3];
-          linePositions[lineIdx++] = posArr[j * 3 + 1];
-          linePositions[lineIdx++] = posArr[j * 3 + 2];
-        }
-      }
-    }
-
-    const lineGeo = linesRef.current.geometry;
-    if (!lineGeo.attributes.position) {
-      lineGeo.setAttribute(
-        "position",
-        new THREE.BufferAttribute(linePositions, 3)
-      );
-    }
-    lineGeo.attributes.position.needsUpdate = true;
-    lineGeo.setDrawRange(0, lineIdx / 3);
   });
 
   return (
-    <>
-      <points ref={pointsRef}>
-        <bufferGeometry>
-          <bufferAttribute
-            attach="attributes-position"
-            array={positions}
-            count={count}
-            itemSize={3}
-          />
-        </bufferGeometry>
-        {/* Colors mirror --accent (#6366f1) and --accent-hover (#818cf8) — update if tokens change */}
-        <pointsMaterial
-          size={0.04}
-          color="#6366f1"
-          transparent
-          opacity={0.7}
-          sizeAttenuation
+    <points ref={pointsRef}>
+      <bufferGeometry>
+        <bufferAttribute
+          attach="attributes-position"
+          array={positions}
+          count={count}
+          itemSize={3}
         />
-      </points>
-      <lineSegments ref={linesRef}>
-        <bufferGeometry />
-        <lineBasicMaterial color="#818cf8" transparent opacity={0.15} />
-      </lineSegments>
-    </>
+      </bufferGeometry>
+      {/* Mirrors --accent (#6366f1) — update if token changes */}
+      <pointsMaterial
+        size={0.04}
+        color="#6366f1"
+        transparent
+        opacity={0.7}
+        sizeAttenuation
+      />
+    </points>
   );
 }
 

@@ -9,6 +9,8 @@ function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const scrollingRef = useRef(false);
   const scrollTimerRef = useRef(null);
+  const navLinksRef = useRef(null);
+  const toggleRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,6 +46,31 @@ function Nav() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (!menuOpen) return;
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        setMenuOpen(false);
+        toggleRef.current?.focus();
+        return;
+      }
+      if (e.key === "Tab" && navLinksRef.current) {
+        const focusable = navLinksRef.current.querySelectorAll("a");
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [menuOpen]);
+
   const handleNavClick = (id) => {
     setMenuOpen(false);
     if (id) {
@@ -65,15 +92,22 @@ function Nav() {
           </svg>
         </a>
         <button
+          ref={toggleRef}
           className={`nav-toggle${menuOpen ? " nav-toggle--open" : ""}`}
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
+          aria-expanded={menuOpen}
+          aria-controls="nav-menu"
         >
           <span />
           <span />
           <span />
         </button>
-        <ul className={`nav-links${menuOpen ? " nav-links--open" : ""}`}>
+        <ul
+          ref={navLinksRef}
+          id="nav-menu"
+          className={`nav-links${menuOpen ? " nav-links--open" : ""}`}
+        >
           {sections.map((id) => (
             <li key={id}>
               <a

@@ -5,7 +5,7 @@ import * as THREE from "three";
 
 const ANIM = {
   IDLE: "Idle",
-  WAVE: "Waving",
+  WAVE: "Wave",
   POINT_LEFT: "Pointing up and left",
   POINT_RIGHT: "Pointing up and right",
   NOD: "Nodding",
@@ -29,9 +29,16 @@ function Mascot({ ctaHover = null, availableHeight = 0 }) {
   const lastLookAround = useRef(0);
   const introPlayed = useRef(false);
   const introFinished = useRef(false);
+  const [ready, setReady] = useState(false);
   const [hovered, setHovered] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [hasHover, setHasHover] = useState(
+    () => window.matchMedia("(hover: hover)").matches
+  );
+  const [reducedMotion, setReducedMotion] = useState(
+    () => window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
   const mouseRef = useRef({ x: 0, y: 0 });
+  const fadeProgress = useRef(0);
 
   const { scene, animations } = useGLTF("/models/MiniMe.glb");
   const { actions, mixer } = useAnimations(animations, groupRef);
@@ -43,9 +50,17 @@ function Mascot({ ctaHover = null, availableHeight = 0 }) {
   mixerRef.current = mixer;
 
   useEffect(() => {
-    const mq = window.matchMedia("(max-width: 1005px)");
-    setIsMobile(mq.matches);
-    const handler = (e) => setIsMobile(e.matches);
+    const mq = window.matchMedia("(hover: hover)");
+    setHasHover(mq.matches);
+    const handler = (e) => setHasHover(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReducedMotion(mq.matches);
+    const handler = (e) => setReducedMotion(e.matches);
     mq.addEventListener("change", handler);
     return () => mq.removeEventListener("change", handler);
   }, []);
@@ -70,6 +85,15 @@ function Mascot({ ctaHover = null, availableHeight = 0 }) {
   }, []);
 
   useEffect(() => {
+    scene.traverse((child) => {
+      if (child.isMesh) {
+        child.material.transparent = true;
+        child.material.opacity = 0;
+      }
+    });
+  }, [scene]);
+
+  useEffect(() => {
     const looping = [ANIM.IDLE, ANIM.POINT_LEFT, ANIM.POINT_RIGHT, ANIM.HAPPY_IDLE, ANIM.SAD_IDLE];
     looping.forEach((name) => {
       const action = actions[name];
@@ -81,25 +105,39 @@ function Mascot({ ctaHover = null, availableHeight = 0 }) {
   }, [actions]);
 
   useEffect(() => {
-    if (!actions[ANIM.WAVE] || introPlayed.current) return;
+    if (!actions[ANIM.WAVE] || introPlayed.current || reducedMotion) {
+      if (reducedMotion && actions[ANIM.IDLE]) {
+        introPlayed.current = true;
+        introFinished.current = true;
+        actions[ANIM.IDLE].play();
+        actions[ANIM.IDLE].setEffectiveWeight(1);
+        targetAnim.current = ANIM.IDLE;
+        setReady(true);
+      }
+      return;
+    }
     introPlayed.current = true;
 
-    const wave = actions[ANIM.WAVE];
-    wave.reset();
-    wave.setLoop(THREE.LoopRepeat, 2);
-    wave.repetitions = 2;
-    wave.clampWhenFinished = true;
-    wave.setEffectiveWeight(1);
-    wave.play();
+    const timer = setTimeout(() => {
+      setReady(true);
+      const wave = actions[ANIM.WAVE];
+      wave.reset();
+      wave.setLoop(THREE.LoopOnce, 1);
+      wave.clampWhenFinished = true;
+      wave.setEffectiveWeight(1);
+      wave.play();
 
-    const handler = (e) => {
-      if (e.action === wave) {
-        mixerRef.current.removeEventListener("finished", handler);
-        introFinished.current = true;
-        targetAnim.current = ANIM.IDLE;
-      }
-    };
-    mixerRef.current.addEventListener("finished", handler);
+      const handler = (e) => {
+        if (e.action === wave) {
+          mixerRef.current.removeEventListener("finished", handler);
+          introFinished.current = true;
+          targetAnim.current = ANIM.IDLE;
+        }
+      };
+      mixerRef.current.addEventListener("finished", handler);
+    }, 500);
+
+    return () => clearTimeout(timer);
   }, [actions]);
 
   useEffect(() => {
@@ -117,24 +155,37 @@ function Mascot({ ctaHover = null, availableHeight = 0 }) {
       lastLookAround.current = -1;
     }
 
-    if (next !== targetAnim.current && actions[next]) {
+    if (!reducedMotion && next !== targetAnim.current && actions[next]) {
       actions[next].reset();
     }
     targetAnim.current = next;
   }, [hovered, ctaHover, actions]);
 
   useEffect(() => {
-    if (isMobile) return;
+    if (!hasHover || reducedMotion) return;
     const handleMove = (e) => {
       mouseRef.current.x = (e.clientX / window.innerWidth) * 2 - 1;
       mouseRef.current.y = -(e.clientY / window.innerHeight) * 2 + 1;
     };
     window.addEventListener("pointermove", handleMove, { passive: true });
     return () => window.removeEventListener("pointermove", handleMove);
-  }, [isMobile]);
+  }, [hasHover, reducedMotion]);
 
   useFrame(({ clock }, delta) => {
     if (!groupRef.current) return;
+
+    if (ready && fadeProgress.current < 1) {
+      fadeProgress.current = Math.min(fadeProgress.current + delta / 0.6, 1);
+      const t = fadeProgress.current;
+      const opacity = 1 - Math.pow(1 - t, 3);
+      scene.traverse((child) => {
+        if (child.isMesh) {
+          child.material.opacity = opacity;
+        }
+      });
+    }
+
+    if (reducedMotion) return;
     const t = clock.getElapsedTime();
 
     if (lastLookAround.current === -1) {
@@ -184,7 +235,7 @@ function Mascot({ ctaHover = null, availableHeight = 0 }) {
       });
     }
 
-    if (!isMobile && leanRef.current) {
+    if (hasHover && leanRef.current) {
       const targetLean = mouseRef.current.x * LEAN_MAX;
       leanRef.current.rotation.y = THREE.MathUtils.lerp(
         leanRef.current.rotation.y,
@@ -199,11 +250,12 @@ function Mascot({ ctaHover = null, availableHeight = 0 }) {
       ref={leanRef}
       position={[responsiveX, responsiveY, 2]}
       scale={scale}
+      visible={ready}
     >
       <group
         ref={groupRef}
-        onPointerOver={() => setHovered(true)}
-        onPointerOut={() => setHovered(false)}
+        onPointerOver={hasHover ? () => setHovered(true) : undefined}
+        onPointerOut={hasHover ? () => setHovered(false) : undefined}
       >
         <primitive object={scene} />
       </group>
