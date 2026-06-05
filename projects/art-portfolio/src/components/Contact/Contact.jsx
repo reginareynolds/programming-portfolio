@@ -1,9 +1,10 @@
+import SectionHeading from "../Shared/SectionHeading";
 import "./Contact.css";
 
 export default function Contact() {
   return (
     <section id="contact" className="contact-section">
-      <h2 className="contact-heading display-text">Let's Connect</h2>
+      <SectionHeading>Let's Connect</SectionHeading>
       <p className="contact-subtitle">
         Based in North Carolina. Currently open to remote and hybrid opportunities.
       </p>

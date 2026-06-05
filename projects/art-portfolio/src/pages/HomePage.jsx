@@ -1,5 +1,6 @@
 import GalleryGrid from "../components/Gallery/GalleryGrid";
 import HeroImage from "../components/Hero/HeroModel";
+import SectionHeading from "../components/Shared/SectionHeading";
 import AboutSection from "../components/About/AboutSection";
 import Contact from "../components/Contact/Contact";
 import { portfolio } from "../data/portfolio";
@@ -36,6 +37,7 @@ export default function HomePage() {
       </section>
       <div className="home-page">
         <section id="gallery" className="home-gallery">
+          <SectionHeading>Gallery</SectionHeading>
           <GalleryGrid pieces={portfolio} />
         </section>
         <section id="about">

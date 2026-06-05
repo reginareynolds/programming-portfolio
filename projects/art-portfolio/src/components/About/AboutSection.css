@@ -1,5 +1,5 @@
 .about-section {
-  padding: var(--space-8) 0;
+  padding: var(--space-20) 0;
 }
 
 /* Bio */
@@ -42,7 +42,7 @@
   margin-bottom: var(--space-12);
 }
 
-.about-skills h2 {
+.about-skills h3 {
   font-size: var(--text-lg);
   margin-bottom: var(--space-4);
 }

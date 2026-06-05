@@ -3,11 +3,6 @@
   text-align: center;
 }
 
-.contact-heading {
-  font-size: var(--text-2xl);
-  margin-bottom: var(--space-4);
-}
-
 .contact-subtitle {
   color: var(--text-secondary);
   font-size: var(--text-base);

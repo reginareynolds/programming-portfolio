@@ -142,5 +142,6 @@
 }
 
 .home-gallery {
+  padding-top: var(--space-20);
   margin-bottom: var(--space-16);
 }

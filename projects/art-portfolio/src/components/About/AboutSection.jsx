@@ -1,4 +1,5 @@
 import PlaceholderImage from "../Shared/PlaceholderImage";
+import SectionHeading from "../Shared/SectionHeading";
 import "./AboutSection.css";
 
 const SKILL_GROUPS = [
@@ -31,6 +32,7 @@ const SKILL_GROUPS = [
 export default function AboutSection() {
   return (
     <div className="about-section">
+      <SectionHeading>About</SectionHeading>
       <section className="about-bio">
         <div className="bio-photo">
           <PlaceholderImage
@@ -61,7 +63,7 @@ export default function AboutSection() {
       </section>
 
       <section className="about-skills">
-        <h2>Skills & Tools</h2>
+        <h3>Skills & Tools</h3>
         <div className="skills-grid">
           {SKILL_GROUPS.map((group) => (
             <div key={group.category} className="skill-card">
