@@ -1,15 +1,33 @@
 import GalleryGrid from "../components/Gallery/GalleryGrid";
+import HeroImage from "../components/Hero/HeroModel";
 import AboutSection from "../components/About/AboutSection";
 import Contact from "../components/Contact/Contact";
 import { portfolio } from "../data/portfolio";
 import "./HomePage.css";
 
+const featuredPiece = portfolio[0];
+
 export default function HomePage() {
   return (
     <div className="home-page">
       <section className="home-hero">
-        <h1>3D Art Portfolio</h1>
-        <p>Modeling, sculpting, animation, and visualization</p>
+        <HeroImage src={featuredPiece.heroImage} alt={featuredPiece.title} />
+        <div className="home-hero-content">
+          <h1 className="home-hero-name display-text">Regina Reynolds</h1>
+          <h2 className="home-hero-title">3D Artist</h2>
+          <p className="home-hero-tagline">
+            Modeling, sculpting, animation, and visualization
+          </p>
+          <div className="home-hero-cta">
+            <a href="#gallery" className="btn btn--primary">See My Work</a>
+            <a href="#contact" className="btn btn--outline">Get in Touch</a>
+          </div>
+        </div>
+        <a href="#gallery" className="home-hero-scroll" aria-label="Scroll to gallery">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </a>
       </section>
       <section id="gallery" className="home-gallery">
         <GalleryGrid pieces={portfolio} />
