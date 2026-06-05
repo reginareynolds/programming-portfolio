@@ -1,4 +1,4 @@
-import ToolBadge from "../Shared/ToolBadge";
+import TechBadge from "../Shared/TechBadge";
 import "./PieceInfo.css";
 
 export default function PieceInfo({ piece }) {
@@ -12,7 +12,7 @@ export default function PieceInfo({ piece }) {
           <h3>Tools</h3>
           <div className="meta-tools">
             {piece.tools.map((tool) => (
-              <ToolBadge key={tool} name={tool} />
+              <TechBadge key={tool} name={tool} />
             ))}
           </div>
         </div>

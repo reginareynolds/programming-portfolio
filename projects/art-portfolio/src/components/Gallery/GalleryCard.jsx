@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import PlaceholderImage from "../Shared/PlaceholderImage";
-import ToolBadge from "../Shared/ToolBadge";
+import TechBadge from "../Shared/TechBadge";
 import "./GalleryCard.css";
 
 export default function GalleryCard({ piece }) {
@@ -16,7 +16,7 @@ export default function GalleryCard({ piece }) {
         <p className="card-subtitle">{piece.subtitle}</p>
         <div className="card-tools">
           {piece.tools.slice(0, 3).map((tool) => (
-            <ToolBadge key={tool} name={tool} />
+            <TechBadge key={tool} name={tool} />
           ))}
         </div>
       </div>

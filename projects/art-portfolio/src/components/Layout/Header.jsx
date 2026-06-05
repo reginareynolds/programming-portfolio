@@ -107,11 +107,11 @@ export default function Header() {
   const resumePath = import.meta.env.BASE_URL + "Regina_Reynolds_Resume.pdf";
 
   return (
-    <header className={`site-header${scrolled ? " site-header--scrolled" : ""}`}>
-      <div className="header-inner">
-        <Link to="/" className="site-logo display-text" onClick={() => { setMenuOpen(false); window.scrollTo({ top: 0, behavior: "smooth" }); }}>
+    <header className={`nav${scrolled ? " nav--scrolled" : ""}`}>
+      <div className="nav-inner">
+        <Link to="/" className="nav-logo display-text" onClick={() => { setMenuOpen(false); window.scrollTo({ top: 0, behavior: "smooth" }); }}>
           Regina Reynolds
-          <svg className="site-logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round">
+          <svg className="nav-logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round">
             <path d="M12 2 L22 7 L22 17 L12 22 L2 17 L2 7 Z" />
             <path d="M12 2 L12 12 L22 7" />
             <path d="M12 12 L2 7" />
@@ -121,11 +121,11 @@ export default function Header() {
 
         <button
           ref={toggleRef}
-          className={`menu-toggle${menuOpen ? " menu-toggle--open" : ""}`}
+          className={`nav-toggle${menuOpen ? " nav-toggle--open" : ""}`}
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
           aria-expanded={menuOpen}
-          aria-controls="site-nav"
+          aria-controls="nav-menu"
         >
           <span />
           <span />
@@ -134,8 +134,8 @@ export default function Header() {
 
         <ul
           ref={navLinksRef}
-          id="site-nav"
-          className={`site-nav${menuOpen ? " site-nav--open" : ""}`}
+          id="nav-menu"
+          className={`nav-links${menuOpen ? " nav-links--open" : ""}`}
         >
           {isHome ? (
             sections.map((id) => (
