@@ -1,7 +1,7 @@
 .home-page {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 var(--space-8) var(--space-8);
+  padding: 0 var(--space-6) var(--space-6);
 }
 
 .home-hero {

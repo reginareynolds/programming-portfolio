@@ -1,13 +1,18 @@
 .gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   gap: var(--space-6);
+  justify-content: center;
+}
+
+.gallery-grid > * {
+  width: calc((100% - 2 * var(--space-6)) / 3);
 }
 
 @media (max-width: 900px) {
-  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .gallery-grid > * { width: calc((100% - var(--space-6)) / 2); }
 }
 
 @media (max-width: 540px) {
-  .gallery-grid { grid-template-columns: 1fr; }
+  .gallery-grid > * { width: 100%; }
 }
