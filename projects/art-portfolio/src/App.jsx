@@ -11,8 +11,11 @@ function Layout() {
   return (
     <>
       <ScrollToTop />
+      <a href="#main-content" className="skip-link">Skip to content</a>
       <Header />
-      <Outlet />
+      <main id="main-content">
+        <Outlet />
+      </main>
       <Footer />
     </>
   );

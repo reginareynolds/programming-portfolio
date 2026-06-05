@@ -19,9 +19,11 @@ export default function PlaceholderImage({ src, alt, className = "" }) {
     );
   }
 
+  const resolvedSrc = import.meta.env.BASE_URL + src.replace(/^\//, "");
+
   return (
     <img
-      src={src}
+      src={resolvedSrc}
       alt={alt}
       className={className}
       onError={() => setFailed(true)}

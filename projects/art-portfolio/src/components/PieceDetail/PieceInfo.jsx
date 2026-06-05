@@ -28,6 +28,25 @@ export default function PieceInfo({ piece }) {
           <h3>Category</h3>
           <p>{piece.category}</p>
         </div>
+        {piece.attribution && (
+          <div className="meta-group">
+            <h3>Attribution</h3>
+            <p>
+              {piece.attribution.url ? (
+                <a
+                  href={piece.attribution.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="attribution-link"
+                >
+                  {piece.attribution.text}
+                </a>
+              ) : (
+                piece.attribution.text
+              )}
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );

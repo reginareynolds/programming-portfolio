@@ -4,7 +4,7 @@ import "./HomePage.css";
 
 export default function HomePage() {
   return (
-    <main className="home-page">
+    <div className="home-page">
       <section className="home-hero">
         <h1>3D Art Portfolio</h1>
         <p>Modeling, sculpting, animation, and visualization</p>
@@ -12,6 +12,6 @@ export default function HomePage() {
       <section className="home-gallery">
         <GalleryGrid pieces={portfolio} />
       </section>
-    </main>
+    </div>
   );
 }

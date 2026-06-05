@@ -4,6 +4,7 @@ import { portfolio } from "../data/portfolio";
 import PieceHero from "../components/PieceDetail/PieceHero";
 import ModelViewer from "../components/PieceDetail/ModelViewer";
 import ProcessBreakdown from "../components/PieceDetail/ProcessBreakdown";
+import DetailGallery from "../components/PieceDetail/DetailGallery";
 import PieceInfo from "../components/PieceDetail/PieceInfo";
 import NotFoundPage from "./NotFoundPage";
 import "./PiecePage.css";
@@ -15,7 +16,7 @@ export default function PiecePage() {
   if (!piece) return <NotFoundPage />;
 
   return (
-    <main className="piece-page">
+    <div className="piece-page">
       <div className="piece-back">
         <Link to="/">&larr; Back to Gallery</Link>
       </div>
@@ -36,7 +37,7 @@ export default function PiecePage() {
           <h2>Animation</h2>
           <div className="video-container">
             <video controls loop muted playsInline>
-              <source src={piece.videoPath} type="video/mp4" />
+              <source src={import.meta.env.BASE_URL + piece.videoPath.replace(/^\//, "")} type="video/mp4" />
             </video>
           </div>
         </section>
@@ -49,9 +50,16 @@ export default function PiecePage() {
         </section>
       )}
 
+      {piece.detailImages?.length > 0 && (
+        <section className="piece-section">
+          <h2>Details</h2>
+          <DetailGallery images={piece.detailImages} />
+        </section>
+      )}
+
       <section className="piece-section">
         <PieceInfo piece={piece} />
       </section>
-    </main>
+    </div>
   );
 }

@@ -2,8 +2,8 @@ import AboutSection from "../components/About/AboutSection";
 
 export default function AboutPage() {
   return (
-    <main style={{ maxWidth: 1200, margin: "0 auto", padding: "2rem" }}>
+    <div style={{ maxWidth: "var(--max-width)", margin: "0 auto", padding: "var(--space-8)" }}>
       <AboutSection />
-    </main>
+    </div>
   );
 }
