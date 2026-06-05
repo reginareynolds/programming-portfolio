@@ -3,9 +3,9 @@ import PlaceholderImage from "../Shared/PlaceholderImage";
 import TechBadge from "../Shared/TechBadge";
 import "./GalleryCard.css";
 
-export default function GalleryCard({ piece, dimmed, activeSkill, onBadgeClick }) {
+export default function GalleryCard({ piece, dimmed, activeSkill, onBadgeClick, skipReveal }) {
   return (
-    <Link to={`/piece/${piece.id}`} className={`gallery-card${dimmed ? " gallery-card--dimmed" : ""}`}>
+    <Link to={`/piece/${piece.id}`} className={`gallery-card${skipReveal ? "" : " reveal reveal-stagger"}${dimmed ? " gallery-card--dimmed" : ""}`}>
       <div className="card-image">
         <PlaceholderImage src={piece.thumbnail} alt={piece.title} className="card-img" />
         {piece.hasModel && <span className="card-3d-badge">3D</span>}

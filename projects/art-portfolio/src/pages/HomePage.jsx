@@ -3,6 +3,7 @@ import HeroImage from "../components/Hero/HeroModel";
 import SectionHeading from "../components/Shared/SectionHeading";
 import AboutSection from "../components/About/AboutSection";
 import Contact from "../components/Contact/Contact";
+import useScrollReveal from "../useScrollReveal";
 import { portfolio } from "../data/portfolio";
 import "./HomePage.css";
 
@@ -14,6 +15,8 @@ function scrollTo(e, id) {
 }
 
 export default function HomePage() {
+  const galleryRef = useScrollReveal();
+
   return (
     <>
       <section className="home-hero">
@@ -35,7 +38,7 @@ export default function HomePage() {
           </svg>
         </a>
       </section>
-      <section id="gallery" className="section home-gallery">
+      <section id="gallery" className="section home-gallery" ref={galleryRef}>
         <SectionHeading>Gallery</SectionHeading>
         <GalleryGrid pieces={portfolio} />
       </section>

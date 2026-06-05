@@ -1,14 +1,17 @@
 import SectionHeading from "../Shared/SectionHeading";
+import useScrollReveal from "../../useScrollReveal";
 import "./Contact.css";
 
 export default function Contact() {
+  const ref = useScrollReveal();
+
   return (
-    <section id="contact" className="section">
+    <section id="contact" className="section" ref={ref}>
       <SectionHeading>Let's Connect</SectionHeading>
-      <p className="contact-subtitle">
+      <p className="contact-subtitle reveal">
         Based in North Carolina. Currently open to remote and hybrid opportunities.
       </p>
-      <div className="contact-links">
+      <div className="contact-links reveal">
         <a href="mailto:regina.reynolds.2014@gmail.com" className="contact-btn">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <rect x="2" y="4" width="20" height="16" rx="2" />

@@ -1,12 +1,14 @@
+/* Intentionally tighter than standard section padding due to size of section */
 #contact {
   padding-top: var(--space-12);
   padding-bottom: var(--space-12);
-  text-align: center;
 }
 
 .contact-subtitle {
+  text-align: center;
   color: var(--text-secondary);
   font-size: var(--text-base);
+  margin-top: calc(-1 * var(--space-6));
   margin-bottom: var(--space-8);
 }
 

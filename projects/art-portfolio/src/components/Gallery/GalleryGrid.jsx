@@ -29,6 +29,7 @@ export default function GalleryGrid({ pieces }) {
             dimmed={filterSkill && !piece.tools.includes(filterSkill)}
             activeSkill={filterSkill}
             onBadgeClick={handleBadgeClick}
+            skipReveal={hasFiltered.current}
           />
         ))}
       </div>

@@ -1,5 +1,6 @@
 import PlaceholderImage from "../Shared/PlaceholderImage";
 import SectionHeading from "../Shared/SectionHeading";
+import useScrollReveal from "../../useScrollReveal";
 import "./AboutSection.css";
 
 const SKILL_GROUPS = [
@@ -30,10 +31,12 @@ const SKILL_GROUPS = [
 ];
 
 export default function AboutSection() {
+  const ref = useScrollReveal();
+
   return (
-    <div className="about-section">
+    <div className="about-section" ref={ref}>
       <SectionHeading>About</SectionHeading>
-      <section className="about-bio">
+      <section className="about-bio reveal">
         <div className="bio-photo">
           <PlaceholderImage
             src="/images/about/headshot.jpg"
@@ -63,10 +66,10 @@ export default function AboutSection() {
       </section>
 
       <section className="about-skills">
-        <h3>Skills & Tools</h3>
+        <h3 className="reveal">Skills & Tools</h3>
         <div className="skills-grid">
           {SKILL_GROUPS.map((group) => (
-            <div key={group.category} className="skill-card">
+            <div key={group.category} className="skill-card reveal reveal-stagger">
               <h3>{group.category}</h3>
               <ul>
                 {group.tools.map((tool) => (
