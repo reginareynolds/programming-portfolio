@@ -1,9 +1,9 @@
 .process-breakdown {
   display: flex;
-  gap: 1rem;
+  gap: var(--space-4);
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  padding-bottom: 0.5rem;
+  padding-bottom: var(--space-2);
 }
 
 .process-step {
@@ -17,7 +17,7 @@
   overflow: hidden;
   background: var(--bg-card);
   border: 1px solid var(--border);
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--space-2);
 }
 
 .step-img {
@@ -27,11 +27,11 @@
 }
 
 .step-label {
-  font-size: 0.85rem;
+  font-size: var(--text-sm);
   color: var(--text-secondary);
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--space-2);
 }
 
 .step-number {
@@ -43,7 +43,7 @@
   border-radius: 50%;
   background: var(--accent);
   color: white;
-  font-size: 0.7rem;
+  font-size: var(--text-xs);
   font-weight: 600;
   flex-shrink: 0;
 }

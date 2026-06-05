@@ -1,99 +1,165 @@
 .site-header {
-  background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 50;
+  padding: var(--space-4) var(--space-6);
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.site-header--scrolled {
+  background: color-mix(in srgb, var(--bg-primary) 90%, transparent);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 var(--border);
 }
 
 .header-inner {
-  max-width: 1200px;
+  max-width: var(--max-width);
   margin: 0 auto;
-  padding: 1rem 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  min-height: 41px;
 }
 
 .site-logo {
-  font-size: 1.5rem;
+  font-size: var(--text-lg);
   font-weight: 700;
-  background: linear-gradient(135deg, #6366f1, #22d3ee);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  transition: transform 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.site-logo-icon {
+  display: inline-block;
+  width: 0.8em;
+  height: 0.8em;
+  margin-left: 0.4em;
+  vertical-align: middle;
+  opacity: 0;
+  transform: translateX(-4px) rotateY(0deg);
+  transition: opacity 0.3s cubic-bezier(0, 0, 0.2, 1), transform 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+@media (hover: hover) {
+  .site-logo:hover {
+    transform: rotate(-2deg);
+  }
+
+  .site-logo:hover .site-logo-icon {
+    opacity: 1;
+    transform: translateX(0) rotateY(180deg);
+  }
 }
 
 .site-nav {
   display: flex;
-  gap: 2rem;
+  align-items: center;
+  gap: var(--space-8);
 }
 
 .site-nav a {
-  font-size: 0.9rem;
+  font-size: var(--text-sm);
+  font-weight: 500;
   color: var(--text-secondary);
   transition: color 0.2s;
-  padding: 0.25rem 0;
+  position: relative;
 }
 
-.site-nav a:hover,
 .site-nav a.active {
   color: var(--text-primary);
 }
 
-.site-nav a.active {
-  border-bottom: 2px solid var(--accent);
+.site-nav a.active::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 1px;
+}
+
+@media (hover: hover) {
+  .site-nav a:hover {
+    color: var(--text-primary);
+  }
+}
+
+.site-nav a:active {
+  color: var(--accent);
 }
 
 .menu-toggle {
   display: none;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--space-1);
   background: none;
   border: none;
   cursor: pointer;
-  padding: 4px;
+  padding: var(--space-3);
+  margin: calc(-1 * var(--space-2)) 0;
+  justify-content: center;
+  align-items: center;
 }
 
 .menu-toggle span {
   display: block;
-  width: 20px;
+  width: 24px;
   height: 2px;
   background: var(--text-primary);
-  transition: transform 0.2s, opacity 0.2s;
+  border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s;
 }
 
-.menu-toggle.open span:nth-child(1) {
-  transform: rotate(45deg) translate(4px, 4px);
+.menu-toggle--open span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
 }
 
-.menu-toggle.open span:nth-child(2) {
+.menu-toggle--open span:nth-child(2) {
   opacity: 0;
 }
 
-.menu-toggle.open span:nth-child(3) {
-  transform: rotate(-45deg) translate(4px, -4px);
+.menu-toggle--open span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 640px) {
   .menu-toggle {
     display: flex;
   }
 
   .site-nav {
-    display: none;
+    display: flex;
+    flex-direction: column;
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
-    background: var(--bg-secondary);
+    background: color-mix(in srgb, var(--bg-primary) 95%, transparent);
+    backdrop-filter: blur(12px);
+    padding: var(--space-6);
+    gap: var(--space-4);
     border-bottom: 1px solid var(--border);
-    flex-direction: column;
-    padding: 1rem 2rem;
-    gap: 1rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 0.3s cubic-bezier(0, 0, 0.2, 1),
+                visibility 0.3s,
+                transform 0.3s cubic-bezier(0, 0, 0.2, 1);
+    pointer-events: none;
   }
 
-  .site-nav.open {
+  .site-nav--open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .site-nav a {
     display: flex;
+    align-items: center;
+    min-height: 44px;
   }
 }

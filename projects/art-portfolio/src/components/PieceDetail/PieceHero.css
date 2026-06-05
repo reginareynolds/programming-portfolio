@@ -24,23 +24,23 @@
 
 .hero-text {
   position: absolute;
-  bottom: 1.5rem;
-  left: 1.5rem;
-  right: 1.5rem;
+  bottom: var(--space-6);
+  left: var(--space-6);
+  right: var(--space-6);
 }
 
 .hero-text h1 {
-  font-size: 2rem;
+  font-size: var(--text-2xl);
   font-weight: 700;
-  margin-bottom: 0.25rem;
+  margin-bottom: var(--space-1);
 }
 
 .hero-text p {
-  font-size: 1rem;
+  font-size: var(--text-base);
   color: var(--text-secondary);
 }
 
 @media (max-width: 640px) {
   .hero-image { aspect-ratio: 16 / 9; }
-  .hero-text h1 { font-size: 1.5rem; }
+  .hero-text h1 { font-size: var(--text-xl); }
 }

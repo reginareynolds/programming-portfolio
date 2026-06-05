@@ -1,21 +1,21 @@
 .site-footer {
   border-top: 1px solid var(--border);
-  padding: 2rem 1.5rem;
+  padding: var(--space-8) var(--space-6);
   text-align: center;
   color: var(--text-secondary);
-  font-size: 0.85rem;
+  font-size: var(--text-sm);
 }
 
 .footer-inner {
-  max-width: 1200px;
+  max-width: var(--max-width);
   margin: 0 auto;
 }
 
 .footer-links {
   display: flex;
   justify-content: center;
-  gap: 1.5rem;
-  margin-bottom: 0.75rem;
+  gap: var(--space-6);
+  margin-bottom: var(--space-3);
 }
 
 .footer-links a {
@@ -23,6 +23,12 @@
   transition: color 0.2s;
 }
 
-.footer-links a:hover {
-  color: var(--accent);
+@media (hover: hover) {
+  .footer-links a:hover {
+    color: var(--accent);
+  }
+}
+
+.footer-links a:active {
+  color: var(--accent-hover);
 }

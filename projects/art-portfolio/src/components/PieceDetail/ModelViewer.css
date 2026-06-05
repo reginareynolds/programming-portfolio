@@ -13,14 +13,14 @@
 
 .viewer-hint {
   position: absolute;
-  bottom: 1rem;
+  bottom: var(--space-4);
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(30, 41, 59, 0.9);
+  background: color-mix(in srgb, var(--bg-card) 90%, transparent);
   color: var(--text-secondary);
-  padding: 0.4rem 1rem;
+  padding: var(--space-1) var(--space-4);
   border-radius: 999px;
-  font-size: 0.8rem;
+  font-size: var(--text-sm);
   pointer-events: none;
   animation: fade-hint 3s forwards;
 }
