@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Header.css";
 
 const sections = ["gallery", "about", "contact"];
@@ -14,6 +14,7 @@ export default function Header() {
   const scrollingRef = useRef(false);
   const scrollTimerRef = useRef(null);
 
+  const navigate = useNavigate();
   const isHome = location.pathname === "/";
 
   useEffect(() => {
@@ -81,11 +82,25 @@ export default function Header() {
     setMenuOpen(false);
   }, [location.pathname]);
 
-  const handleNavClick = (id) => {
+  const scrollToSection = (e, id) => {
+    e.preventDefault();
     setMenuOpen(false);
-    if (id) {
-      scrollingRef.current = true;
-      setActive(id);
+    scrollingRef.current = true;
+    setActive(id);
+    if (isHome) {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      window.__skipScrollToTop = true;
+      navigate("/");
+      const waitForElement = () => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+        } else {
+          requestAnimationFrame(waitForElement);
+        }
+      };
+      setTimeout(waitForElement, 50);
     }
   };
 
@@ -94,7 +109,7 @@ export default function Header() {
   return (
     <header className={`site-header${scrolled ? " site-header--scrolled" : ""}`}>
       <div className="header-inner">
-        <Link to="/" className="site-logo display-text" onClick={() => handleNavClick(null)}>
+        <Link to="/" className="site-logo display-text" onClick={() => { setMenuOpen(false); window.scrollTo({ top: 0, behavior: "smooth" }); }}>
           Regina Reynolds
           <svg className="site-logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round">
             <path d="M12 2 L22 7 L22 17 L12 22 L2 17 L2 7 Z" />
@@ -128,7 +143,7 @@ export default function Header() {
                 <a
                   href={`#${id}`}
                   className={active === id ? "active" : ""}
-                  onClick={() => handleNavClick(id)}
+                  onClick={(e) => scrollToSection(e, id)}
                 >
                   {id.charAt(0).toUpperCase() + id.slice(1)}
                 </a>
@@ -136,9 +151,9 @@ export default function Header() {
             ))
           ) : (
             <>
-              <li><Link to="/" onClick={() => handleNavClick(null)}>Gallery</Link></li>
-              <li><Link to="/#about" onClick={() => handleNavClick(null)}>About</Link></li>
-              <li><Link to="/#contact" onClick={() => handleNavClick(null)}>Contact</Link></li>
+              <li><a href="#/" onClick={(e) => { e.preventDefault(); setMenuOpen(false); navigate("/"); }}>Gallery</a></li>
+              <li><a href="#about" onClick={(e) => scrollToSection(e, "about")}>About</a></li>
+              <li><a href="#contact" onClick={(e) => scrollToSection(e, "contact")}>Contact</a></li>
             </>
           )}
           <li>

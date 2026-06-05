@@ -7,9 +7,14 @@ import "./HomePage.css";
 
 const featuredPiece = portfolio[0];
 
+function scrollTo(e, id) {
+  e.preventDefault();
+  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+}
+
 export default function HomePage() {
   return (
-    <div className="home-page">
+    <>
       <section className="home-hero">
         <HeroImage src={featuredPiece.heroImage} alt={featuredPiece.title} />
         <div className="home-hero-content">
@@ -19,23 +24,25 @@ export default function HomePage() {
             Modeling, sculpting, animation, and visualization
           </p>
           <div className="home-hero-cta">
-            <a href="#gallery" className="btn btn--primary">See My Work</a>
-            <a href="#contact" className="btn btn--outline">Get in Touch</a>
+            <a href="#gallery" className="btn btn--primary" onClick={(e) => scrollTo(e, "gallery")}>See My Work</a>
+            <a href="#contact" className="btn btn--outline" onClick={(e) => scrollTo(e, "contact")}>Get in Touch</a>
           </div>
         </div>
-        <a href="#gallery" className="home-hero-scroll" aria-label="Scroll to gallery">
+        <a href="#gallery" className="home-hero-scroll" aria-label="Scroll to gallery" onClick={(e) => scrollTo(e, "gallery")}>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="6 9 12 15 18 9" />
           </svg>
         </a>
       </section>
-      <section id="gallery" className="home-gallery">
-        <GalleryGrid pieces={portfolio} />
-      </section>
-      <section id="about">
-        <AboutSection />
-      </section>
-      <Contact />
-    </div>
+      <div className="home-page">
+        <section id="gallery" className="home-gallery">
+          <GalleryGrid pieces={portfolio} />
+        </section>
+        <section id="about">
+          <AboutSection />
+        </section>
+        <Contact />
+      </div>
+    </>
   );
 }
