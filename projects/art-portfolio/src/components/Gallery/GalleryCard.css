@@ -3,7 +3,7 @@
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
-  transition: transform 0.2s, border-color 0.2s;
+  transition: transform 0.2s, border-color 0.2s, opacity 0.2s;
   display: flex;
   flex-direction: column;
 }
