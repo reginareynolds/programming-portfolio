@@ -78,33 +78,6 @@
   padding: var(--space-1) 0;
 }
 
-/* Contact */
-.about-contact h2 {
-  font-size: var(--text-lg);
-  margin-bottom: var(--space-4);
-}
-
-.contact-links {
-  display: flex;
-  gap: var(--space-4);
-}
-
-.contact-link {
-  padding: var(--space-2) var(--space-6);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  color: var(--text-primary);
-  font-size: var(--text-sm);
-  transition: border-color 0.2s, color 0.2s;
-}
-
-@media (hover: hover) {
-  .contact-link:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-}
-
 @media (max-width: 768px) {
   .about-bio {
     grid-template-columns: 1fr;
@@ -120,13 +93,5 @@
 @media (max-width: 480px) {
   .skills-grid {
     grid-template-columns: 1fr;
-  }
-
-  .contact-links {
-    flex-direction: column;
-  }
-
-  .contact-link {
-    text-align: center;
   }
 }

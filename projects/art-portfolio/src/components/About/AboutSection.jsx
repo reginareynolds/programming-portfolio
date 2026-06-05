@@ -76,30 +76,6 @@ export default function AboutSection() {
         </div>
       </section>
 
-      <section className="about-contact">
-        <h2>Get in Touch</h2>
-        <div className="contact-links">
-          <a href="mailto:regina.reynolds.2014@gmail.com" className="contact-link">
-            Email
-          </a>
-          <a
-            href="https://linkedin.com/in/regina-c-reynolds"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="contact-link"
-          >
-            LinkedIn
-          </a>
-          <a
-            href="https://github.com/reginareynolds"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="contact-link"
-          >
-            GitHub
-          </a>
-        </div>
-      </section>
     </div>
   );
 }

@@ -90,6 +90,25 @@
   color: var(--accent);
 }
 
+.site-nav .nav-resume {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  color: var(--accent);
+}
+
+@media (hover: hover) {
+  .nav-resume:hover {
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+  }
+}
+
+.nav-resume:active {
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
 .menu-toggle {
   display: none;
   flex-direction: column;
