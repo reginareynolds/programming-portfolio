@@ -117,39 +117,42 @@ export default function Header() {
           <span />
         </button>
 
-        <nav
+        <ul
           ref={navLinksRef}
           id="site-nav"
           className={`site-nav${menuOpen ? " site-nav--open" : ""}`}
         >
           {isHome ? (
             sections.map((id) => (
-              <a
-                key={id}
-                href={`#${id}`}
-                className={active === id ? "active" : ""}
-                onClick={() => handleNavClick(id)}
-              >
-                {id.charAt(0).toUpperCase() + id.slice(1)}
-              </a>
+              <li key={id}>
+                <a
+                  href={`#${id}`}
+                  className={active === id ? "active" : ""}
+                  onClick={() => handleNavClick(id)}
+                >
+                  {id.charAt(0).toUpperCase() + id.slice(1)}
+                </a>
+              </li>
             ))
           ) : (
             <>
-              <Link to="/" onClick={() => handleNavClick(null)}>Gallery</Link>
-              <Link to="/#about" onClick={() => handleNavClick(null)}>About</Link>
-              <Link to="/#contact" onClick={() => handleNavClick(null)}>Contact</Link>
+              <li><Link to="/" onClick={() => handleNavClick(null)}>Gallery</Link></li>
+              <li><Link to="/#about" onClick={() => handleNavClick(null)}>About</Link></li>
+              <li><Link to="/#contact" onClick={() => handleNavClick(null)}>Contact</Link></li>
             </>
           )}
-          <a
-            href={resumePath}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="nav-resume"
-            onClick={() => setMenuOpen(false)}
-          >
-            Resume
-          </a>
-        </nav>
+          <li>
+            <a
+              href={resumePath}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="nav-resume"
+              onClick={() => setMenuOpen(false)}
+            >
+              Resume
+            </a>
+          </li>
+        </ul>
       </div>
     </header>
   );
