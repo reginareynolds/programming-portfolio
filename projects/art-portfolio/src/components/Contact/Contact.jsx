@@ -3,7 +3,7 @@ import "./Contact.css";
 
 export default function Contact() {
   return (
-    <section id="contact" className="contact-section">
+    <section id="contact" className="section">
       <SectionHeading>Let's Connect</SectionHeading>
       <p className="contact-subtitle">
         Based in North Carolina. Currently open to remote and hybrid opportunities.

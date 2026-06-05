@@ -1,12 +1,1 @@
-.site-footer {
-  border-top: 1px solid var(--border);
-  padding: var(--space-8) var(--space-6);
-  text-align: center;
-  color: var(--text-secondary);
-  font-size: var(--text-sm);
-}
-
-.footer-inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-}
+/* Footer styles defined in index.css */

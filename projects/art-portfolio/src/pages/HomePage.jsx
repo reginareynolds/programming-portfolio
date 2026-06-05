@@ -35,16 +35,14 @@ export default function HomePage() {
           </svg>
         </a>
       </section>
-      <div className="home-page">
-        <section id="gallery" className="home-gallery">
-          <SectionHeading>Gallery</SectionHeading>
-          <GalleryGrid pieces={portfolio} />
-        </section>
-        <section id="about">
-          <AboutSection />
-        </section>
-        <Contact />
-      </div>
+      <section id="gallery" className="section home-gallery">
+        <SectionHeading>Gallery</SectionHeading>
+        <GalleryGrid pieces={portfolio} />
+      </section>
+      <section id="about" className="section">
+        <AboutSection />
+      </section>
+      <Contact />
     </>
   );
 }
