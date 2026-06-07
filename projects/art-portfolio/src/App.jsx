@@ -1,6 +1,5 @@
 import { createHashRouter, Outlet } from "react-router-dom";
 import Header from "./components/Layout/Header.jsx";
-import Footer from "./components/Layout/Footer.jsx";
 import ScrollToTop from "./components/Shared/ScrollToTop.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import PiecePage from "./pages/PiecePage.jsx";
@@ -15,7 +14,9 @@ function Layout() {
       <main id="main-content">
         <Outlet />
       </main>
-      <Footer />
+      <footer className="footer">
+        <p>&copy; 2026 Regina Reynolds. 3D Artist &amp; Software Engineer.</p>
+      </footer>
     </>
   );
 }
