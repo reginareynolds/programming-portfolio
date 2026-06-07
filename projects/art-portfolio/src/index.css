@@ -51,9 +51,9 @@ html {
 }
 
 body {
+  font-family: var(--font-body);
   background: var(--bg-primary);
   color: var(--text-primary);
-  font-family: var(--font-body);
   font-size: var(--text-base);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -99,6 +99,7 @@ img {
   left: var(--space-4);
 }
 
+/* Space Grotesk is reserved for section-level landmarks only — all other headings use Inter */
 .display-text {
   color: var(--accent);
   font-family: var(--font-display);
