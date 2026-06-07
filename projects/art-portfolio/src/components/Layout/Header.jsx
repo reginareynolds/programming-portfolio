@@ -107,7 +107,7 @@ function Header() {
   const resumePath = import.meta.env.BASE_URL + "Regina_Reynolds_Resume.pdf";
 
   return (
-    <header className={`nav${scrolled ? " nav--scrolled" : ""}`}>
+    <nav className={`nav${scrolled ? " nav--scrolled" : ""}`}>
       <div className="nav-inner">
         <Link to="/" className="nav-logo display-text" onClick={() => { setMenuOpen(false); window.scrollTo({ top: 0, behavior: "smooth" }); }}>
           Regina Reynolds
@@ -169,7 +169,7 @@ function Header() {
           </li>
         </ul>
       </div>
-    </header>
+    </nav>
   );
 }
 
