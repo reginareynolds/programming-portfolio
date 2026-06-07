@@ -1,8 +1,8 @@
-import SectionHeading from "../Shared/SectionHeading";
-import useScrollReveal from "../../useScrollReveal";
+import SectionHeading from "../Shared/SectionHeading.jsx";
+import useScrollReveal from "../../useScrollReveal.js";
 import "./Contact.css";
 
-export default function Contact() {
+function Contact() {
   const ref = useScrollReveal();
 
   return (
@@ -45,3 +45,5 @@ export default function Contact() {
     </section>
   );
 }
+
+export default Contact;

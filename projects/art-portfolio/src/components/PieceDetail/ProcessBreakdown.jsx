@@ -1,7 +1,7 @@
-import PlaceholderImage from "../Shared/PlaceholderImage";
+import PlaceholderImage from "../Shared/PlaceholderImage.jsx";
 import "./ProcessBreakdown.css";
 
-export default function ProcessBreakdown({ steps }) {
+function ProcessBreakdown({ steps }) {
   return (
     <div className="process-breakdown">
       {steps.map((step, i) => (
@@ -18,3 +18,5 @@ export default function ProcessBreakdown({ steps }) {
     </div>
   );
 }
+
+export default ProcessBreakdown;

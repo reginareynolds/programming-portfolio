@@ -1,10 +1,10 @@
-import GalleryGrid from "../components/Gallery/GalleryGrid";
-import HeroImage from "../components/Hero/HeroModel";
-import SectionHeading from "../components/Shared/SectionHeading";
-import AboutSection from "../components/About/AboutSection";
-import Contact from "../components/Contact/Contact";
-import useScrollReveal from "../useScrollReveal";
-import { portfolio } from "../data/portfolio";
+import GalleryGrid from "../components/Gallery/GalleryGrid.jsx";
+import HeroImage from "../components/Hero/HeroModel.jsx";
+import SectionHeading from "../components/Shared/SectionHeading.jsx";
+import AboutSection from "../components/About/AboutSection.jsx";
+import Contact from "../components/Contact/Contact.jsx";
+import useScrollReveal from "../useScrollReveal.js";
+import { portfolio } from "../data/portfolio.js";
 import "./HomePage.css";
 
 const featuredPiece = portfolio[0];
@@ -14,7 +14,7 @@ function scrollTo(e, id) {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 }
 
-export default function HomePage() {
+function HomePage() {
   const galleryRef = useScrollReveal();
 
   return (
@@ -49,3 +49,5 @@ export default function HomePage() {
     </>
   );
 }
+
+export default HomePage;

@@ -1,8 +1,8 @@
 import { useState, useRef } from "react";
-import GalleryCard from "./GalleryCard";
+import GalleryCard from "./GalleryCard.jsx";
 import "./GalleryGrid.css";
 
-export default function GalleryGrid({ pieces }) {
+function GalleryGrid({ pieces }) {
   const [filterSkill, setFilterSkill] = useState(null);
   const hasFiltered = useRef(false);
 
@@ -36,3 +36,5 @@ export default function GalleryGrid({ pieces }) {
     </>
   );
 }
+
+export default GalleryGrid;

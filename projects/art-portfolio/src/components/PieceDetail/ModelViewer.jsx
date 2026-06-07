@@ -1,10 +1,10 @@
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Environment, Grid } from "@react-three/drei";
 import { useState } from "react";
-import ModelLoader from "../Shared/ModelLoader";
+import ModelLoader from "../Shared/ModelLoader.jsx";
 import "./ModelViewer.css";
 
-export default function ModelViewer({ modelPath }) {
+function ModelViewer({ modelPath }) {
   const [interacted, setInteracted] = useState(false);
 
   return (
@@ -48,3 +48,5 @@ export default function ModelViewer({ modelPath }) {
     </div>
   );
 }
+
+export default ModelViewer;

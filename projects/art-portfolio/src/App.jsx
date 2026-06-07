@@ -1,10 +1,10 @@
 import { createHashRouter, Outlet } from "react-router-dom";
-import Header from "./components/Layout/Header";
-import Footer from "./components/Layout/Footer";
-import ScrollToTop from "./components/Shared/ScrollToTop";
-import HomePage from "./pages/HomePage";
-import PiecePage from "./pages/PiecePage";
-import NotFoundPage from "./pages/NotFoundPage";
+import Header from "./components/Layout/Header.jsx";
+import Footer from "./components/Layout/Footer.jsx";
+import ScrollToTop from "./components/Shared/ScrollToTop.jsx";
+import HomePage from "./pages/HomePage.jsx";
+import PiecePage from "./pages/PiecePage.jsx";
+import NotFoundPage from "./pages/NotFoundPage.jsx";
 
 function Layout() {
   return (

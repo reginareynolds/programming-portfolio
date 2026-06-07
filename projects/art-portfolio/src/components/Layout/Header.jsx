@@ -4,7 +4,7 @@ import "./Header.css";
 
 const sections = ["gallery", "about", "contact"];
 
-export default function Header() {
+function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("");
@@ -172,3 +172,5 @@ export default function Header() {
     </header>
   );
 }
+
+export default Header;

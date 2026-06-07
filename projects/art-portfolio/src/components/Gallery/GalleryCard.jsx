@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import PlaceholderImage from "../Shared/PlaceholderImage";
-import TechBadge from "../Shared/TechBadge";
+import PlaceholderImage from "../Shared/PlaceholderImage.jsx";
+import TechBadge from "../Shared/TechBadge.jsx";
 import "./GalleryCard.css";
 
-export default function GalleryCard({ piece, dimmed, activeSkill, onBadgeClick, skipReveal }) {
+function GalleryCard({ piece, dimmed, activeSkill, onBadgeClick, skipReveal }) {
   return (
     <Link to={`/piece/${piece.id}`} className={`gallery-card${skipReveal ? "" : " reveal reveal-stagger"}${dimmed ? " gallery-card--dimmed" : ""}`}>
       <div className="card-image">
@@ -28,3 +28,5 @@ export default function GalleryCard({ piece, dimmed, activeSkill, onBadgeClick, 
     </Link>
   );
 }
+
+export default GalleryCard;

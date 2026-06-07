@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./PlaceholderImage.css";
 
-export default function PlaceholderImage({ src, alt, className = "" }) {
+function PlaceholderImage({ src, alt, className = "" }) {
   const [failed, setFailed] = useState(false);
 
   if (failed || !src) {
@@ -30,3 +30,5 @@ export default function PlaceholderImage({ src, alt, className = "" }) {
     />
   );
 }
+
+export default PlaceholderImage;

@@ -1,6 +1,6 @@
-import PlaceholderImage from "../Shared/PlaceholderImage";
-import SectionHeading from "../Shared/SectionHeading";
-import useScrollReveal from "../../useScrollReveal";
+import PlaceholderImage from "../Shared/PlaceholderImage.jsx";
+import SectionHeading from "../Shared/SectionHeading.jsx";
+import useScrollReveal from "../../useScrollReveal.js";
 import "./AboutSection.css";
 
 const SKILL_GROUPS = [
@@ -30,7 +30,7 @@ const SKILL_GROUPS = [
   },
 ];
 
-export default function AboutSection() {
+function AboutSection() {
   const ref = useScrollReveal();
 
   return (
@@ -84,3 +84,5 @@ export default function AboutSection() {
     </div>
   );
 }
+
+export default AboutSection;

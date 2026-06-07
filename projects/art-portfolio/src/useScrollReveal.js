@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-export default function useScrollReveal(options = {}) {
+function useScrollReveal(options = {}) {
   const ref = useRef(null);
 
   useEffect(() => {
@@ -36,3 +36,5 @@ export default function useScrollReveal(options = {}) {
 
   return ref;
 }
+
+export default useScrollReveal;

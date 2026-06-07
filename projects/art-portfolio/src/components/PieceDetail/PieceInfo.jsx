@@ -1,7 +1,7 @@
-import TechBadge from "../Shared/TechBadge";
+import TechBadge from "../Shared/TechBadge.jsx";
 import "./PieceInfo.css";
 
-export default function PieceInfo({ piece }) {
+function PieceInfo({ piece }) {
   return (
     <div className="piece-info">
       <div className="info-description">
@@ -51,3 +51,5 @@ export default function PieceInfo({ piece }) {
     </div>
   );
 }
+
+export default PieceInfo;

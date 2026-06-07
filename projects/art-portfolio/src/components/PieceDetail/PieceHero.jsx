@@ -1,7 +1,7 @@
-import PlaceholderImage from "../Shared/PlaceholderImage";
+import PlaceholderImage from "../Shared/PlaceholderImage.jsx";
 import "./PieceHero.css";
 
-export default function PieceHero({ piece }) {
+function PieceHero({ piece }) {
   return (
     <div className="piece-hero">
       <div className="hero-image">
@@ -15,3 +15,5 @@ export default function PieceHero({ piece }) {
     </div>
   );
 }
+
+export default PieceHero;

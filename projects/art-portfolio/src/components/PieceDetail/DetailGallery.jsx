@@ -1,7 +1,7 @@
-import PlaceholderImage from "../Shared/PlaceholderImage";
+import PlaceholderImage from "../Shared/PlaceholderImage.jsx";
 import "./DetailGallery.css";
 
-export default function DetailGallery({ images }) {
+function DetailGallery({ images }) {
   return (
     <div className="detail-gallery">
       {images.map((img, i) => (
@@ -15,3 +15,5 @@ export default function DetailGallery({ images }) {
     </div>
   );
 }
+
+export default DetailGallery;

@@ -1,15 +1,15 @@
 import { useParams, Link } from "react-router-dom";
 import { Suspense } from "react";
-import { portfolio } from "../data/portfolio";
-import PieceHero from "../components/PieceDetail/PieceHero";
-import ModelViewer from "../components/PieceDetail/ModelViewer";
-import ProcessBreakdown from "../components/PieceDetail/ProcessBreakdown";
-import DetailGallery from "../components/PieceDetail/DetailGallery";
-import PieceInfo from "../components/PieceDetail/PieceInfo";
-import NotFoundPage from "./NotFoundPage";
+import { portfolio } from "../data/portfolio.js";
+import PieceHero from "../components/PieceDetail/PieceHero.jsx";
+import ModelViewer from "../components/PieceDetail/ModelViewer.jsx";
+import ProcessBreakdown from "../components/PieceDetail/ProcessBreakdown.jsx";
+import DetailGallery from "../components/PieceDetail/DetailGallery.jsx";
+import PieceInfo from "../components/PieceDetail/PieceInfo.jsx";
+import NotFoundPage from "./NotFoundPage.jsx";
 import "./PiecePage.css";
 
-export default function PiecePage() {
+function PiecePage() {
   const { id } = useParams();
   const piece = portfolio.find((p) => p.id === id);
 
@@ -63,3 +63,5 @@ export default function PiecePage() {
     </div>
   );
 }
+
+export default PiecePage;
