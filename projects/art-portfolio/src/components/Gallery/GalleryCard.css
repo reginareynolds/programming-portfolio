@@ -47,11 +47,11 @@
 
 .card-3d-badge {
   background: var(--accent);
-  color: white;
+  color: var(--bg-primary);
 }
 
 .card-video-badge {
-  background: var(--warning);
+  background: var(--text-secondary);
   color: var(--bg-primary);
 }
 

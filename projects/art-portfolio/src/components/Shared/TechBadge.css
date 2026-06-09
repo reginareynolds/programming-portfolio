@@ -26,5 +26,5 @@
 
 .tech-badge--active {
   background: var(--accent);
-  color: white;
+  color: var(--bg-primary);
 }
