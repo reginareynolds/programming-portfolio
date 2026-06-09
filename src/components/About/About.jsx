@@ -35,8 +35,8 @@ function About() {
 
       <h3 className="about-subtitle reveal">Technical Skills</h3>
       <div className="skills-inline">
-        {skills.map((group) => (
-          <div key={group.category} className="skill-row reveal reveal-stagger">
+        {skills.map((group, index) => (
+          <div key={group.category} className="skill-row reveal reveal-stagger" style={{ transitionDelay: `${index * 0.1}s` }}>
             <span className="skill-label">{group.category}</span>
             <span className="skill-items">{group.items.join(" · ")}</span>
           </div>
@@ -45,7 +45,7 @@ function About() {
 
       <h3 className="about-subtitle reveal">Education</h3>
       <div className="edu-timeline">
-        <div className="edu-entry reveal reveal-stagger">
+        <div className="edu-entry reveal reveal-stagger" style={{ transitionDelay: "0s" }}>
           <div className="edu-marker" />
           <div className="edu-content">
             <p className="edu-degree">M.S. IT & Management</p>
@@ -57,7 +57,7 @@ function About() {
             </p>
           </div>
         </div>
-        <div className="edu-entry reveal reveal-stagger">
+        <div className="edu-entry reveal reveal-stagger" style={{ transitionDelay: "0.1s" }}>
           <div className="edu-marker" />
           <div className="edu-content">
             <p className="edu-degree">Dual B.S.</p>

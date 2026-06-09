@@ -22,10 +22,11 @@ function GalleryGrid({ pieces }) {
         </div>
       )}
       <div className="gallery-grid">
-        {pieces.map((piece) => (
+        {pieces.map((piece, index) => (
           <GalleryCard
             key={piece.id}
             piece={piece}
+            index={index}
             dimmed={filterSkill && !piece.tools.includes(filterSkill)}
             activeSkill={filterSkill}
             onBadgeClick={handleBadgeClick}

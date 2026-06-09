@@ -3,9 +3,9 @@ import PlaceholderImage from "../Shared/PlaceholderImage.jsx";
 import TechBadge from "../Shared/TechBadge.jsx";
 import "./GalleryCard.css";
 
-function GalleryCard({ piece, dimmed, activeSkill, onBadgeClick, skipReveal }) {
+function GalleryCard({ piece, index, dimmed, activeSkill, onBadgeClick, skipReveal }) {
   return (
-    <Link to={`/piece/${piece.id}`} className={`gallery-card${skipReveal ? "" : " reveal reveal-stagger"}${dimmed ? " gallery-card--dimmed" : ""}`}>
+    <Link to={`/piece/${piece.id}`} className={`gallery-card${skipReveal ? "" : " reveal reveal-stagger"}${dimmed ? " gallery-card--dimmed" : ""}`} style={skipReveal ? undefined : { transitionDelay: `${index * 0.1}s` }}>
       <div className="card-image">
         <PlaceholderImage src={piece.thumbnail} alt={piece.title} className="card-img" />
         {piece.hasModel && <span className="card-3d-badge">3D</span>}

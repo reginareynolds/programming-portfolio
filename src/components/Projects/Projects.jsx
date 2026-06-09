@@ -27,10 +27,11 @@ function Projects() {
         </div>
       )}
       <div className="projects-grid">
-        {projects.map((project) => (
+        {projects.map((project, index) => (
           <ProjectCard
             key={project.id}
             project={project}
+            index={index}
             dimmed={filterSkill && !project.stack.includes(filterSkill)}
             activeSkill={filterSkill}
             onBadgeClick={handleBadgeClick}

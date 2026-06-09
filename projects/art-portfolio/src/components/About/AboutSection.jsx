@@ -68,8 +68,8 @@ function AboutSection() {
       <section className="about-skills">
         <h3 className="reveal">Skills & Tools</h3>
         <div className="skills-grid">
-          {SKILL_GROUPS.map((group) => (
-            <div key={group.category} className="skill-card reveal reveal-stagger">
+          {SKILL_GROUPS.map((group, index) => (
+            <div key={group.category} className="skill-card reveal reveal-stagger" style={{ transitionDelay: `${index * 0.1}s` }}>
               <h3>{group.category}</h3>
               <ul>
                 {group.tools.map((tool) => (
