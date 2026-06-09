@@ -1,14 +1,25 @@
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Environment, Grid } from "@react-three/drei";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import ModelLoader from "../Shared/ModelLoader.jsx";
 import "./ModelViewer.css";
 
+function LoadingOverlay() {
+  return (
+    <div className="viewer-loading">
+      <div className="viewer-spinner" />
+      <span>Loading model…</span>
+    </div>
+  );
+}
+
 function ModelViewer({ modelPath }) {
   const [interacted, setInteracted] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   return (
     <div className="model-viewer" onPointerDown={() => setInteracted(true)}>
+      {!loaded && <LoadingOverlay />}
       <Canvas camera={{ position: [3, 2, 3], fov: 50 }}>
         <ambientLight intensity={0.4} />
         <directionalLight position={[5, 5, 5]} intensity={0.8} />
@@ -16,7 +27,9 @@ function ModelViewer({ modelPath }) {
 
         <Environment preset="studio" background={false} />
 
-        <ModelLoader url={modelPath} />
+        <Suspense fallback={null}>
+          <ModelLoader url={modelPath} onLoad={() => setLoaded(true)} />
+        </Suspense>
 
         <Grid
           args={[10, 10]}
