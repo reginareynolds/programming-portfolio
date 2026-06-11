@@ -34,7 +34,7 @@
 .hero-name {
   font-size: clamp(var(--text-2xl), 5vw + 1rem, var(--text-4xl));
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.25;
   padding-bottom: 0.15em;
   margin-bottom: var(--space-3);
   overflow: visible;
