@@ -87,7 +87,7 @@ function Hero() {
             onMouseEnter={hasHover ? onPrimaryEnter : undefined}
             onMouseLeave={hasHover ? onCtaLeave : undefined}
           >
-            See My Work
+            View Projects
           </a>
           <a
             href="#contact"

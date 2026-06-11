@@ -28,8 +28,8 @@ function HomePage() {
             Modeling, sculpting, animation, and visualization
           </p>
           <div className="home-hero-cta">
-            <a href="#gallery" className="btn btn--primary" onClick={(e) => scrollTo(e, "gallery")}>See My Work</a>
-            <a href="#contact" className="btn btn--outline" onClick={(e) => scrollTo(e, "contact")}>Get in Touch</a>
+            <a href="#gallery" className="btn btn--primary" onClick={(e) => scrollTo(e, "gallery")}>Browse Gallery</a>
+            <a href="#contact" className="btn btn--outline" onClick={(e) => scrollTo(e, "contact")}>Say Hi!</a>
           </div>
         </div>
         <a href="#gallery" className="home-hero-scroll" aria-label="Scroll to gallery" onClick={(e) => scrollTo(e, "gallery")}>
