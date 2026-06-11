@@ -4,7 +4,7 @@ import "./ProjectCard.css";
 
 const gradientAngles = [135, 160, 200, 180, 145];
 
-function ProjectCard({ project, index, dimmed, activeSkill, onBadgeClick, skipReveal }) {
+function ProjectCard({ project, row, columns, dimmed, activeSkill, onBadgeClick, skipReveal }) {
   const idx = ["ai-dashboard", "3d-model-viewer", "rest-api-microservice", "iot-data-simulator", "art-portfolio"].indexOf(project.id);
   const initials = project.title
     .split(" ")
@@ -17,7 +17,7 @@ function ProjectCard({ project, index, dimmed, activeSkill, onBadgeClick, skipRe
   const isClamped = project.description.length > maxChars;
 
   return (
-    <div className={`project-card${skipReveal ? "" : " reveal reveal-stagger"}${dimmed ? " project-card--dimmed" : ""}`} style={skipReveal ? undefined : { transitionDelay: `${index * 0.1}s` }}>
+    <div className={`project-card${skipReveal ? "" : " reveal reveal-stagger"}${dimmed ? " project-card--dimmed" : ""}`} style={skipReveal ? undefined : { transitionDelay: `${columns > 1 ? Math.min(row, 3) * 0.1 : 0}s` }}>
       <div className="project-card-thumb">
         {project.thumbnail ? (
           <img

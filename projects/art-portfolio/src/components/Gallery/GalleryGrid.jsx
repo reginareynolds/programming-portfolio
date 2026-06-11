@@ -1,10 +1,12 @@
 import { useState, useRef } from "react";
 import GalleryCard from "./GalleryCard.jsx";
+import useGridColumns from "../../useGridColumns.js";
 import "./GalleryGrid.css";
 
 function GalleryGrid({ pieces }) {
   const [filterSkill, setFilterSkill] = useState(null);
   const hasFiltered = useRef(false);
+  const [gridRef, columns] = useGridColumns();
 
   function handleBadgeClick(skill) {
     hasFiltered.current = true;
@@ -21,12 +23,13 @@ function GalleryGrid({ pieces }) {
           </button>
         </div>
       )}
-      <div className="gallery-grid">
+      <div className="gallery-grid" ref={gridRef}>
         {pieces.map((piece, index) => (
           <GalleryCard
             key={piece.id}
             piece={piece}
-            index={index}
+            row={Math.floor(index / columns)}
+            columns={columns}
             dimmed={filterSkill && !piece.tools.includes(filterSkill)}
             activeSkill={filterSkill}
             onBadgeClick={handleBadgeClick}
