@@ -118,7 +118,7 @@
   z-index: 1;
   color: var(--text-secondary);
   opacity: 0;
-  animation: hero-scroll-fade 1s 2s ease forwards, hero-scroll-bounce 2s 3s cubic-bezier(0, 0, 0.2, 1) infinite;
+  animation: hero-scroll-fade 1s 2s ease forwards;
 }
 
 @media (hover: hover) {
@@ -129,10 +129,5 @@
 
 @keyframes hero-scroll-fade {
   to { opacity: 0.6; }
-}
-
-@keyframes hero-scroll-bounce {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(6px); }
 }
 
