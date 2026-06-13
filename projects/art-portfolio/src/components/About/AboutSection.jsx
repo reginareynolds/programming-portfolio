@@ -68,7 +68,7 @@ function AboutSection() {
       <h3 className="about-subtitle reveal">Skills & Tools</h3>
       <div className="skills-inline">
         {SKILL_GROUPS.map((group, index) => (
-          <div key={group.category} className="skill-row reveal reveal-stagger" style={{ transitionDelay: `${index * 0.1}s` }}>
+          <div key={group.category} className="skill-row reveal">
             <span className="skill-label">{group.category}</span>
             <span className="skill-items">{group.tools.join(" · ")}</span>
           </div>

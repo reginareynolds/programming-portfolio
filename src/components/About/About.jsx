@@ -36,7 +36,7 @@ function About() {
       <h3 className="about-subtitle reveal">Technical Skills</h3>
       <div className="skills-inline">
         {skills.map((group, index) => (
-          <div key={group.category} className="skill-row reveal reveal-stagger" style={{ transitionDelay: `${index * 0.1}s` }}>
+          <div key={group.category} className="skill-row reveal">
             <span className="skill-label">{group.category}</span>
             <span className="skill-items">{group.items.join(" · ")}</span>
           </div>
