@@ -32,6 +32,10 @@
   }
 }
 
+.filter-pill button:active {
+  color: var(--accent);
+}
+
 .gallery-card--dimmed {
   opacity: 0.25;
 }
