@@ -14,6 +14,10 @@
   }
 }
 
+.gallery-card:active {
+  transform: scale(0.98);
+}
+
 .card-image {
   position: relative;
   aspect-ratio: 16 / 10;
