@@ -9,6 +9,7 @@
 
 .model-viewer canvas {
   display: block;
+  background: var(--bg-card);
 }
 
 .viewer-hint {
