@@ -22,7 +22,7 @@ const SKILL_GROUPS = [
   },
   {
     category: "AR / VR",
-    tools: ["Unity", "Unreal Engine", "Vuforia"],
+    tools: ["Unity", "Unreal Engine", "Vuforia", "ThingWorx"],
   },
   {
     category: "Design",
@@ -65,21 +65,15 @@ function AboutSection() {
         </div>
       </section>
 
-      <section className="about-skills">
-        <h3 className="reveal">Skills & Tools</h3>
-        <div className="skills-grid">
-          {SKILL_GROUPS.map((group, index) => (
-            <div key={group.category} className="skill-card reveal reveal-stagger" style={{ transitionDelay: `${index * 0.1}s` }}>
-              <h3>{group.category}</h3>
-              <ul>
-                {group.tools.map((tool) => (
-                  <li key={tool}>{tool}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </section>
+      <h3 className="about-subtitle reveal">Skills & Tools</h3>
+      <div className="skills-inline">
+        {SKILL_GROUPS.map((group, index) => (
+          <div key={group.category} className="skill-row reveal reveal-stagger" style={{ transitionDelay: `${index * 0.1}s` }}>
+            <span className="skill-label">{group.category}</span>
+            <span className="skill-items">{group.tools.join(" · ")}</span>
+          </div>
+        ))}
+      </div>
 
     </div>
   );
