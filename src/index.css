@@ -5,8 +5,8 @@
   --border: #2f3b52;
   --text-primary: #edf1f8;
   --text-secondary: #8f9db4;
-  --accent: #6366f1;
-  --accent-hover: #818cf8;
+  --accent: #7578f5;
+  --accent-hover: #9094f8;
   --radius: 8px;
   --max-width: 1200px;
 
@@ -80,7 +80,7 @@ img {
   z-index: 100;
   padding: var(--space-2) var(--space-4);
   background: var(--accent);
-  color: #fff;
+  color: var(--text-primary);
   border-radius: var(--radius);
   font-size: var(--text-sm);
   font-weight: 500;
