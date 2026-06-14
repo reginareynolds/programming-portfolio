@@ -45,7 +45,7 @@ function AboutSection() {
           />
         </div>
         <div className="bio-text">
-          <h1>Regina Reynolds</h1>
+          <h2 className="bio-name">Regina Reynolds</h2>
           <p>
             3D artist and software engineer with 8+ years of experience bridging
             the gap between technical engineering and creative visualization.

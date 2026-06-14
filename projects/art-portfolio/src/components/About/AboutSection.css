@@ -22,7 +22,7 @@
   object-fit: cover;
 }
 
-.bio-text h1 {
+.bio-name {
   font-size: var(--text-2xl);
   font-family: var(--font-display);
   color: var(--accent);
