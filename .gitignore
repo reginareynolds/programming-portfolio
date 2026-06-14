@@ -40,12 +40,16 @@ Thumbs.db
 .coverage
 htmlcov/
 .pytest_cache/
+test-results/
+tests/
+playwright.config.js
 
 # User data / uploads
 uploads/
 **/uploads/
 **/data/
 !/src/data/
+!projects/art-portfolio/src/data/
 
 # Docker
 *.log
