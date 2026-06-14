@@ -114,6 +114,19 @@ img {
   font-size: var(--text-sm);
 }
 
+.footer-link {
+  display: inline-block;
+  margin-top: var(--space-2);
+  color: var(--text-secondary);
+  transition: color 0.2s ease;
+}
+
+@media (hover: hover) {
+  .footer-link:hover {
+    color: var(--accent);
+  }
+}
+
 @media (max-width: 640px) {
   .section {
     padding: var(--space-12) var(--space-4);
