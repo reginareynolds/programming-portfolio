@@ -102,10 +102,10 @@ export const portfolio = [
   },
   {
     id: "environment-diorama",
-    title: "Cyberpunk Alley Diorama",
+    title: "Subway Tunnel Diorama",
     subtitle: "Environment Art",
     description:
-      "A detailed cyberpunk-themed alley diorama built for real-time rendering. Combines modular architecture pieces, prop modeling, and atmospheric lighting to create an immersive scene. Demonstrates environment composition, mood lighting, and asset reuse.",
+      "A detailed subway tunnel diorama built for real-time rendering. Combines modular architecture pieces, prop modeling, and atmospheric lighting to create an underground urban scene. Demonstrates environment composition, mood lighting, and asset reuse across tiled structural elements.",
     category: "Environment",
     tools: ["Blender", "Unreal Engine", "Substance Painter"],
     role: "Environment Artist",
@@ -121,7 +121,7 @@ export const portfolio = [
       { src: "/images/pieces/environment-diorama/process-03-lighting.jpg", label: "Lighting" },
       { src: "/images/pieces/environment-diorama/process-04-final.jpg", label: "Final" },
     ],
-    tags: ["Environment", "Real-Time", "Sci-Fi"],
+    tags: ["Environment", "Real-Time", "Urban"],
   },
   {
     id: "mechanical-animation",
