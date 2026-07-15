@@ -1,8 +1,9 @@
 import { useParams, Link } from "react-router-dom";
-import { Suspense, useEffect } from "react";
+import { Suspense, useEffect, lazy } from "react";
 import { portfolio } from "../data/portfolio.js";
 import PieceHero from "../components/PieceDetail/PieceHero.jsx";
-import ModelViewer from "../components/PieceDetail/ModelViewer.jsx";
+
+const ModelViewer = lazy(() => import("../components/PieceDetail/ModelViewer.jsx"));
 import ProcessBreakdown from "../components/PieceDetail/ProcessBreakdown.jsx";
 import DetailGallery from "../components/PieceDetail/DetailGallery.jsx";
 import PieceInfo from "../components/PieceDetail/PieceInfo.jsx";
