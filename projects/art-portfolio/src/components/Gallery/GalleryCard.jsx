@@ -7,7 +7,7 @@ function GalleryCard({ piece, row, columns, dimmed, activeSkill, onBadgeClick, s
   return (
     <div className={`gallery-card${skipReveal ? "" : " reveal reveal-stagger"}${dimmed ? " gallery-card--dimmed" : ""}`} style={skipReveal ? undefined : { transitionDelay: `${columns > 1 ? Math.min(row, 3) * 0.1 : 0}s` }}>
       <div className="card-image">
-        <PlaceholderImage src={piece.thumbnail} alt={piece.title} className="card-img" />
+        <PlaceholderImage src={piece.thumbnail} alt={`${piece.title} — ${piece.subtitle}`} className="card-img" />
         {piece.hasModel && <span className="card-3d-badge">3D</span>}
         {piece.videoPath && <span className="card-video-badge">Video</span>}
       </div>
