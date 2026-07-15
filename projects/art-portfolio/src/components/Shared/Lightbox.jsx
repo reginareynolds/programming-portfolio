@@ -2,22 +2,47 @@ import { useEffect, useRef } from "react";
 import "./Lightbox.css";
 
 function Lightbox({ images, index, onClose, onNavigate }) {
+  const containerRef = useRef(null);
   const closeRef = useRef(null);
   const image = images[index];
 
+  // On open: lock scroll, move focus in; on close: restore both
   useEffect(() => {
+    const previouslyFocused = document.activeElement;
+    document.body.style.overflow = "hidden";
+    closeRef.current?.focus();
+    return () => {
+      document.body.style.overflow = "";
+      if (previouslyFocused instanceof HTMLElement) previouslyFocused.focus();
+    };
+  }, []);
+
+  useEffect(() => {
+    // If the focused nav button unmounted (first/last image), recover focus
+    if (containerRef.current && !containerRef.current.contains(document.activeElement)) {
+      closeRef.current?.focus();
+    }
+
     function handleKey(e) {
       if (e.key === "Escape") onClose();
       if (e.key === "ArrowLeft" && index > 0) onNavigate(index - 1);
       if (e.key === "ArrowRight" && index < images.length - 1) onNavigate(index + 1);
+      if (e.key === "Tab") {
+        const focusables = containerRef.current?.querySelectorAll("button");
+        if (!focusables?.length) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     }
     document.addEventListener("keydown", handleKey);
-    document.body.style.overflow = "hidden";
-    closeRef.current?.focus();
-    return () => {
-      document.removeEventListener("keydown", handleKey);
-      document.body.style.overflow = "";
-    };
+    return () => document.removeEventListener("keydown", handleKey);
   }, [index, images.length, onClose, onNavigate]);
 
   if (!image) return null;
@@ -26,6 +51,7 @@ function Lightbox({ images, index, onClose, onNavigate }) {
 
   return (
     <div
+      ref={containerRef}
       className="lightbox"
       role="dialog"
       aria-modal="true"

@@ -10,7 +10,7 @@ function NotFoundPage() {
     }}>
       <h1 style={{ fontSize: "var(--text-4xl)", opacity: 0.2, marginBottom: "var(--space-4)" }}>404</h1>
       <p style={{ color: "var(--text-secondary)", marginBottom: "var(--space-8)" }}>
-        This page doesn't exist.
+        This page doesn&rsquo;t exist.
       </p>
       <Link to="/" style={{ color: "var(--accent)" }}>
         &larr; Back to Gallery

@@ -13,14 +13,32 @@ function LoadingOverlay() {
   );
 }
 
+function FallbackNotice() {
+  return (
+    <div className="viewer-fallback" role="status">
+      <span>3D preview unavailable on this device.</span>
+      <span>The process images below show this model in detail.</span>
+    </div>
+  );
+}
+
 function ModelViewer({ modelPath }) {
   const [interacted, setInteracted] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const [webglFailed, setWebglFailed] = useState(false);
+
+  if (webglFailed) return <FallbackNotice />;
 
   return (
     <div className="model-viewer" onPointerDown={() => setInteracted(true)}>
       {!loaded && <LoadingOverlay />}
-      <Canvas camera={{ position: [3, 2, 3], fov: 50 }}>
+      <Canvas
+        camera={{ position: [3, 2, 3], fov: 50 }}
+        onCreated={({ gl }) => {
+          gl.domElement.addEventListener("webglcontextlost", () => setWebglFailed(true));
+        }}
+        fallback={<FallbackNotice />}
+      >
         <ambientLight intensity={0.4} />
         <directionalLight position={[5, 5, 5]} intensity={0.8} />
         <directionalLight position={[-3, 3, -3]} intensity={0.3} />
@@ -36,10 +54,10 @@ function ModelViewer({ modelPath }) {
           position={[0, -1.01, 0]}
           cellSize={0.5}
           cellThickness={0.5}
-          cellColor="#334155"
+          cellColor="#38342b"
           sectionSize={2}
           sectionThickness={1}
-          sectionColor="#475569"
+          sectionColor="#4a4437"
           fadeDistance={10}
           infiniteGrid
         />
