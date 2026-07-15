@@ -7,7 +7,7 @@ function Contact() {
 
   return (
     <section id="contact" className="section" ref={ref}>
-      <SectionHeading>Let's Connect</SectionHeading>
+      <SectionHeading>Let&rsquo;s Connect</SectionHeading>
       <p className="contact-subtitle reveal">
         Based in North Carolina. Currently open to remote and hybrid opportunities.
       </p>

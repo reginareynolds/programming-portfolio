@@ -1,5 +1,5 @@
 import { useParams, Link } from "react-router-dom";
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import { portfolio } from "../data/portfolio.js";
 import PieceHero from "../components/PieceDetail/PieceHero.jsx";
 import ModelViewer from "../components/PieceDetail/ModelViewer.jsx";
@@ -12,6 +12,14 @@ import "./PiecePage.css";
 function PiecePage() {
   const { id } = useParams();
   const piece = portfolio.find((p) => p.id === id);
+
+  useEffect(() => {
+    if (!piece) return;
+    document.title = `${piece.title} — Regina Reynolds`;
+    return () => {
+      document.title = "Regina Reynolds | 3D Art Portfolio";
+    };
+  }, [piece]);
 
   if (!piece) return <NotFoundPage />;
 

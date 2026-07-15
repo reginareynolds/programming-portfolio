@@ -12,7 +12,7 @@ function PieceInfo({ piece }) {
           <h3>Tools</h3>
           <div className="meta-tools">
             {piece.tools.map((tool) => (
-              <TechBadge key={tool} label={tool} onClick={() => {}} />
+              <TechBadge key={tool} label={tool} />
             ))}
           </div>
         </div>

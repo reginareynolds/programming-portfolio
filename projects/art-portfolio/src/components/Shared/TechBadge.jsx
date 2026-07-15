@@ -1,6 +1,10 @@
 import "./TechBadge.css";
 
 function TechBadge({ label, active, onClick }) {
+  if (!onClick) {
+    return <span className="tech-badge">{label}</span>;
+  }
+
   return (
     <button
       className={`tech-badge${active ? " tech-badge--active" : ""}`}

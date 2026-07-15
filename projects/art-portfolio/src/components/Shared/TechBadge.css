@@ -10,17 +10,20 @@
   font-weight: 500;
   white-space: nowrap;
   border: none;
-  cursor: pointer;
   transition: background 0.2s, color 0.2s, transform 0.2s;
 }
 
+button.tech-badge {
+  cursor: pointer;
+}
+
 @media (hover: hover) {
-  .tech-badge:hover {
+  button.tech-badge:hover {
     background: color-mix(in srgb, var(--accent) 30%, transparent);
   }
 }
 
-.tech-badge:active {
+button.tech-badge:active {
   transform: scale(0.97);
 }
 
