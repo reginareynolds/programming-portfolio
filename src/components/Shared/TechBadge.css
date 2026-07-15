@@ -26,5 +26,6 @@
 
 .tech-badge--active {
   background: var(--accent);
-  color: var(--text-primary);
+  /* Dark text on accent fills — white on indigo fails AA */
+  color: var(--bg-primary);
 }
