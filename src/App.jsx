@@ -18,6 +18,7 @@ function App() {
       </main>
       <footer className="footer">
         <p>&copy; 2026 Regina Reynolds. Software Engineer & 3D Artist.</p>
+        <a href="https://reginareynolds.github.io/programming-portfolio/" className="footer-link" target="_blank" rel="noopener noreferrer">3D Art Portfolio &rarr;</a>
       </footer>
       <Analytics />
     </>
