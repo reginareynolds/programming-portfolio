@@ -77,7 +77,8 @@
 
 .btn--primary {
   background: var(--accent);
-  color: var(--text-primary);
+  /* Dark text on accent fills — white on indigo fails AA (3.26:1) */
+  color: var(--bg-primary);
 }
 
 @media (hover: hover) {
@@ -118,7 +119,7 @@
   z-index: 1;
   color: var(--text-secondary);
   opacity: 0;
-  animation: hero-scroll-fade 1s 2s ease forwards;
+  animation: hero-scroll-fade 1s 2s cubic-bezier(0, 0, 0.2, 1) forwards;
 }
 
 @media (hover: hover) {

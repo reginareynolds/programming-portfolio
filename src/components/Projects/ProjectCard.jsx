@@ -22,7 +22,7 @@ function ProjectCard({ project, row, columns, dimmed, activeSkill, onBadgeClick,
         {project.thumbnail ? (
           <img
             src={project.thumbnail}
-            alt={project.title}
+            alt={`${project.title} interface screenshot`}
             className="project-card-img"
           />
         ) : (
