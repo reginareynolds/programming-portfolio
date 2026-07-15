@@ -3,7 +3,7 @@ const projects = [
     id: "ai-dashboard",
     title: "AI-Powered Dashboard",
     description:
-      "I built this full-stack analytics dashboard with natural language querying powered by LLMs to better understand the way that real data integrates with AI. Functional AI can be really powerful, but it can also be really confusing, and I wanted to demystify the whole process by working with it from end-to-end. \n\n The dashboard works by taking a user's natural language question and translating it into a SQL query that gets executed against a PostgreSQL database. The results from the database are then returned to the user and formatted into a visual demonstration where appropriate. For example, asking the demo data for the top 5 products by quantity sold returns a bar chart while asking for the product with the highest sales just returns a stylized text response. By including the option to show the SQL query that gets generated from the user input, I made it possible to take a peek at how AI is thinking about the question that you asked it.\n\nI set it up so that you can upload your own data and ask it questions, so hopefully it gives you a better understanding of how your data can practically integrate with AI and be used in the future! ",
+      "I built this full-stack analytics dashboard with natural language querying powered by LLMs to better understand the way that real data integrates with AI. Functional AI can be really powerful, but it can also be really confusing, and I wanted to demystify the whole process by working with it from end-to-end. \n\n The dashboard works by taking a user’s natural language question and translating it into a SQL query that gets executed against a PostgreSQL database. The results from the database are then returned to the user and formatted into a visual demonstration where appropriate. For example, asking the demo data for the top 5 products by quantity sold returns a bar chart while asking for the product with the highest sales just returns a stylized text response. By including the option to show the SQL query that gets generated from the user input, I made it possible to take a peek at how AI is thinking about the question that you asked it.\n\nI set it up so that you can upload your own data and ask it questions, so hopefully it gives you a better understanding of how your data can practically integrate with AI and be used in the future! ",
     type: "Full-Stack",
     stack: ["React", "Flask", "PostgreSQL", "LangChain", "Groq", "Recharts", "Docker"],
     githubUrl:
@@ -27,7 +27,7 @@ const projects = [
     id: "rest-api-microservice",
     title: "REST API Microservice",
     description:
-      "This project is my take on a full-stack task management application with a Kanban board UI. I created it to show that I can build a clean, well-structured, production-level API capable of CRUD operations, but more importantly, I wanted to demonstrate my ability to proactively identify and address potential failure points throughout the tech stack. This is because I believe that being a good engineer requires thinking beyond just features and taking into consideration potential problems BEFORE they happen. Simply being reactive to problems that arise creates compounding technical debt from the moment that a project begins. A good engineer has to be proactive about problems so that they never come up in the first place.\n\nThe backend is built using the Flask REST API, which is linked to a PostgreSQL database. It features JWT authentication with secure token handling and input validation through Marshmallow schemas to ensure the validity of submitted data and avoid database injection attacks. Rate limits on task, project, and user creation prevent users from abusing the database, and user isolation ensures data privacy. Additionally, a scheduled cron job runs automatically to regularly purge stale demo accounts and their associated data from the system. The full API surface includes auth endpoints, project CRUD, and task CRUD with filtering by status, priority, and project, plus sorting and pagination.\n\nThe React frontend includes an authentication flow and a demo mode for exploring the full UI without creating an account. The demo mode operates entirely on local state when the backend isn't available, which is an affordance for situations that require graceful degradation. When a user signs in, the frontend sends the credentials to the backend, where the credentials are verified by the server and a signed JWT is issued. This lets the user see the Kanban board. Users can only access their own data, but they can create projects, organize tasks into To Do, In Progress, and Done columns, assign priorities, and set due dates.\n\nThe whole thing is deployed with CI/CD in mind. GitHub Actions runs the test suite on every push, the API lives on Railway with a managed PostgreSQL instance, and the frontend is on Vercel. Docker Compose handles local development. ",
+      "This project is my take on a full-stack task management application with a Kanban board UI. I created it to show that I can build a clean, well-structured, production-level API capable of CRUD operations, but more importantly, I wanted to demonstrate my ability to proactively identify and address potential failure points throughout the tech stack. This is because I believe that being a good engineer requires thinking beyond just features and taking into consideration potential problems BEFORE they happen. Simply being reactive to problems that arise creates compounding technical debt from the moment that a project begins. A good engineer has to be proactive about problems so that they never come up in the first place.\n\nThe backend is built using the Flask REST API, which is linked to a PostgreSQL database. It features JWT authentication with secure token handling and input validation through Marshmallow schemas to ensure the validity of submitted data and avoid database injection attacks. Rate limits on task, project, and user creation prevent users from abusing the database, and user isolation ensures data privacy. Additionally, a scheduled cron job runs automatically to regularly purge stale demo accounts and their associated data from the system. The full API surface includes auth endpoints, project CRUD, and task CRUD with filtering by status, priority, and project, plus sorting and pagination.\n\nThe React frontend includes an authentication flow and a demo mode for exploring the full UI without creating an account. The demo mode operates entirely on local state when the backend isn’t available, which is an affordance for situations that require graceful degradation. When a user signs in, the frontend sends the credentials to the backend, where the credentials are verified by the server and a signed JWT is issued. This lets the user see the Kanban board. Users can only access their own data, but they can create projects, organize tasks into To Do, In Progress, and Done columns, assign priorities, and set due dates.\n\nThe whole thing is deployed with CI/CD in mind. GitHub Actions runs the test suite on every push, the API lives on Railway with a managed PostgreSQL instance, and the frontend is on Vercel. Docker Compose handles local development. ",
     type: "Full-Stack",
     stack: ["React", "Flask", "PostgreSQL", "JWT", "Docker", "GitHub Actions"],
     githubUrl:
@@ -39,7 +39,7 @@ const projects = [
     id: "iot-data-simulator",
     title: "IoT Data Simulator",
     description:
-      "This is a real-time sensor data simulator with WebSocket streaming and live time-series visualization dashboards. It's inspired by the OEE monitoring system that I built while working at Harpak-ULMA Packaging. \n\nIt works by simulating sensor data and streaming it to the frontend in real-time. The frontend charts the sensor data in real-time as it's received. There is also a live alert system to detect any anomalies in the received data and display any warnings or critical alerts. Just like in real life, the lines can stop and start, and the OEE for each line is recalculated every second to reflect the most up-to-date information about the line's functioning. ",
+      "This is a real-time sensor data simulator with WebSocket streaming and live time-series visualization dashboards. It’s inspired by the OEE monitoring system that I built while working at Harpak-ULMA Packaging. \n\nIt works by simulating sensor data and streaming it to the frontend in real-time. The frontend charts the sensor data in real-time as it’s received. There is also a live alert system to detect any anomalies in the received data and display any warnings or critical alerts. Just like in real life, the lines can stop and start, and the OEE for each line is recalculated every second to reflect the most up-to-date information about the line’s functioning. ",
     type: "Full-Stack",
     stack: ["React", "FastAPI", "WebSockets", "Recharts", "Docker"],
     githubUrl:
@@ -56,6 +56,30 @@ const projects = [
     stack: ["React", "Three.js", "React Three Fiber", "Vite", "GitHub Pages"],
     githubUrl:
       "https://github.com/reginareynolds/programming-portfolio/tree/master/projects/art-portfolio",
+    liveUrl: null,
+    thumbnail: null,
+    wip: true,
+  },
+  {
+    id: "mcp-server",
+    title: "MCP Server",
+    description:
+      "A Model Context Protocol server that exposes structured tools for AI agents to interact with external services. MCP is an open standard that lets AI assistants like Claude connect to data sources and tools through a unified interface — think of it as a USB-C port for AI. This project implements a custom MCP server that handles tool registration, schema validation, and request routing, demonstrating how to build the infrastructure layer that makes agentic AI workflows possible.",
+    type: "Full-Stack",
+    stack: ["TypeScript", "Node.js", "MCP SDK", "Docker"],
+    githubUrl: null,
+    liveUrl: null,
+    thumbnail: null,
+    wip: true,
+  },
+  {
+    id: "figma-plugin",
+    title: "Figma Plugin",
+    description:
+      "A Figma plugin that bridges design and development workflows. Built with the Figma Plugin API and a custom UI, it demonstrates the ability to build developer tools that integrate directly into creative workflows — the kind of tooling that creative agencies and design-forward teams rely on to stay efficient.",
+    type: "Static",
+    stack: ["TypeScript", "Figma Plugin API", "React"],
+    githubUrl: null,
     liveUrl: null,
     thumbnail: null,
     wip: true,
