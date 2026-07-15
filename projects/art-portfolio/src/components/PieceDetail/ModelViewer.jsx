@@ -1,6 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Environment, Grid } from "@react-three/drei";
-import { Suspense, useState } from "react";
+import { Suspense, useState, useRef, useEffect } from "react";
 import ModelLoader from "../Shared/ModelLoader.jsx";
 import "./ModelViewer.css";
 
@@ -26,16 +26,78 @@ function ModelViewer({ modelPath }) {
   const [interacted, setInteracted] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [webglFailed, setWebglFailed] = useState(false);
+  // Remounting the Canvas creates a fresh <canvas> element, which is the only
+  // way to get a new WebGL context after an unrestored loss (one context per
+  // canvas element, ever). Dev StrictMode teardown can strand the canvas in
+  // that state, so retry once with a clean element before giving up.
+  const [canvasKey, setCanvasKey] = useState(0);
+  const retriedRef = useRef(false);
+  const restoreTriedRef = useRef(false);
+  const containerRef = useRef(null);
+
+  function failOrRetry() {
+    if (retriedRef.current) {
+      setWebglFailed(true);
+    } else {
+      retriedRef.current = true;
+      restoreTriedRef.current = false;
+      setCanvasKey((k) => k + 1);
+    }
+  }
+
+  function checkCanvasHealth() {
+    const canvas = containerRef.current?.querySelector("canvas");
+    if (!canvas) return;
+    if (!canvas.hasAttribute("data-engine")) {
+      // three.js stamps data-engine on the canvas when the renderer
+      // initializes. Missing = renderer never came up: either WebGL is
+      // unavailable (fail over) or it's just slow (a later check recurs).
+      const scratch = document.createElement("canvas");
+      if (scratch.getContext("webgl2") || scratch.getContext("webgl")) return;
+      failOrRetry();
+      return;
+    }
+    const ctx = canvas.getContext("webgl2") || canvas.getContext("webgl");
+    if (ctx && !ctx.isContextLost()) return;
+    // Losses triggered through WEBGL_lose_context (r3f's own dev-mode
+    // teardown) are reversible in place — try that before remounting,
+    // since three.js reinitializes itself on webglcontextrestored.
+    if (ctx && !restoreTriedRef.current) {
+      restoreTriedRef.current = true;
+      try {
+        ctx.getExtension("WEBGL_lose_context")?.restoreContext();
+      } catch {
+        // Loss didn't come from the extension — not restorable this way
+      }
+      setTimeout(checkCanvasHealth, 500);
+      return;
+    }
+    failOrRetry();
+  }
+
+  // Context loss can strike before any listener attaches (dev StrictMode
+  // teardown fires it during r3f's own re-init), and when WebGL is disabled
+  // the renderer never constructs at all — so poll canvas health on a
+  // schedule instead of trusting events. A dead canvas can never get a new
+  // context, so the retry remounts the Canvas for a fresh element.
+  useEffect(() => {
+    const timers = [setTimeout(checkCanvasHealth, 1500), setTimeout(checkCanvasHealth, 4000)];
+    return () => timers.forEach(clearTimeout);
+  }, [canvasKey]);
 
   if (webglFailed) return <FallbackNotice />;
 
   return (
-    <div className="model-viewer" onPointerDown={() => setInteracted(true)}>
+    <div className="model-viewer" ref={containerRef} onPointerDown={() => setInteracted(true)}>
       {!loaded && <LoadingOverlay />}
       <Canvas
+        key={canvasKey}
         camera={{ position: [3, 2, 3], fov: 50 }}
         onCreated={({ gl }) => {
-          gl.domElement.addEventListener("webglcontextlost", () => setWebglFailed(true));
+          // Mid-session losses still get caught promptly via the event
+          gl.domElement.addEventListener("webglcontextlost", () => {
+            setTimeout(checkCanvasHealth, 1000);
+          });
         }}
         fallback={<FallbackNotice />}
       >
