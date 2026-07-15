@@ -26,6 +26,14 @@
   outline-offset: 2px;
 }
 
+/* Browsers without :has() keep a visible indicator on the link itself */
+@supports not selector(:has(*)) {
+  .card-link:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+
 @media (hover: hover) {
   .gallery-card:hover {
     border-color: var(--accent);
