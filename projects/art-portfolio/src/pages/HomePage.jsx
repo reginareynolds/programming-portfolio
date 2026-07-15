@@ -23,7 +23,7 @@ function HomePage() {
         <HeroImage src={featuredPiece.heroImage} alt={featuredPiece.title} />
         <div className="home-hero-content">
           <h1 className="home-hero-name display-text">Regina Reynolds</h1>
-          <h2 className="home-hero-title">3D Artist</h2>
+          <p className="home-hero-title">3D Artist</p>
           <p className="home-hero-tagline">
             Modeling, sculpting, animation, and visualization
           </p>

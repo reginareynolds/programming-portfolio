@@ -36,7 +36,7 @@ function PiecePage() {
         <section className="piece-section">
           <h2>Animation</h2>
           <div className="video-container">
-            <video controls loop muted playsInline>
+            <video controls loop muted playsInline poster={import.meta.env.BASE_URL + piece.heroImage.replace(/^\//, "")}>
               <source src={import.meta.env.BASE_URL + piece.videoPath.replace(/^\//, "")} type="video/mp4" />
             </video>
           </div>
@@ -46,7 +46,7 @@ function PiecePage() {
       {piece.processImages.length > 0 && (
         <section className="piece-section">
           <h2>Process</h2>
-          <ProcessBreakdown steps={piece.processImages} />
+          <ProcessBreakdown steps={piece.processImages} pieceTitle={piece.title} />
         </section>
       )}
 

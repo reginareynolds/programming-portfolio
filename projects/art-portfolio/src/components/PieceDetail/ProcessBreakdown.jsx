@@ -1,13 +1,13 @@
 import PlaceholderImage from "../Shared/PlaceholderImage.jsx";
 import "./ProcessBreakdown.css";
 
-function ProcessBreakdown({ steps }) {
+function ProcessBreakdown({ steps, pieceTitle }) {
   return (
     <div className="process-breakdown">
       {steps.map((step, i) => (
         <div key={i} className="process-step">
           <div className="step-image">
-            <PlaceholderImage src={step.src} alt={step.label} className="step-img" />
+            <PlaceholderImage src={step.src} alt={pieceTitle ? `${step.label} — ${pieceTitle}` : step.label} className="step-img" />
           </div>
           <div className="step-label">
             <span className="step-number">{i + 1}</span>
