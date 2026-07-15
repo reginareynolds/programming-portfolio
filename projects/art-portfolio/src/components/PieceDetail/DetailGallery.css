@@ -9,12 +9,23 @@
 }
 
 .detail-image {
+  display: block;
+  width: 100%;
+  padding: 0;
   aspect-ratio: 16 / 10;
   border-radius: var(--radius);
   overflow: hidden;
   background: var(--bg-card);
   border: 1px solid var(--border);
   margin-bottom: var(--space-2);
+  cursor: zoom-in;
+  transition: border-color 0.2s;
+}
+
+@media (hover: hover) {
+  .detail-image:hover {
+    border-color: var(--accent);
+  }
 }
 
 .detail-img {
