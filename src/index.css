@@ -1,17 +1,17 @@
 :root {
-  --bg-primary: #0f172a;
-  --bg-secondary: #1e293b;
-  --bg-card: #1e293b;
-  --border: #334155;
-  --text-primary: #f1f5f9;
-  --text-secondary: #94a3b8;
-  --accent: #6366f1;
-  --accent-hover: #818cf8;
+  --bg-primary: #0e1225;
+  --bg-secondary: #1a2236;
+  --bg-card: #1a2236;
+  --border: #2f3b52;
+  --text-primary: #edf1f8;
+  --text-secondary: #8f9db4;
+  --accent: #7578f5;
+  --accent-hover: #9094f8;
   --radius: 8px;
   --max-width: 1200px;
 
   --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-display: "Space Grotesk", sans-serif;
+  --font-display: "Sora", sans-serif;
 
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
@@ -80,7 +80,7 @@ img {
   z-index: 100;
   padding: var(--space-2) var(--space-4);
   background: var(--accent);
-  color: #fff;
+  color: var(--bg-primary);
   border-radius: var(--radius);
   font-size: var(--text-sm);
   font-weight: 500;
@@ -90,7 +90,7 @@ img {
   left: var(--space-4);
 }
 
-/* Space Grotesk is reserved for section-level landmarks only — all other headings use Inter */
+/* Sora is reserved for section-level landmarks only — all other headings use Inter */
 .display-text {
   color: var(--accent);
   font-family: var(--font-display);
@@ -110,6 +110,19 @@ img {
   font-size: var(--text-sm);
 }
 
+.footer-link {
+  display: inline-block;
+  margin-top: var(--space-2);
+  color: var(--text-secondary);
+  transition: color 0.2s;
+}
+
+@media (hover: hover) {
+  .footer-link:hover {
+    color: var(--accent);
+  }
+}
+
 @media (max-width: 640px) {
   .section {
     padding: var(--space-12) var(--space-4);
@@ -127,12 +140,6 @@ img {
   transform: translateY(0);
 }
 
-.reveal-stagger:nth-child(1) { transition-delay: 0s; }
-.reveal-stagger:nth-child(2) { transition-delay: 0.1s; }
-.reveal-stagger:nth-child(3) { transition-delay: 0.2s; }
-.reveal-stagger:nth-child(4) { transition-delay: 0.3s; }
-.reveal-stagger:nth-child(5) { transition-delay: 0.4s; }
-.reveal-stagger:nth-child(6) { transition-delay: 0.5s; }
 
 @media (prefers-reduced-motion: reduce) {
   *,

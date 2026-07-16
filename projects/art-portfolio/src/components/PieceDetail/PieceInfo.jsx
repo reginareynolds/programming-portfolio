@@ -1,7 +1,7 @@
-import ToolBadge from "../Shared/ToolBadge";
+import TechBadge from "../Shared/TechBadge.jsx";
 import "./PieceInfo.css";
 
-export default function PieceInfo({ piece }) {
+function PieceInfo({ piece }) {
   return (
     <div className="piece-info">
       <div className="info-description">
@@ -12,7 +12,7 @@ export default function PieceInfo({ piece }) {
           <h3>Tools</h3>
           <div className="meta-tools">
             {piece.tools.map((tool) => (
-              <ToolBadge key={tool} name={tool} />
+              <TechBadge key={tool} label={tool} />
             ))}
           </div>
         </div>
@@ -28,7 +28,28 @@ export default function PieceInfo({ piece }) {
           <h3>Category</h3>
           <p>{piece.category}</p>
         </div>
+        {piece.attribution && (
+          <div className="meta-group">
+            <h3>Attribution</h3>
+            <p>
+              {piece.attribution.url ? (
+                <a
+                  href={piece.attribution.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="attribution-link"
+                >
+                  {piece.attribution.text}
+                </a>
+              ) : (
+                piece.attribution.text
+              )}
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );
 }
+
+export default PieceInfo;

@@ -75,7 +75,7 @@ function Hero() {
       </div>
       <div className="hero-content">
         <h1 className="hero-name display-text">Regina Reynolds</h1>
-        <h2 className="hero-title">Software Engineer</h2>
+        <p className="hero-title">Software Engineer</p>
         <p className="hero-tagline">
           Building full-stack applications, AI-driven tools, and interactive 3D
           experiences.
@@ -87,7 +87,7 @@ function Hero() {
             onMouseEnter={hasHover ? onPrimaryEnter : undefined}
             onMouseLeave={hasHover ? onCtaLeave : undefined}
           >
-            See My Work
+            View Projects
           </a>
           <a
             href="#contact"

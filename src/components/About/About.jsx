@@ -11,14 +11,14 @@ function About() {
       <SectionHeading>About</SectionHeading>
       <div className="about-bio reveal">
         <p>
-          I'm a results-driven Software Engineer with 8+ years of experience in
+          I&rsquo;m a results-driven Software Engineer with 8+ years of experience in
           full-stack development, AR/VR applications, and cloud-based solutions.
           I build scalable AI-driven applications, interactive 3D experiences,
           and production-grade APIs using Python, JavaScript, and C#.
         </p>
         <p>
-          I graduated from UNCG with a Master's in IT & Management in 2026. My concentration was in 
-          Generative AI for Business. Alongside the Master's, I also received Post-Baccalaureate Certificates in 
+          I graduated from UNCG with a Master&rsquo;s in IT & Management in 2026. My concentration was in
+          Generative AI for Business. Alongside the Master&rsquo;s, I also received Post-Baccalaureate Certificates in
           Business Analytics, IT Development, and Cloud Computing. Prior to that, I did my undergrad at WPI, where
           I graduated in 2018 with a Dual B.S. in Electrical & Computer Engineering and in Interactive Media & Game Development. 
 </p>
@@ -35,8 +35,8 @@ function About() {
 
       <h3 className="about-subtitle reveal">Technical Skills</h3>
       <div className="skills-inline">
-        {skills.map((group) => (
-          <div key={group.category} className="skill-row reveal reveal-stagger">
+        {skills.map((group, index) => (
+          <div key={group.category} className="skill-row reveal">
             <span className="skill-label">{group.category}</span>
             <span className="skill-items">{group.items.join(" · ")}</span>
           </div>
@@ -45,7 +45,7 @@ function About() {
 
       <h3 className="about-subtitle reveal">Education</h3>
       <div className="edu-timeline">
-        <div className="edu-entry reveal reveal-stagger">
+        <div className="edu-entry reveal reveal-stagger" style={{ transitionDelay: "0s" }}>
           <div className="edu-marker" />
           <div className="edu-content">
             <p className="edu-degree">M.S. IT & Management</p>
@@ -57,7 +57,7 @@ function About() {
             </p>
           </div>
         </div>
-        <div className="edu-entry reveal reveal-stagger">
+        <div className="edu-entry reveal reveal-stagger" style={{ transitionDelay: "0.1s" }}>
           <div className="edu-marker" />
           <div className="edu-content">
             <p className="edu-degree">Dual B.S.</p>

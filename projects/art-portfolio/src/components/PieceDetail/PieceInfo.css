@@ -1,37 +1,52 @@
 .piece-info {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: 2rem;
+  gap: var(--space-8);
 }
 
 .info-description p {
   color: var(--text-secondary);
-  font-size: 1rem;
+  font-size: var(--text-base);
   line-height: 1.8;
 }
 
 .info-metadata {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: var(--space-4);
 }
 
 .meta-group h3 {
-  font-size: 0.7rem;
+  font-size: var(--text-xs);
   color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  margin-bottom: 0.35rem;
+  margin-bottom: var(--space-1);
 }
 
 .meta-group p {
-  font-size: 0.9rem;
+  font-size: var(--text-sm);
 }
 
 .meta-tools {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35rem;
+  gap: var(--space-1);
+}
+
+.attribution-link {
+  color: var(--accent);
+  transition: color 0.2s;
+}
+
+@media (hover: hover) {
+  .attribution-link:hover {
+    color: var(--accent-hover);
+  }
+}
+
+.attribution-link:active {
+  color: var(--text-primary);
 }
 
 @media (max-width: 768px) {

@@ -1,8 +1,8 @@
 .tech-badge {
   display: inline-flex;
   align-items: center;
-  min-height: 32px;
-  padding: var(--space-1) var(--space-2);
+  min-height: 44px;
+  padding: var(--space-1) var(--space-3);
   background: color-mix(in srgb, var(--accent) 15%, transparent);
   color: var(--accent-hover);
   border-radius: var(--radius);
@@ -26,5 +26,6 @@
 
 .tech-badge--active {
   background: var(--accent);
-  color: white;
+  /* Dark text on accent fills — white on indigo fails AA */
+  color: var(--bg-primary);
 }

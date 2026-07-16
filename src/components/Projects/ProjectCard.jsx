@@ -4,7 +4,7 @@ import "./ProjectCard.css";
 
 const gradientAngles = [135, 160, 200, 180, 145];
 
-function ProjectCard({ project, dimmed, activeSkill, onBadgeClick, skipReveal }) {
+function ProjectCard({ project, row, columns, dimmed, activeSkill, onBadgeClick, skipReveal }) {
   const idx = ["ai-dashboard", "3d-model-viewer", "rest-api-microservice", "iot-data-simulator", "art-portfolio"].indexOf(project.id);
   const initials = project.title
     .split(" ")
@@ -17,19 +17,19 @@ function ProjectCard({ project, dimmed, activeSkill, onBadgeClick, skipReveal })
   const isClamped = project.description.length > maxChars;
 
   return (
-    <div className={`project-card${skipReveal ? "" : " reveal reveal-stagger"}${dimmed ? " project-card--dimmed" : ""}`}>
+    <div className={`project-card${skipReveal ? "" : " reveal reveal-stagger"}${dimmed ? " project-card--dimmed" : ""}`} style={skipReveal ? undefined : { transitionDelay: `${columns > 1 ? Math.min(row, 3) * 0.1 : 0}s` }}>
       <div className="project-card-thumb">
         {project.thumbnail ? (
           <img
             src={project.thumbnail}
-            alt={project.title}
+            alt={`${project.title} interface screenshot`}
             className="project-card-img"
           />
         ) : (
           <div
             className="project-card-placeholder"
             style={{
-              background: `linear-gradient(${gradientAngles[idx] || 135}deg, rgba(99,102,241,0.3), rgba(129,140,248,0.1))`,
+              background: `linear-gradient(${gradientAngles[idx] || 135}deg, rgba(117,120,245,0.3), rgba(144,148,248,0.1))`,
             }}
           >
             <span className="project-card-initials">{initials}</span>

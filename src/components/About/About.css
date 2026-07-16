@@ -1,7 +1,6 @@
 .about-bio {
   max-width: 750px;
   margin: 0 auto var(--space-12);
-  text-align: center;
 }
 
 .about-bio p {

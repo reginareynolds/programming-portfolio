@@ -1,4 +1,6 @@
-import PlaceholderImage from "../Shared/PlaceholderImage";
+import PlaceholderImage from "../Shared/PlaceholderImage.jsx";
+import SectionHeading from "../Shared/SectionHeading.jsx";
+import useScrollReveal from "../../useScrollReveal.js";
 import "./AboutSection.css";
 
 const SKILL_GROUPS = [
@@ -20,7 +22,7 @@ const SKILL_GROUPS = [
   },
   {
     category: "AR / VR",
-    tools: ["Unity", "Unreal Engine", "Vuforia"],
+    tools: ["Unity", "Unreal Engine", "Vuforia", "ThingWorx"],
   },
   {
     category: "Design",
@@ -28,10 +30,13 @@ const SKILL_GROUPS = [
   },
 ];
 
-export default function AboutSection() {
+function AboutSection() {
+  const ref = useScrollReveal();
+
   return (
-    <div className="about-section">
-      <section className="about-bio">
+    <div className="about-section" ref={ref}>
+      <SectionHeading>About</SectionHeading>
+      <section className="about-bio reveal">
         <div className="bio-photo">
           <PlaceholderImage
             src="/images/about/headshot.jpg"
@@ -40,7 +45,7 @@ export default function AboutSection() {
           />
         </div>
         <div className="bio-text">
-          <h1>Regina Reynolds</h1>
+          <h2 className="bio-name">Regina Reynolds</h2>
           <p>
             3D artist and software engineer with 8+ years of experience bridging
             the gap between technical engineering and creative visualization.
@@ -60,46 +65,18 @@ export default function AboutSection() {
         </div>
       </section>
 
-      <section className="about-skills">
-        <h2>Skills & Tools</h2>
-        <div className="skills-grid">
-          {SKILL_GROUPS.map((group) => (
-            <div key={group.category} className="skill-card">
-              <h3>{group.category}</h3>
-              <ul>
-                {group.tools.map((tool) => (
-                  <li key={tool}>{tool}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </section>
+      <h3 className="about-subtitle reveal">Skills & Tools</h3>
+      <div className="skills-inline">
+        {SKILL_GROUPS.map((group, index) => (
+          <div key={group.category} className="skill-row reveal">
+            <span className="skill-label">{group.category}</span>
+            <span className="skill-items">{group.tools.join(" · ")}</span>
+          </div>
+        ))}
+      </div>
 
-      <section className="about-contact">
-        <h2>Get in Touch</h2>
-        <div className="contact-links">
-          <a href="mailto:regina.reynolds.2014@gmail.com" className="contact-link">
-            Email
-          </a>
-          <a
-            href="https://linkedin.com/in/regina-c-reynolds"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="contact-link"
-          >
-            LinkedIn
-          </a>
-          <a
-            href="https://github.com/reginareynolds"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="contact-link"
-          >
-            GitHub
-          </a>
-        </div>
-      </section>
     </div>
   );
 }
+
+export default AboutSection;

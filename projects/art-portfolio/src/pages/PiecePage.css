@@ -1,33 +1,39 @@
 .piece-page {
-  max-width: 1200px;
+  max-width: var(--max-width);
   margin: 0 auto;
-  padding: 2rem;
+  padding: var(--space-8);
 }
 
 .piece-back {
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--space-6);
 }
 
 .piece-back a {
   color: var(--text-secondary);
-  font-size: 0.9rem;
+  font-size: var(--text-sm);
   transition: color 0.2s;
 }
 
-.piece-back a:hover {
-  color: var(--accent);
+@media (hover: hover) {
+  .piece-back a:hover {
+    color: var(--accent);
+  }
+}
+
+.piece-back a:active {
+  color: var(--accent-hover);
 }
 
 .piece-section {
-  margin-top: 2.5rem;
+  margin-top: var(--space-12);
 }
 
 .piece-section h2 {
-  font-size: 1.1rem;
+  font-size: var(--text-sm);
   color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-4);
 }
 
 .viewer-loading {

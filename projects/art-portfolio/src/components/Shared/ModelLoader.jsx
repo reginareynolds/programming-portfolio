@@ -2,8 +2,9 @@ import { useEffect, useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 
-export default function ModelLoader({ url }) {
-  const { scene } = useGLTF(url);
+function ModelLoader({ url, onLoad }) {
+  const resolvedUrl = import.meta.env.BASE_URL + url.replace(/^\//, "");
+  const { scene } = useGLTF(resolvedUrl);
   const ref = useRef();
 
   useEffect(() => {
@@ -19,8 +20,11 @@ export default function ModelLoader({ url }) {
         -center.y * scale,
         -center.z * scale
       );
+      if (onLoad) onLoad();
     }
   }, [scene]);
 
   return <primitive ref={ref} object={scene} />;
 }
+
+export default ModelLoader;
