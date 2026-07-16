@@ -1,6 +1,7 @@
 import { createHashRouter, Outlet } from "react-router-dom";
 import Header from "./components/Layout/Header.jsx";
 import ScrollToTop from "./components/Shared/ScrollToTop.jsx";
+import Analytics from "./components/Shared/Analytics.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import PiecePage from "./pages/PiecePage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
@@ -9,6 +10,7 @@ function Layout() {
   return (
     <>
       <ScrollToTop />
+      <Analytics />
       <a href="#main-content" className="skip-link">Skip to content</a>
       <Header />
       <main id="main-content">
