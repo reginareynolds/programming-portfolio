@@ -18,7 +18,7 @@ function Layout() {
       </main>
       <footer className="footer">
         <p>&copy; 2026 Regina Reynolds. 3D Artist &amp; Software Engineer.</p>
-        <a href="https://reginareynolds.vercel.app" className="footer-link" target="_blank" rel="noopener noreferrer">Software Portfolio &rarr;</a>
+        <a href="https://reginareynolds.com" className="footer-link" target="_blank" rel="noopener noreferrer">Software Portfolio &rarr;</a>
       </footer>
     </>
   );
