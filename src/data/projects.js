@@ -57,7 +57,8 @@ const projects = [
     githubUrl:
       "https://github.com/reginareynolds/programming-portfolio/tree/master/projects/art-portfolio",
     liveUrl: "https://art.reginareynolds.com/",
-    thumbnail: null,
+    liveLabel: "Visit Site",
+    thumbnail: "/images/projects/art-portfolio.png",
     wip: false,
   },
   {
