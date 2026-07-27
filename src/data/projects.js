@@ -56,9 +56,9 @@ const projects = [
     stack: ["React", "Three.js", "React Three Fiber", "Vite", "GitHub Pages"],
     githubUrl:
       "https://github.com/reginareynolds/programming-portfolio/tree/master/projects/art-portfolio",
-    liveUrl: null,
+    liveUrl: "https://art.reginareynolds.com/",
     thumbnail: null,
-    wip: true,
+    wip: false,
   },
   {
     id: "mcp-server",
